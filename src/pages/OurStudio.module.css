@@ -1,0 +1,625 @@
+/* Use a more elegant font by importing it in your global CSS file.
+  For example, a font like "Cormorant Garamond" or "Cinzel".
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+  
+  Then you could set:
+  font-family: 'Cinzel', serif;
+*/
+
+.pageContainer {
+  min-height: 100vh;
+  width: 100%;
+  color: #ffffff;
+
+  /* --- UPDATED BACKGROUND --- */
+  
+  /* 1. Corrected image path and removed the gradient */
+  background-image: url('/assets/OurStudioSection1.jpg');
+  
+  /* 2. Set the image to cover the screen, centered */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* 3. This fixes the "expanding" issue by locking the image in place */
+  background-attachment: fixed;
+  
+  /* --- END OF UPDATE --- */
+
+  font-family: 'Times New Roman', Times, serif;
+  overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+/* --- Navigation --- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  box-sizing: border-box; /* Good! This fixes the overflow */
+}
+
+.logo {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* --- Main Content --- */
+.mainContent {
+  padding: 0 2.5rem 4rem;
+  width: 100%;
+  box-sizing: border-box; /* Good! This fixes the overflow */
+}
+
+/* --- Studio Header --- */
+.studioHeader {
+  margin-top: 4rem;
+  margin-bottom: 12rem;
+  padding-left: 2.5rem;
+}
+
+.headerLogo {
+  /* This is a placeholder for your "OUI" logo graphic */
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  /* You'd likely style this to match your actual logo font */
+}
+
+.studioHeader h1 {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.studioHeader p {
+  font-size: 0.9rem;
+  color: #c0c0c0; /* A light grey */
+  margin: 0.5rem 0 0;
+  max-width: 200px;
+}
+
+/* --- Central Image --- */
+.centralImageSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 8rem;
+}
+
+.imageWrapper {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-image: radial-gradient(circle at center, #702830 0%, #4a0e1a 70%);
+  
+  /* This is a placeholder for your image tag */
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #666;
+   */
+  /* If using Next.js <Image> with layout="fill", add position: relative */
+  position: relative;
+}
+.centralImage {
+  width: 100%;
+  height: 100%;
+  /* This scales the image to fill the circle, cropping it (like zoom) */
+  object-fit: cover; 
+}
+
+/* --- Industries List --- */
+.industriesSection {
+  max-width: 700px;
+  margin: 0 auto; /* Center the section */
+  padding-top: 4rem;
+}
+
+.industriesSection h2 {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #aaa;
+  margin-bottom: 2.5rem;
+}
+
+.industryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.industryItem {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 1.25rem;
+  border-top: 1px solid #333; /* Line separator */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.industryItem:last-child {
+  border-bottom: 1px solid #333; /* Add border to the last item */
+}
+
+.industryItem:hover {
+  color: #e0b868; /* A subtle gold hover effect */
+}
+
+.servicesContainer {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  /* Light gray background from your image */
+  background-color: #f7f7f7; 
+  color: #222; /* Dark text for light background */
+  font-family: 'Cinzel', serif; /* Assuming you use Cinzel as suggested */
+  overflow: hidden;
+  /* Add a border to separate from the dark section above */
+  border-top: 1px solid #333;
+}
+
+/* --- Left Column (Graphic & Title) --- */
+.leftColumn {
+  flex: 2; /* Gives it more space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  
+  /* 👇 IMPORTANT 👇
+    Replace this with the path to your faint ornament graphic 
+  */
+  background-image: url('/assets/ornament-graphic.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; 
+  position: relative;
+}
+
+.title {
+  font-size: 4rem; /* 64px */
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-align: center;
+  color: #333;
+  z-index: 2;
+}
+
+/* --- Right Column (Services List) --- */
+.rightColumn {
+  flex: 3; /* Gives it more space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 6rem;
+  /* Add a subtle left border to separate columns */
+  border-left: 1px solid #e0e0e0; 
+}
+
+.serviceList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.serviceItem {
+  /* This creates the line */
+  border-bottom: 1px solid #ccc;
+}
+
+.serviceItem:first-child {
+  /* Add a top border to the first item */
+  border-top: 1px solid #ccc;
+}
+
+.serviceLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.75rem 0.5rem; /* Vertical padding creates space */
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.serviceName {
+  font-size: 1rem; /* 16px */
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.serviceIcon {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+/* --- Hover Effect --- */
+.serviceLink:hover {
+  color: #000;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.serviceLink:hover .serviceIcon {
+  transform: translateX(5px);
+}
+
+/* --- 
+  SECTION 4: OUR CLIENTS 
+  (Add this to the end of OurStudio.module.css) 
+--- */
+
+.clientsContainer {
+  width: 100%;
+  padding: 8rem 2rem;
+  background-color: #000; /* Dark background */
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  overflow: hidden;
+}
+
+.clientsHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+  position: relative; /* For positioning the crest */
+}
+
+.clientsCrest {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px; /* Adjust size as needed */
+  height: auto;
+  opacity: 0.15; /* Makes it faint, behind the text */
+  z-index: 1;
+}
+
+.clientsHeader h2 {
+  font-size: 2rem; /* 32px */
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 2; /* Sits on top of the crest */
+}
+
+.clientsHeader p {
+  font-family: 'Times New Roman', Times, serif; /* Subheading has a different font */
+  font-style: italic;
+  font-size: 1rem;
+  color: #aaa;
+  position: relative;
+  z-index: 2; /* Sits on top of the crest */
+}
+
+.clientGrid {
+  display: grid;
+  /* Creates 4 columns on desktop, 2 on tablet, 1 on mobile */
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.5rem;
+  max-width: 1200px; /* Constrains the max width */
+  margin: 0 auto;
+}
+
+.clientLogoBox {
+  background-color: #111; /* Dark gray box */
+  border-radius: 16px;
+  /* Padding creates space inside the box */
+  padding: 2rem; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* This forces the box to be a perfect square */
+  aspect-ratio: 1 / 1; 
+  transition: background-color 0.3s ease;
+}
+
+.clientLogoBox:hover {
+  background-color: #222; /* Slightly lighter on hover */
+}
+
+.clientLogoBox img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* This CSS filter turns your logos white. 
+    If your logos are already white, you can remove this.
+  */
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.clientLogoBox:hover img {
+  opacity: 1;
+}
+
+/* --- Responsive styles for the grid --- */
+
+/* For tablets */
+@media (max-width: 900px) {
+  .clientGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 600px) {
+  .clientGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.testimonialsContainer {
+  width: 100%;
+  padding: 8rem 2rem;
+  background-color: #000; /* Dark background */
+  color: #fff;
+  font-family: 'Cinzel', serif; /* Or your preferred elegant font */
+  overflow: hidden;
+}
+
+.testimonialsHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.testimonialsHeader h2 {
+  font-size: 2rem; /* 32px */
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.testimonialsHeader p {
+  font-family: 'Times New Roman', Times, serif; /* Subheading font */
+  font-style: italic;
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.testimonialGrid {
+  display: grid;
+  /* 3 columns on desktop, 2 on tablet, 1 on mobile */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem; /* Space between cards */
+  max-width: 1200px; /* Max width of the grid */
+  margin: 0 auto; /* Center the grid */
+}
+
+.testimonialCard {
+  background-color: #f0f0f0; /* Light gray card background */
+  color: #333; /* Dark text for the card */
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes name to top, text to bottom */
+  min-height: 250px; /* Ensures cards have a consistent minimum height */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonialName {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem; /* Space below the name */
+  font-family: 'Cinzel', serif; /* Match header font */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.testimonialText {
+  font-family: 'Times New Roman', Times, serif; /* Body text font */
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  margin-top: auto; /* Pushes the text to the bottom if content is short */
+}
+
+
+/* --- Responsive styles for the grid --- */
+
+/* For tablets */
+@media (max-width: 992px) {
+  .testimonialGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 600px) {
+  .testimonialGrid {
+    grid-template-columns: 1fr; /* 1 column */
+    padding: 0 1rem; /* Adjust padding for smaller screens */
+  }
+  .testimonialsContainer {
+    padding: 6rem 1rem;
+  }
+  .testimonialsHeader {
+    margin-bottom: 3rem;
+  }
+  .testimonialsHeader h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.contactContainer {
+  width: 100%;
+  padding: 4rem 2rem 0; /* No bottom padding, footer handles it */
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Make it fill the screen */
+
+  /* The maroon gradient from your image */
+  background-color: #000;
+  background-image: radial-gradient(ellipse at 50% -20%, #4a0e1a 0%, #000000 70%);
+  background-repeat: no-repeat;
+}
+
+.contactHeader {
+  text-align: center;
+  padding: 2rem 0;
+  margin-bottom: 4rem;
+}
+
+.contactHeader img {
+  height: 40px; /* Adjust height as needed */
+  width: auto;
+  opacity: 0.8;
+}
+
+.contactMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto; /* Center the content */
+  padding: 0 2rem;
+}
+
+.contactText {
+  flex: 1;
+  max-width: 450px;
+  color: #c0c0c0; /* Light gray text */
+}
+
+.contactQuote {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.contactName {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #aaa;
+  margin-bottom: 2.5rem;
+  display: block;
+}
+
+.contactParagraph {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.contactImageWrapper {
+  flex: 1;
+  max-width: 450px;
+  position: relative;
+  /* This creates the double border effect */
+  border: 1px solid #888;
+  padding: 8px; /* Space between outer and inner border */
+}
+
+.contactImageWrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid #888; /* The inner border */
+}
+
+.contactFooter {
+  margin-top: auto; /* Pushes footer to the bottom */
+  padding-top: 8rem; /* Space above "CONTACT US" */
+  text-align: center;
+  width: 100%;
+}
+
+.contactFooter h2 {
+  font-size: 6rem; /* Huge text */
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.contactFooter p {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #aaa;
+  margin-bottom: 6rem; /* Space before footer bar */
+}
+
+.footerBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  border-top: 1px solid #333; /* Faint line */
+  font-size: 0.75rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footerBar a {
+  color: #777;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerBar a:hover {
+  color: #fff;
+}
+
+
+/* --- Responsive styles for the contact section --- */
+@media (max-width: 900px) {
+  .contactMain {
+    flex-direction: column; /* Stack text and image vertically */
+  }
+  .contactText {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contactFooter h2 {
+    font-size: 3rem; /* Smaller text on mobile */
+  }
+  .contactFooter p {
+    font-size: 0.9rem;
+    margin-bottom: 4rem;
+  }
+  .footerBar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}

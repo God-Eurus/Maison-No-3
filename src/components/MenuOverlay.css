@@ -1,0 +1,16 @@
+/* src/components/MenuOverlay.css */
+
+/* This gives the parallax effect */
+.menu-overlay-parallax-bg {
+  background-attachment: fixed;
+}
+
+/* Optional: Smooth transition for the menu itself if you want */
+/*
+.menu-overlay {
+  transition: transform 0.5s ease-out;
+}
+.menu-overlay.hidden {
+  transform: translateX(100%);
+}
+*/

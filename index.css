@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:wght@700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    overflow-x: hidden;
+    background: #000;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.section {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+.card-title {
+  /* Use the 'Playfair Display' font we imported */
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; /* 56px */
+  font-weight: 700;
+  color: white;
+  /* Add a shadow to make the text readable over images */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.card-description {
+  /* Use the 'Montserrat' font */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 300;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  margin-top: 1rem;
+  max-width: 500px; /* Stop it from getting too wide */
+  text-align: center;
+}

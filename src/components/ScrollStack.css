@@ -1,0 +1,43 @@
+/* Container adjustments */
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  /* FIX: Remove the dark background color */
+  background-color: transparent !important; 
+  will-change: scroll-position; 
+}
+
+.scroll-stack-inner {
+  padding: 20vh 5rem 10rem;
+  width: 100%;
+  box-sizing: border-box;
+  transform-style: preserve-3d; 
+}
+
+/* THE CARDS */
+.scroll-stack-card {
+  position: relative;
+  box-sizing: border-box;
+  transform-origin: top center;
+  
+  will-change: transform, filter; 
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  
+  transition: transform 0s linear !important; 
+
+  /* FIX: Remove the background and shadow from the wrapper.
+     Your HomePage.js 'itemStyle' already handles the card's 
+     actual background and shadow. */
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important; 
+}
+
+/* Spacer for the bottom */
+.scroll-stack-end {
+  width: 100%;
+  height: 50vh; 
+  pointer-events: none;
+  visibility: hidden;
+}
