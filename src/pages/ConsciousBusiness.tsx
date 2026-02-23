@@ -1,70 +1,104 @@
 import React from 'react';
-import { Menu, ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // --- ANIMATION VARIANTS ---
+// Slightly increased duration for an even smoother reveal
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] } 
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    }
   }
 };
 
 const marqueeVariants = {
   animate: {
-    x: [0, -1035], // Adjust based on content width
-    transition: {
-      x: {
-        repeat: Infinity,
-        repeatType: "loop",
-        duration: 25,
-        ease: "linear",
-      },
-    },
+    x: [0, -1035], 
+    transition: { x: { repeat: Infinity, repeatType: "loop", duration: 25, ease: "linear" } },
   },
 };
 
 const marqueeVariantsReverse = {
   animate: {
     x: [-1035, 0], 
-    transition: {
-      x: {
-        repeat: Infinity,
-        repeatType: "loop",
-        duration: 25,
-        ease: "linear",
-      },
-    },
+    transition: { x: { repeat: Infinity, repeatType: "loop", duration: 25, ease: "linear" } },
   },
 };
 
-// --- DATA: TOP MARQUEE (SDG 1-4) ---
+const projectCardHover = {
+  rest: { scale: 1, y: 0 },
+  hover: { 
+    scale: 1.02, 
+    y: -10, 
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } 
+  }
+};
+
+const imageScaleOnHover = {
+  rest: { scale: 1 },
+  hover: { scale: 1.05, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const pinkButtonVariants = {
+  rest: { scale: 1, rotate: 0 },
+  hover: { 
+    scale: 1.1, 
+    rotate: 10, 
+    boxShadow: '0 10px 25px rgba(245, 208, 214, 0.9)',
+    transition: { type: "spring", stiffness: 300, damping: 15 } 
+  },
+  tap: { scale: 0.95 }
+};
+
+// --- DATA ---
 const sdgTop = [
-  { id: 1, number: '1', title: 'NO\nPOVERTY', icon: '👨‍👩‍👧‍👦' }, 
-  { id: 2, number: '2', title: 'ZERO\nHUNGER', icon: '🍲' },
-  { id: 3, number: '3', title: 'GOOD HEALTH\nAND WELL-BEING', icon: '🩺' },
-  { id: 4, number: '4', title: 'QUALITY\nEDUCATION', icon: '📖' },
-  // Duplicates
-  { id: 5, number: '1', title: 'NO\nPOVERTY', icon: '👨‍👩‍👧‍👦' }, 
-  { id: 6, number: '2', title: 'ZERO\nHUNGER', icon: '🍲' },
-  { id: 7, number: '3', title: 'GOOD HEALTH\nAND WELL-BEING', icon: '🩺' },
-  { id: 8, number: '4', title: 'QUALITY\nEDUCATION', icon: '📖' },
+  { id: 1, number: '1', title: 'NO\nPOVERTY', image: '/assets/sus1.png' }, 
+  { id: 2, number: '2', title: 'ZERO\nHUNGER', image: '/assets/sus2.png' },
+  { id: 3, number: '3', title: 'GOOD HEALTH\nAND WELL-BEING', image: '/assets/sus3.png' },
+  { id: 4, number: '4', title: 'QUALITY\nEDUCATION', image: '/assets/sus4.png' },
+  { id: 5, number: '5', title: 'NO\nPOVERTY', image: '/assets/sus1.png' }, 
 ];
 
-// --- DATA: BOTTOM MARQUEE (SDG 11-14) ---
 const sdgBottom = [
-  { id: 11, number: '11', title: 'SUSTAINABLE CITIES\nAND COMMUNITIES', icon: '🏙️' },
-  { id: 12, number: '12', title: 'RESPONSIBLE\nCONSUMPTION', icon: '♾️' },
-  { id: 13, number: '13', title: 'CLIMATE\nACTION', icon: '👁️' },
-  { id: 14, number: '14', title: 'LIFE BELOW\nWATER', icon: '🐟' }, 
-  // Duplicates
-  { id: 15, number: '11', title: 'SUSTAINABLE CITIES\nAND COMMUNITIES', icon: '🏙️' },
-  { id: 16, number: '12', title: 'RESPONSIBLE\nCONSUMPTION', icon: '♾️' },
-  { id: 17, number: '13', title: 'CLIMATE\nACTION', icon: '👁️' },
-  { id: 18, number: '14', title: 'LIFE BELOW\nWATER', icon: '🐟' }, 
+  { id: 6, number: '6', title: 'ZERO\nHUNGER', image: '/assets/sus6.png' },
+  { id: 7, number: '7', title: 'GOOD HEALTH\nAND WELL-BEING', image: '/assets/sus7.png' },
+  { id: 8, number: '8', title: 'QUALITY\nEDUCATION', image: '/assets/sus8.png' },
+  { id: 9, number: '9', title: 'GENDER\nEQUITY', image: '/assets/sus9.png' },
+  { id: 10, number: '10', title: 'WATER\nAND SANITATION', image: '/assets/sus10.png' },
+];
+
+const projectsData = [
+  {
+    id: 1,
+    link: '/kezavera',
+    image: '/assets/kezavera.png',
+    textColor: '#ffffff'
+  },
+  {
+    id: 2,
+    link: '/aia',
+    image: '/assets/aia.png',
+    textColor: '#ffffff'
+  },
+  {
+    id: 3,
+    link: '/sust-fest',
+    image: '/assets/susfest.png',
+    textColor: '#ffffff'
+  }
 ];
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -76,27 +110,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     overflowX: 'hidden',
   },
-  nav: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    padding: '2rem 3rem',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 20,
-  },
-  menuBtn: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    color: '#333',
-  },
   
-  // --- HEADER ---
   headerSection: {
-    paddingTop: '20vh',
+    paddingTop: '15vh', // Adjusted slightly since nav is gone
     paddingBottom: '4rem',
     textAlign: 'center',
     maxWidth: '800px',
@@ -121,7 +137,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: '0 auto',
   },
 
-  // --- MARQUEE STYLES ---
   marqueeContainer: {
     width: '100%',
     overflow: 'hidden',
@@ -136,13 +151,15 @@ const styles: { [key: string]: React.CSSProperties } = {
   sdgCard: {
     minWidth: '280px',
     height: '280px',
-    backgroundColor: '#d8c8c8', // Muted mauve
+    backgroundColor: '#d8c8c8',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     padding: '2rem',
     color: '#fff',
     flexShrink: 0,
+    borderRadius: '15px',
+    boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
   },
   sdgNumber: {
     fontSize: '3.5rem',
@@ -159,49 +176,79 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginLeft: '0.5rem',
     marginTop: '0.5rem',
     fontFamily: 'sans-serif',
+    whiteSpace: 'pre-line',
   },
-  sdgIconPlace: {
-    fontSize: '4rem', 
-    textAlign: 'center',
+  sdgImage: {
+    width: '100px',
+    height: '100px',
+    objectFit: 'contain',
+    alignSelf: 'center',
     marginBottom: '1rem',
   },
 
-  // --- PROJECT STACK SECTION ---
   projectStackSection: {
     padding: '6rem 2rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '2rem',
+    gap: '4rem',
+  },
+  largeProjectLink: {
+    width: '100%',
+    maxWidth: '1000px',
+    textDecoration: 'none',
+    display: 'block',
   },
   largeProjectCard: {
     width: '100%',
-    maxWidth: '1000px',
     height: '500px',
-    borderRadius: '20px',
+    borderRadius: '24px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+    boxShadow: '0 15px 40px rgba(0,0,0,0.15)',
     position: 'relative',
+    overflow: 'hidden',
+  },
+  cardBackgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    zIndex: 0,
+  },
+  cardOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    zIndex: 1,
+    transition: 'background-color 0.4s ease',
+  },
+  cardContent: {
+    position: 'relative',
+    zIndex: 2,
+    textAlign: 'center',
   },
   cardTitle: {
     fontFamily: '"Times New Roman", serif',
-    fontSize: '2rem',
+    fontSize: '2.5rem',
     letterSpacing: '0.3em',
     textTransform: 'uppercase',
     marginBottom: '0.5rem',
-    color: '#333',
   },
   cardSubtitle: {
-    fontSize: '0.8rem',
+    fontSize: '0.9rem',
     letterSpacing: '0.2em',
     textTransform: 'uppercase',
-    color: '#666',
   },
 
-  // --- "WHY NOT" SECTION ---
   whyNotSection: {
     textAlign: 'center',
     padding: '4rem 2rem 8rem 2rem',
@@ -224,8 +271,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: '0 auto 4rem auto',
   },
   pinkCircleButton: {
-    width: '100px',
-    height: '100px',
+    width: '110px',
+    height: '110px',
     borderRadius: '50%',
     background: 'radial-gradient(circle at 30% 30%, #fcebeb, #f5d0d6)',
     border: '1px solid #f0c0c0',
@@ -235,15 +282,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: '0 auto',
     cursor: 'pointer',
     boxShadow: '0 5px 15px rgba(245, 208, 214, 0.6)',
-    fontSize: '0.6rem',
+    fontSize: '0.65rem',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     color: '#8a5a5a',
     textAlign: 'center',
     padding: '1rem',
+    fontWeight: 'bold',
   },
 
-  // --- FOOTER ---
   footerSection: {
     padding: '4rem 2rem',
     textAlign: 'center',
@@ -258,6 +305,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     textTransform: 'uppercase',
     marginBottom: '4rem',
     cursor: 'pointer',
+    display: 'inline-block',
   },
   bottomBar: {
     display: 'flex',
@@ -281,119 +329,181 @@ const ConsciousBusinessPage = () => {
 
   return (
     <div style={styles.container}>
-      
-      {/* Nav */}
-      <nav style={styles.nav}>
-        <button style={styles.menuBtn}>
-          <Menu size={24} strokeWidth={1.5} />
-        </button>
-      </nav>
+      {/* Injecting smooth scroll globally for this page. 
+        This ensures manual scrolling and the "back on top" button feel seamless.
+      */}
+      <style>
+        {`
+          html, body {
+            scroll-behavior: smooth;
+          }
+        `}
+      </style>
 
-      {/* Header Text */}
+      {/* Header Text - Staggered Reveal */}
       <motion.section 
         style={styles.headerSection}
+        variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        variants={fadeInUp}
       >
-        <h1 style={styles.scriptTitle}>Conscious Businesses</h1>
-        <p style={styles.bodyText}>
+        <motion.h1 variants={fadeInUp} style={styles.scriptTitle}>Conscious Businesses</motion.h1>
+        <motion.p variants={fadeInUp} style={styles.bodyText}>
           What you're building now is the Admin Command Center — the single source of truth from where the entire company is run.<br/>
           This is how serious brands avoid chaos.<br/>
           Below is a SINGLE MASTER ADMIN TABLE you can paste directly into Excel / Google Sheets and start filling links into today.
-        </p>
+        </motion.p>
       </motion.section>
 
-      {/* --- TOP MARQUEE (SDG 1-4) --- */}
-      <div style={styles.marqueeContainer}>
-        <motion.div 
-          style={styles.marqueeTrack}
-          variants={marqueeVariants}
-          animate="animate"
-        >
-          {sdgTop.map((card, index) => (
-            <div key={`top-${card.id}-${index}`} style={styles.sdgCard}>
-              <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                <span style={styles.sdgNumber}>{card.number}</span>
-                <span style={styles.sdgTitle}>{card.title}</span>
-              </div>
-              <div style={styles.sdgIconPlace}>{card.icon}</div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+      {/* --- TOP MARQUEE --- */}
+      <motion.div 
+        style={styles.marqueeContainer}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      >
+        {/* Added Link wrapper around the entire top track */}
+        <Link to="/sdg" style={{ display: 'flex', textDecoration: 'none', width: '100%', cursor: 'pointer' }}>
+          <motion.div style={styles.marqueeTrack} variants={marqueeVariants} animate="animate">
+            {/* Duplicated the array multiple times to fix empty spaces during infinite scroll loop */}
+            {[...sdgTop, ...sdgTop, ...sdgTop].map((card, index) => (
+              <motion.div 
+                key={`top-${card.id}-${index}`} 
+                style={styles.sdgCard}
+                whileHover={{ scale: 1.05, rotate: -1 }}
+              >
+                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                  <span style={styles.sdgNumber}>{card.number}</span>
+                  <span style={styles.sdgTitle}>{card.title}</span>
+                </div>
+                <img src={card.image} alt="SDG" style={styles.sdgImage} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </Link>
+      </motion.div>
 
-      {/* --- PROJECT STACK (Keza Vera / Sust Fest) --- */}
+      {/* --- PROJECT STACK --- */}
       <motion.section 
         style={styles.projectStackSection}
+        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
-        variants={fadeInUp}
       >
-        <div style={{ ...styles.largeProjectCard, backgroundColor: '#ffffff' }}>
-          <h2 style={styles.cardTitle}>KEZA VERA</h2>
-          <span style={styles.cardSubtitle}>UNEARTHING FLAIRS</span>
-        </div>
-
-        <div style={{ 
-          ...styles.largeProjectCard, 
-          background: 'linear-gradient(to bottom right, #eaffea, #dfffd6)', 
-        }}>
-          <h2 style={{ ...styles.cardTitle, color: '#2d5a2d' }}>SUST FEST</h2>
-        </div>
+        {projectsData.map((project) => (
+          <motion.div key={project.id} variants={fadeInUp} style={{ width: '100%', maxWidth: '1000px' }}>
+            <Link to={project.link} style={styles.largeProjectLink}>
+              <motion.div 
+                style={styles.largeProjectCard}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+                variants={projectCardHover}
+              >
+                <motion.div 
+                  style={{...styles.cardBackgroundImage, backgroundImage: `url(${project.image})`}}
+                  variants={imageScaleOnHover}
+                />
+                
+                <motion.div style={styles.cardOverlay} variants={{
+                  rest: { backgroundColor: 'rgba(0,0,0,0)' },
+                  hover: { backgroundColor: 'rgba(0,0,0,0)' }
+                }} />
+                
+                <div style={styles.cardContent}>
+                  <h2 style={{ ...styles.cardTitle, color: project.textColor }}>{project.title}</h2>
+                  <span style={{ ...styles.cardSubtitle, color: project.textColor, opacity: 0.8 }}>
+                    {project.subtitle}
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
+          </motion.div>
+        ))}
       </motion.section>
 
-      {/* --- BOTTOM MARQUEE (SDG 11-14) --- */}
+      {/* --- BOTTOM MARQUEE --- */}
       <div style={styles.marqueeContainer}>
-        <motion.div 
-          style={styles.marqueeTrack}
-          variants={marqueeVariantsReverse} // Scrolls in opposite direction for visual interest
-          animate="animate"
-        >
-          {sdgBottom.map((card, index) => (
-            <div key={`bot-${card.id}-${index}`} style={{ ...styles.sdgCard, backgroundColor: '#cbbdbd' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                <span style={styles.sdgNumber}>{card.number}</span>
-                <span style={styles.sdgTitle}>{card.title}</span>
-              </div>
-              <div style={styles.sdgIconPlace}>{card.icon}</div>
-            </div>
-          ))}
-        </motion.div>
+        {/* Added Link wrapper around the entire bottom track */}
+        <Link to="/sdg" style={{ display: 'flex', textDecoration: 'none', width: '100%', cursor: 'pointer' }}>
+          <motion.div style={styles.marqueeTrack} variants={marqueeVariantsReverse} animate="animate">
+            {/* Duplicated the array multiple times to fix empty spaces during infinite scroll loop */}
+            {[...sdgBottom, ...sdgBottom, ...sdgBottom].map((card, index) => (
+              <motion.div 
+                key={`bot-${card.id}-${index}`} 
+                style={{ ...styles.sdgCard, backgroundColor: '#cbbdbd' }}
+                whileHover={{ scale: 1.05, rotate: 1 }}
+              >
+                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                  <span style={styles.sdgNumber}>{card.number}</span>
+                  <span style={styles.sdgTitle}>{card.title}</span>
+                </div>
+                 <img src={card.image} alt="SDG" style={styles.sdgImage} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </Link>
       </div>
 
       {/* --- WHY NOT SECTION --- */}
       <motion.section 
         style={styles.whyNotSection}
+        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
+        viewport={{ once: true, amount: 0.4 }}
       >
-        <h2 style={styles.whyNotTitle}>Why not a conscious business?</h2>
-        <p style={styles.whyNotText}>
+        <motion.h2 variants={fadeInUp} style={styles.whyNotTitle}>Why not a conscious business?</motion.h2>
+        <motion.p variants={fadeInUp} style={styles.whyNotText}>
           Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        </p>
+        </motion.p>
         
-        <div style={styles.pinkCircleButton}>
+        <motion.div 
+          variants={pinkButtonVariants}
+          initial="rest"
+          whileHover="hover"
+          whileTap="tap"
+          style={styles.pinkCircleButton}
+        >
           Get<br/>Conscious
-        </div>
+        </motion.div>
       </motion.section>
 
-      {/* --- ALL PROJECTS FOOTER --- */}
-      <footer style={styles.footerSection}>
+      {/* --- FOOTER --- */}
+      <motion.footer 
+        style={styles.footerSection}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div style={{ marginBottom: '2rem' }}>
-          <h2 style={styles.allProjectsTitle}>ALL<br/>PROJECTS</h2>
+          <Link to="/atelier" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <motion.h2 
+              style={styles.allProjectsTitle}
+              whileHover={{ scale: 1.02, letterSpacing: '0.25em', color: '#555' }}
+              transition={{ duration: 0.3 }}
+            >
+              ALL<br/>PROJECTS
+            </motion.h2>
+          </Link>
         </div>
 
         <div style={styles.bottomBar}>
-          <span onClick={scrollToTop} style={{ cursor: 'pointer' }}>back on top</span>
+          <motion.span 
+            onClick={scrollToTop} 
+            whileHover={{ y: -3, color: '#000' }} 
+            style={{ cursor: 'pointer' }}
+          >
+            back on top
+          </motion.span>
           <span>2024 © oui creatives all rights reserved</span>
-          <span>Follow Us</span>
+          <motion.span whileHover={{ y: -3, color: '#000' }} style={{ cursor: 'pointer' }}>
+            Follow Us
+          </motion.span>
         </div>
-      </footer>
+      </motion.footer>
 
     </div>
   );

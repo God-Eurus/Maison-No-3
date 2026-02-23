@@ -4,8 +4,14 @@ const styles: { [key: string]: React.CSSProperties } = {
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '0 5vw',
+    padding: '15rem 5vw', 
     position: 'relative',
+    minHeight: '100vh', 
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    // ADDED GAP: This creates the massive space between the Archale row and the Golf row
+    gap: '15rem', 
   },
   
   // --- ARCHALE SECTION STYLES ---
@@ -14,7 +20,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     gap: '4rem',
-    marginBottom: '1rem',
     flexWrap: 'wrap',
     position: 'relative',
     zIndex: 2,
@@ -83,7 +88,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   // --- KEY ORNAMENT STYLES ---
   ornamentRight: {
     position: 'absolute',
-    // CHANGED: Pushed further right into empty space
     right: '-15%', 
     top: '5%',
     height: '110%',

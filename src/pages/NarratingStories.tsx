@@ -1,39 +1,36 @@
 import React from 'react';
-import { Menu } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom'; // 1. Added useNavigate import
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 // --- 1. CONFIGURATION: CARDS DATA ---
 const cardsData = [
   {
     id: 1,
     title: "ZOHARET",
-    background: 'url("/assets/zoharet-wood-texture.jpg")', 
+    background: 'url("/assets/zoharet.png")', 
     backgroundColor: '#e3d0b9', 
     backgroundSize: 'cover',
     textColor: '#5c3a21', 
-    logo: '/assets/zoharet-logo.png', 
-    description: '', 
+    description: '',
+    link: '/zoharet'
   },
   {
     id: 2,
-    title: "MEDAFEM",
-    background: 'url("/assets/medafem-green-texture.jpg")',
+    background: 'url("/assets/medafem.png")',
     backgroundColor: '#8da399', 
     backgroundSize: 'cover',
     textColor: '#2d4a3e', 
-    logo: '/assets/medafem-logo.png',
-    description: 'THE NEW AGE AYURVEDA',
+    description: '',
+    link: '/medafemone'
   },
   {
     id: 3,
-    title: "COMING SOON",
-    background: 'none',
+    background: 'url("/assets/malachi.png")',
     backgroundColor: '#1a1a1a', 
-    backgroundSize: 'auto',
-    textColor: '#ffffff',
-    logo: '',
+    backgroundSize: 'cover',
     description: 'Future Project',
-  }
+    link: '/malachione'
+  },
 ];
 
 // --- 2. STYLES ---
@@ -76,20 +73,20 @@ const styles: { [key: string]: React.CSSProperties } = {
     left: 0,
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center', // Centered since menu icon is gone
     alignItems: 'center',
     padding: '2rem 3rem',
     zIndex: 10,
   },
   logo: {
     fontFamily: '"Times New Roman", serif',
+    fontWeight: 300,
     fontSize: '0.8rem',
     letterSpacing: '0.2em',
     color: '#e0e0e0',
     textTransform: 'uppercase',
     textDecoration: 'none',
   },
-  
   heroContent: {
     position: 'relative',
     zIndex: 2,
@@ -101,14 +98,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     flexDirection: 'column',
     alignItems: 'center',
   },
-  rabbitImage: {
-    width: '350px',
-    height: 'auto',
-    objectFit: 'contain',
-    opacity: 0.8,
-    filter: 'grayscale(100%) contrast(1.1)',
-    marginBottom: '-20px', 
-  },
   heroTitle: {
     position: 'absolute',
     top: '55%',
@@ -118,12 +107,60 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontFamily: '"Times New Roman", serif',
     fontSize: 'clamp(2rem, 5vw, 4.5rem)',
     letterSpacing: '0.3em',
-    fontWeight: 400,
+    fontWeight: 300,
     color: '#ffffff',
     textTransform: 'uppercase',
-    lineHeight: 1.2,
+    lineHeight: 1.3,
     textShadow: '0 2px 20px rgba(0,0,0,0.9)',
     pointerEvents: 'none',
+  },
+
+  /* --- STORYBOOK SECTION --- */
+  storySection: {
+    backgroundColor: '#000000',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  storyImageContainer: {
+    width: '100%',
+    height: '90vh', 
+    overflow: 'hidden',
+  },
+  storyImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
+  },
+  storyTextContainer: {
+    width: '100%',
+    maxWidth: '1000px',
+    padding: '8rem 2rem 4rem 2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '3rem',
+    textAlign: 'center',
+  },
+  storyTextLine1: {
+    fontFamily: '"Times New Roman", serif',
+    fontWeight: 300,
+    fontSize: '1.2rem',
+    color: '#e0e0e0',
+    letterSpacing: '0.05em',
+    lineHeight: 1.3,
+    margin: 0,
+  },
+  storyTextLine2: {
+    fontFamily: '"Times New Roman", serif',
+    fontWeight: 300,
+    fontSize: '1rem',
+    color: '#b0b0b0',
+    lineHeight: 1.3,
+    letterSpacing: '0.05em',
+    margin: 0,
   },
 
   /* --- CARDS SECTION --- */
@@ -136,33 +173,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     zIndex: 5,
   },
-  sectionHeader: {
-    textAlign: 'center',
-    marginBottom: '6rem',
-    maxWidth: '700px',
-    color: '#e0e0e0',
-  },
-  sectionTitle: {
-    fontFamily: '"Times New Roman", serif',
-    fontSize: '3rem',
-    fontStyle: 'italic',
-    marginBottom: '1.5rem',
-    letterSpacing: '0.05em',
-  },
-  sectionText: {
-    fontFamily: 'sans-serif',
-    fontSize: '0.9rem',
-    lineHeight: '1.6',
-    color: '#a0a0a0',
-    fontStyle: 'italic',
-  },
   cardsStack: {
     display: 'flex',
     flexDirection: 'column',
     gap: '5rem', 
     width: '100%',
     maxWidth: '1400px', 
-    marginBottom: '5rem', // Reduced margin so footer image can overlap if needed
+    marginBottom: '5rem',
   },
   cardContainer: {
     width: '100%',
@@ -194,93 +211,92 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   cardTitle: {
     fontFamily: '"Times New Roman", serif',
+    fontWeight: 300,
     fontSize: '3.5rem',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
   },
   cardDesc: {
     fontFamily: 'sans-serif',
+    fontWeight: 300,
     fontSize: '0.9rem',
     textTransform: 'uppercase',
     letterSpacing: '0.25em',
     opacity: 0.9,
   },
 
-  /* --- FOOTER SECTION (EXPANDED) --- */
+  /* --- FOOTER SECTION --- */
   footerSection: {
     position: 'relative',
     backgroundColor: '#000000',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // INCREASED HEIGHT: Allows large ornament to fit fully
-    minHeight: '140vh', 
+    minHeight: '100vh', 
     padding: '4rem 2rem 2rem 2rem',
     overflow: 'hidden',
     zIndex: 1, 
   },
-  
-  // IMAGE STYLING FIXED
-  footerBackgroundImage: {
+  footerWatermark: {
     position: 'absolute',
-    bottom: 0, // Anchor to bottom
+    top: '50%', 
     left: '50%',
-    transform: 'translateX(-50%)', // Center horizontally
-    width: '100%',
-    maxWidth: '1400px', // Prevent it from getting absurdly wide on 4k screens
-    height: 'auto', // Auto height preserves aspect ratio
-    maxHeight: '100%', // Ensure it fits within the container
-    opacity: 0.5, 
-    filter: 'grayscale(100%)',
-    zIndex: 0, // Behind text
+    transform: 'translate(-50%, -50%)', 
+    height: '110%', 
+    opacity: 0.15,
+    zIndex: 0, 
     pointerEvents: 'none',
   },
-  
   footerTopTextContainer: {
     textAlign: 'center',
-    marginTop: '5rem', // Push down slightly from top edge
+    marginTop: '10vh', 
     marginBottom: 'auto', 
     color: '#e0e0e0',
-    zIndex: 2, // Above image
-    maxWidth: '600px',
-  },
-  footerScriptText: {
-    fontFamily: '"Times New Roman", serif',
-    fontStyle: 'italic',
-    fontSize: '1.5rem',
-    marginBottom: '1rem',
-    letterSpacing: '0.1em',
+    zIndex: 2, 
+    maxWidth: '800px',
   },
   footerBodyText: {
     fontFamily: '"Times New Roman", serif',
-    fontSize: '0.9rem',
+    fontWeight: 300,
+    fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', 
     fontStyle: 'italic',
-    color: '#888',
+    color: '#e0e0e0',
     lineHeight: 1.5,
+    margin: 0,
   },
-  
-  // CTA BUTTON STYLES (Positioned Absolute)
-  footerCtaText: {
-    position: 'absolute',
-    top: '60%', 
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    textAlign: 'center',
-    fontFamily: '"Times New Roman", serif',
-    fontSize: 'clamp(3rem, 7vw, 6rem)', 
-    letterSpacing: '0.2em',
-    color: '#ffffff',
-    textTransform: 'uppercase',
-    lineHeight: 1.1,
+  footerMainContent: {
+    position: 'relative',
     zIndex: 2, 
-    textShadow: '0 5px 20px rgba(0,0,0,0.9)', 
-    // Button Reset Styles
+    textAlign: 'center',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
     padding: 0,
+    marginTop: 'auto',
+    marginBottom: '2rem',
+    transition: 'opacity 0.3s ease',
   },
-  
+  footerTitle: {
+    fontFamily: '"Times New Roman", serif',
+    fontWeight: 300,
+    fontSize: 'clamp(2.5rem, 8vw, 6.5rem)', 
+    letterSpacing: '0.25em',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+    lineHeight: 1.1,
+    margin: 0,
+  },
+  footerSubtitle: {
+    fontFamily: '"Times New Roman", serif',
+    fontWeight: 300,
+    fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+    color: '#e0e0e0',
+    letterSpacing: '0.05em',
+    marginBottom: 'auto',
+    zIndex: 2,
+    textAlign: 'center',
+    padding: '0 1rem', 
+  },
   bottomBar: {
     width: '100%',
     display: 'flex',
@@ -288,8 +304,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     marginTop: 'auto', 
     paddingTop: '2rem',
-    borderTop: '1px solid rgba(255,255,255,0.1)',
     fontFamily: 'sans-serif',
+    fontWeight: 300,
     fontSize: '0.75rem',
     textTransform: 'uppercase',
     letterSpacing: '0.15em',
@@ -311,7 +327,7 @@ const styles: { [key: string]: React.CSSProperties } = {
 };
 
 const NarratingStoriesPage = () => {
-  const navigate = useNavigate(); // 2. Initialize navigation hook
+  const navigate = useNavigate();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -320,43 +336,141 @@ const NarratingStoriesPage = () => {
   return (
     <div style={styles.pageContainer}>
       
+      {/* MOBILE RESPONSIVE CSS OVERRIDES */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .nav-responsive {
+              padding: 1.5rem !important;
+            }
+            .hero-title-responsive {
+              font-size: 2.2rem !important;
+              width: 90% !important;
+            }
+            .story-img-responsive {
+              height: 50vh !important;
+            }
+            .story-txt-responsive {
+              padding: 4rem 1.5rem !important;
+              gap: 2rem !important;
+            }
+            .cards-sec-responsive {
+              padding: 4rem 1rem 0rem 1rem !important;
+            }
+            .cards-stack-responsive {
+              gap: 3rem !important;
+            }
+            .card-cont-responsive {
+              height: 60vh !important; 
+              min-height: 400px !important;
+              border-radius: 24px !important;
+            }
+            .card-title-responsive {
+              font-size: 2.2rem !important;
+            }
+            /* MOBILE FOOTER OVERRIDES - Tighter, cleaner spacing */
+            .footer-sec-responsive {
+              padding: 5rem 1.5rem 2rem 1.5rem !important;
+              min-height: auto !important;
+              gap: 2.5rem !important; 
+            }
+            .footer-top-text-responsive,
+            .footer-main-content-responsive,
+            .footer-subtitle-responsive {
+              margin: 0 !important;
+            }
+            .footer-title-responsive {
+              font-size: 2.2rem !important;
+            }
+            .bottom-bar-responsive {
+              flex-direction: column !important;
+              justify-content: center !important;
+              gap: 1.5rem !important;
+              text-align: center !important;
+              margin-top: 2rem !important;
+            }
+          }
+        `}
+      </style>
+
       {/* SECTION 1: HERO */}
       <section style={styles.heroSection}>
         <div style={styles.heroOverlay} />
-        <nav style={styles.nav}>
+        <nav style={styles.nav} className="nav-responsive">
           <Link to="/" style={styles.logo}>OUI CREATIVES</Link>
-          <button style={styles.menuBtn}>
-            <Menu size={24} strokeWidth={1} />
-          </button>
         </nav>
         <div style={styles.heroContent}>
-          
-          <h1 style={styles.heroTitle}>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30, x: '-50%' }}
+            animate={{ opacity: 1, y: '-50%', x: '-50%' }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+            style={styles.heroTitle} 
+            className="hero-title-responsive"
+          >
             The Art of Narrating Stories!
-          </h1>
+          </motion.h1>
         </div>
       </section>
 
-      {/* SECTION 2: CARDS */}
-      <section style={styles.cardsSection}>
-        <div style={styles.sectionHeader}>
-          <h2 style={styles.sectionTitle}>Lorem Ipsum</h2>
-          <p style={styles.sectionText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua.
+      {/* SECTION 2: NEW STORYBOOK SECTION */}
+      <section style={styles.storySection}>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.5 }}
+          style={styles.storyImageContainer} 
+          className="story-img-responsive"
+        >
+          <img 
+            src="/assets/narrate.png" 
+            alt="Illuminated open book" 
+            style={styles.storyImage} 
+          />
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          style={styles.storyTextContainer} 
+          className="story-txt-responsive"
+        >
+          <p style={styles.storyTextLine1}>
+            Some stories are loud. The ones that last are often deeply imagined.
           </p>
-        </div>
+          <p style={styles.storyTextLine2}>
+            We are drawn to narratives that unfold gently, stories that invite discovery rather than demand attention, but build curiosity. Like a well-told fairytale, they linger in memory, carried through emotion rather than explanation.
+          </p>
+        </motion.div>
+      </section>
 
-        <div style={styles.cardsStack}>
-          {cardsData.map((card) => (
-            <div 
+      {/* SECTION 3: CARDS */}
+      <section style={styles.cardsSection} className="cards-sec-responsive">
+        <div style={styles.cardsStack} className="cards-stack-responsive">
+          {cardsData.map((card, index) => (
+            <motion.div 
               key={card.id} 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+              onClick={() => {
+                if (card.link) {
+                  navigate(card.link);
+                }
+              }}
+              className="card-cont-responsive"
+              whileHover={{ scale: 0.98 }}
               style={{
                 ...styles.cardContainer,
                 backgroundImage: card.background,
                 backgroundColor: card.backgroundColor,
                 backgroundSize: card.backgroundSize,
+                backgroundPosition: 'center', 
+                backgroundRepeat: 'no-repeat',
                 color: card.textColor,
+                cursor: card.link ? 'pointer' : 'default', 
               }}
             >
               <div style={styles.cardContent}>
@@ -364,56 +478,82 @@ const NarratingStoriesPage = () => {
                   <img src={card.logo} alt="logo" style={styles.cardLogo} />
                 )}
                 {!card.logo && (
-                   <h3 style={styles.cardTitle}>{card.title}</h3>
+                   <h3 style={styles.cardTitle} className="card-title-responsive">{card.title}</h3>
                 )}
                 {card.description && (
                   <span style={styles.cardDesc}>{card.description}</span>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* SECTION 3: FOOTER */}
-      <footer style={styles.footerSection}>
+      {/* SECTION 4: FOOTER */}
+      <footer style={styles.footerSection} className="footer-sec-responsive">
         
-        {/* Background Image */}
         <img 
-            src="/assets/brandingf.png" 
+            src="/assets/crest-ornament-dark.png" 
             alt="" 
-            style={styles.footerBackgroundImage} 
+            style={styles.footerWatermark} 
         />
 
-        {/* Top Text */}
-        <div style={styles.footerTopTextContainer}>
-          <h3 style={styles.footerScriptText}>Lorem Ipsum</h3>
-          <p style={styles.footerBodyText}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-
-        {/* Centered CTA Button with Redirect */}
-        <button 
-          style={styles.footerCtaText}
-          onClick={() => navigate('/consciousbusiness')} // 3. Redirects to all projects page
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={styles.footerTopTextContainer} 
+          className="footer-top-text-responsive"
         >
-          VIEW<br />PROJECTS
-        </button>
+          <h4 style={styles.footerBodyText}>
+            At its heart, storytelling is an act of care. To narrate a brand is to give it a soul, one<br/>that lives beyond moments and grows with time.
+          </h4>
+        </motion.div>
 
-        {/* Bottom Bar */}
-        <div style={styles.bottomBar}>
+        <motion.button 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          style={styles.footerMainContent}
+          className="footer-main-content-responsive"
+          onClick={() => navigate('/consciousbusiness')}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+        >
+          <h2 style={styles.footerTitle} className="footer-title-responsive">SIGNATURE<br />ENGAGEMENTS</h2>
+        </motion.button>
+
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4 }}
+          style={styles.footerSubtitle}
+          className="footer-subtitle-responsive"
+        >
+          A selection of commissions developed through close collaboration and considered form.
+        </motion.p>
+
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.6 }}
+          style={styles.bottomBar} 
+          className="bottom-bar-responsive"
+        >
           <button onClick={scrollToTop} style={styles.bottomLink}>
             back on top
           </button>
           
-          <span style={{ textAlign: 'center' }}>
-            2024 © oui creatives all rights reserved
+          <span>
+            2024 @ qui creatives all rights reserved
           </span>
           
           <a href="#" style={styles.bottomLink}>Follow Us</a>
-        </div>
+        </motion.div>
 
       </footer>
 

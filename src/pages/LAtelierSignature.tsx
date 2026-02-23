@@ -6,7 +6,7 @@ const LAtelierSignature = () => {
 
   // Example slide data
   const slides = [
-    { id: 1, image: '/assets/signature-card-1.jpg' },
+    { id: 1, image: '/assets/brandingcard.png' },
     { id: 2, image: '/assets/signature-card-2.jpg' },
     { id: 3, image: '/assets/signature-card-3.jpg' },
     { id: 4, image: '/assets/signature-card-4.jpg' },
@@ -40,19 +40,14 @@ const LAtelierSignature = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             style={styles.mainCardFrame}
           >
-            {/* The Floating Card Effect */}
-            <div style={styles.cardPerspective}>
-              <img 
-                src={slides[activeIndex].image} 
-                alt="Signature Project" 
-                style={styles.floatingCard} 
-              />
-            </div>
+            {/* Image perfectly covers the box now */}
+            <img 
+              src={slides[activeIndex].image} 
+              alt="" 
+              style={styles.fullCoverImage} 
+            />
           </motion.div>
         </AnimatePresence>
-
-        {/* LOREM Label (Right side) */}
-        <div style={styles.loremLabel}>LOREM</div>
 
         {/* Navigation Dots */}
         <div style={styles.pagination}>
@@ -73,7 +68,7 @@ const LAtelierSignature = () => {
   );
 };
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   container: {
     backgroundColor: '#000000',
     minHeight: '100vh',
@@ -104,7 +99,7 @@ const styles = {
     color: '#ffffff',
     fontSize: '1rem',
     letterSpacing: '0.6em',
-    fontWeight: '400',
+    fontWeight: 400,
     marginBottom: '1.5rem',
   },
   subtitle: {
@@ -130,7 +125,7 @@ const styles = {
     width: '100%',
     height: '100%',
     backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-    backgroundSize: '100px 100px', // Subtle grid pattern
+    backgroundSize: '100px 100px', 
     borderRadius: '24px',
     border: '1px solid rgba(255,255,255,0.1)',
     display: 'flex',
@@ -139,33 +134,18 @@ const styles = {
     overflow: 'hidden',
     position: 'relative',
   },
-  cardPerspective: {
-    perspective: '1200px',
-    zIndex: 3,
-  },
-  floatingCard: {
-    width: '450px',
-    height: 'auto',
-    borderRadius: '4px',
-    boxShadow: '0 50px 100px rgba(0,0,0,0.8)',
-    transform: 'rotateX(25deg) rotateY(-25deg) rotateZ(10deg)', // Fixed isometric angle
-    transition: 'transform 0.3s ease',
-  },
-  loremLabel: {
-    position: 'absolute',
-    right: '2rem',
-    top: '50%',
-    transform: 'translateY(-50%) rotate(0deg)',
-    color: '#8b0000', // Deep red from screenshot
-    fontFamily: 'serif',
-    fontSize: '0.8rem',
-    letterSpacing: '0.2em',
+  fullCoverImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover', // Ensures the image stretches to fill the box without distorting
+    display: 'block',
   },
   pagination: {
     position: 'absolute',
     bottom: '2rem',
     display: 'flex',
     gap: '1rem',
+    zIndex: 10,
   },
   dot: {
     width: '6px',

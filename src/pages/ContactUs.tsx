@@ -1,169 +1,273 @@
 import React from "react";
-import { MapPin, ArrowUpRight, ArrowUp } from "lucide-react";
-import { Link } from "react-router-dom"; // 1. Imported Link
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-// Placeholder for your custom fonts. 
-// Ensure you import 'Breadley Sans' and 'Snell Roundhand' in your CSS for full fidelity.
+// Font placeholders - weights set to thin/light
 const styles = {
-  scriptFont: { fontFamily: '"Snell Roundhand", "Cursive", sans-serif' },
-  sansFont: { fontFamily: '"Breadley Sans", "Helvetica Neue", sans-serif' },
+  scriptFont: { fontFamily: '"Snell Roundhand", "Cursive", serif', fontWeight: 300, lineHeight: 1.3 },
+  serifFont: { fontFamily: '"Times New Roman", serif', fontWeight: 300, lineHeight: 1.3 },
+  sansFont: { fontFamily: '"Helvetica Neue", sans-serif', fontWeight: 300, lineHeight: 1.3 },
 };
 
-export const ContactUs = () => {
+// --- ANIMATION VARIANTS ---
+const slowFadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } // Buttery smooth custom easing
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15, // Delay between each field appearing
+      delayChildren: 0.2
+    }
+  }
+};
+
+const ContactUs = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="bg-[#34131c] min-h-screen w-full relative overflow-hidden text-white selection:bg-[#58182b] selection:text-white">
+    <div className="min-h-screen w-full relative overflow-x-hidden text-[#1a1a1a] font-light leading-[1.3]">
       
-      {/* --- Background Ambient Blobs --- */}
-      <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-[#471829] rounded-full blur-[150px] opacity-60 pointer-events-none" />
-      <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#471829] rounded-full blur-[150px] opacity-50 pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[-10%] w-[400px] h-[400px] bg-[#471829] rounded-full blur-[150px] opacity-60 pointer-events-none" />
+      {/* --- BACKGROUND GRADIENT --- */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, #f9f6f6 0%, #fdfbf7 50%, #f9f6f6 100%)'
+        }}
+      />
 
-      {/* --- Navbar --- */}
-      <nav className="relative z-10 w-full max-w-[1440px] mx-auto px-6 py-10 flex justify-between items-start">
-        <Link to="/" style={styles.sansFont} className="text-2xl md:text-3xl tracking-[0.3em] uppercase hover:opacity-80 transition-opacity">
-          Qui Creatives
-        </Link>
-        {/* Logo/Icon Placeholder */}
-        <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center">
-          <div className="w-2 h-2 bg-white rounded-full"></div>
-        </div>
+      {/* --- ORNAMENTAL HEADER BACKGROUND (Now "Breathing") --- */}
+      <div className="absolute top-0 left-0 w-full h-[400px] md:h-[500px] z-0 pointer-events-none overflow-hidden">
+        <motion.img 
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          src="/assets/contact.png" 
+          alt="" 
+          className="w-full h-full object-cover object-center opacity-[0.30] mix-blend-multiply"
+        />
+      </div>
+
+      {/* --- NAV --- */}
+      <nav className="relative z-20 w-full px-8 py-8 flex justify-end min-h-[80px]">
+         {/* Nav space kept for layout consistency */}
       </nav>
 
-      {/* --- Hero Section --- */}
-      <main className="relative z-10 max-w-[1440px] mx-auto px-6 pt-20 pb-32 flex flex-col items-center text-center">
-        {/* Logo Center */}
-        <div className="mb-12 w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/10 flex items-center justify-center bg-[#34131c]/50 backdrop-blur-sm">
-           <span className="text-4xl">Q</span>
-        </div>
-
-        <h2 style={styles.scriptFont} className="text-6xl md:text-8xl lg:text-9xl mb-6 leading-tight">
-          Crafting <br />
-          <span className="italic">Hypnotic Brands!</span>
-        </h2>
-        
-        <p style={styles.sansFont} className="text-lg md:text-2xl max-w-lg text-white/80 mt-4 font-light">
-          Unlock the art of conversation, and let’s bring your vision to life together.
-        </p>
-      </main>
-
-      {/* --- Contact Section (The "Enchanté" Form) --- */}
-      <section className="relative z-10 w-full max-w-[1000px] mx-auto px-6 py-20">
-        
-        {/* Background Text Overlay */}
-        <div 
+      {/* --- HERO SECTION --- */}
+      <header className="relative z-10 w-full max-w-4xl mx-auto px-6 pt-40 pb-12 text-center flex flex-col items-center">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
           style={styles.scriptFont} 
-          className="absolute top-0 left-0 w-full text-center text-[150px] md:text-[250px] text-white/[0.03] select-none pointer-events-none -translate-y-1/4"
+          className="text-5xl md:text-7xl mb-10 text-[#1a1a1a]"
         >
-          enchanté?
-        </div>
+          Crafting <br />
+          Hypnotic Brands!
+        </motion.h1>
+      </header>
 
-        <div className="relative z-20 bg-white/5 backdrop-blur-sm rounded-[3rem] p-8 md:p-16 border border-white/10 shadow-2xl">
-            <div className="text-center mb-16">
-                <h3 style={styles.scriptFont} className="text-5xl md:text-6xl mb-4">enchanté?</h3>
-                <p style={styles.sansFont} className="text-white/70 text-lg md:text-xl max-w-md mx-auto">
-                    Delighted by what you see? Let's get in touch to make it happen for you, for real!
-                </p>
-            </div>
-
-            {/* Form Fields - Grid Layout */}
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                {/* Name */}
-                <div className="group">
-                    <label className="block text-lg text-white/60 mb-2" style={styles.sansFont}>Your name</label>
-                    <input type="text" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2 transition-colors" />
-                </div>
-                
-                {/* Email */}
-                <div className="group">
-                    <label className="block text-lg text-white/60 mb-2" style={styles.sansFont}>Email Address</label>
-                    <input type="email" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2 transition-colors" />
-                </div>
-
-                {/* Phone */}
-                <div className="group">
-                    <label className="block text-lg text-white/60 mb-2" style={styles.sansFont}>Telephone Number</label>
-                    <input type="tel" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2 transition-colors" />
-                </div>
-
-                {/* Services */}
-                <div className="group">
-                    <label className="block text-lg text-white/60 mb-2" style={styles.sansFont}>Services</label>
-                    <select className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2 transition-colors text-white appearance-none">
-                        <option className="bg-[#34131c]">Branding</option>
-                        <option className="bg-[#34131c]">Web Design</option>
-                        <option className="bg-[#34131c]">Development</option>
-                    </select>
-                </div>
-
-                {/* Project Details (Full Width) */}
-                <div className="group md:col-span-2">
-                    <label className="block text-lg text-white/60 mb-2" style={styles.sansFont}>Tell us about your project</label>
-                    <textarea rows="1" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2 transition-colors resize-none overflow-hidden"></textarea>
-                </div>
-
-                {/* Submit Button */}
-                <div className="md:col-span-2 flex justify-center mt-8">
-                    <button 
-                        type="button"
-                        className="w-32 h-32 rounded-full bg-gradient-to-br from-[#fff5f5] to-[#bc9fa7] flex flex-col items-center justify-center text-[#58182b] hover:scale-105 transition-transform duration-300 shadow-lg group"
-                    >
-                        <span style={styles.sansFont} className="tracking-[0.2em] font-semibold text-sm mb-1">SUBMIT</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-      </section>
-
-      {/* --- Map Section --- */}
-      <section className="relative z-10 w-full max-w-[1320px] mx-auto px-6 py-20">
-        <div className="w-full h-[400px] md:h-[600px] rounded-[30px] overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
-             {/* Map Image Placeholder */}
-             <img 
-                src="https://placehold.co/1440x800/222/999?text=Map+View" 
-                alt="Map Location" 
-                className="w-full h-full object-cover"
-             />
-             
-             {/* Marker Overlay */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4">
-                <MapPin className="text-white w-12 h-12 drop-shadow-lg" />
-                <span className="bg-black/80 px-4 py-2 text-sm tracking-[0.2em] rounded-md backdrop-blur-md">GOOGLE MAP</span>
-             </div>
-        </div>
-      </section>
-
-      {/* --- Footer --- */}
-      <footer className="relative z-10 max-w-[1440px] mx-auto px-6 pt-20 pb-12 text-center">
+      {/* --- FORM SECTION --- */}
+      <section className="relative z-10 w-full pb-20">
         
-        {/* 2. Wrapped the title in a Link component */}
-        <Link to="/ourprojects" className="inline-block hover:scale-[1.02] transition-transform duration-500 cursor-pointer">
-            <h2 style={styles.sansFont} className="text-[10vw] md:text-[140px] leading-none tracking-widest opacity-90 mb-16">
-                OUR PROJECTS
-            </h2>
-        </Link>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={slowFadeUp}
+          className="text-center mb-16 relative z-10 px-6"
+        >
+          <h2 style={styles.scriptFont} className="text-4xl md:text-5xl text-[#1a1a1a] mb-6">
+            enchanté?
+          </h2>
+          <p style={styles.sansFont} className="text-[9px] md:text-[10px] text-[#333] max-w-lg mx-auto tracking-[0.2em] uppercase">
+            Let's have a refined dialogue that shares creative expression and strategic intent.
+          </p>
+        </motion.div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm md:text-base opacity-70 border-t border-white/10 pt-8 gap-6">
-            <p>© 2024 Qui Creatives. All rights reserved.</p>
+        <div className="relative w-full mt-12">
+          
+          {/* LEFT SIDE IMAGE (Smooth Slide In) */}
+          <motion.img 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            src="/assets/hante.png" 
+            alt="Form Left" 
+            className="hidden lg:block absolute left-0 top-0 w-48 md:w-64 h-auto object-cover z-20"
+          />
+
+          <form className="relative z-10 max-w-2xl mx-auto px-6">
             
-            <div className="flex gap-8">
-                <a href="#" className="hover:text-white transition-colors">Instagram</a>
-                <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-                <a href="#" className="hover:text-white transition-colors">Behance</a>
-            </div>
-
-            <button 
-                onClick={scrollToTop}
-                className="flex items-center gap-2 hover:text-white transition-colors"
+            {/* Staggered Form Grid */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 mb-12"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
             >
-                Back on Top <ArrowUp size={16} />
+              <motion.div variants={slowFadeUp} className="group relative text-center">
+                <label className="block text-[10px] text-[#333] mb-4" style={styles.serifFont}>Your name</label>
+                <input type="text" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 text-center font-light transition-all" />
+              </motion.div>
+              
+              <motion.div variants={slowFadeUp} className="group relative text-center">
+                <label className="block text-[10px] text-[#333] mb-4" style={styles.serifFont}>Email Address</label>
+                <input type="email" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 text-center font-light transition-all" />
+              </motion.div>
+              
+              <motion.div variants={slowFadeUp} className="group relative text-center">
+                <label className="block text-[10px] text-[#333] mb-4" style={styles.serifFont}>Telephone Number</label>
+                <input type="tel" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 text-center font-light transition-all" />
+              </motion.div>
+              
+              <motion.div variants={slowFadeUp} className="group relative text-center">
+                <label className="block text-[10px] text-[#333] mb-4" style={styles.serifFont}>Services</label>
+                <input type="text" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 text-center font-light transition-all" />
+              </motion.div>
+              
+              <motion.div variants={slowFadeUp} className="group md:col-span-2 relative text-center mt-4">
+                <label className="block text-[10px] text-[#333] mb-4" style={styles.serifFont}>Tell us about your project</label>
+                <textarea rows={1} className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 text-center font-light transition-all resize-none overflow-hidden"></textarea>
+              </motion.div>
+            </motion.div>
+
+            {/* Action Buttons (Fade Up) */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={slowFadeUp}
+              className="relative flex flex-col items-center gap-6 mt-16 w-full"
+            >
+              <motion.button 
+                whileHover={{ scale: 1.02, backgroundColor: "#222" }}
+                whileTap={{ scale: 0.98 }}
+                type="button" 
+                className="px-10 py-3 rounded-full bg-black text-white transition-colors shadow-lg"
+              >
+                <span style={styles.serifFont} className="text-[10px] tracking-[0.3em] uppercase">SCHEDULE A CALL</span>
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.02, backgroundColor: "#222" }}
+                whileTap={{ scale: 0.98 }}
+                type="button" 
+                className="px-10 py-3 rounded-full bg-black text-white transition-colors shadow-lg"
+              >
+                <span style={styles.serifFont} className="text-[10px] tracking-[0.3em] uppercase">GET IN TOUCH</span>
+              </motion.button>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 1 }}
+              viewport={{ once: true }}
+              className="text-center mt-20"
+            >
+               <span style={styles.serifFont} className="text-[10px] tracking-[0.4em] text-[#333] uppercase">VISIT THE MAISON</span>
+            </motion.div>
+          </form>
+
+          {/* RIGHT SIDE IMAGE (Smooth Slide In) */}
+          <motion.img 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            src="/assets/enc.png" 
+            alt="Buttons Right" 
+            className="hidden lg:block absolute right-0 top-[65%] -translate-y-1/2 w-48 md:w-64 h-auto object-cover z-20"
+          />
+
+        </div>
+      </section>
+
+      {/* --- MAP SECTION --- */}
+      <section className="relative z-10 w-full max-w-[1100px] mx-auto px-6 py-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 40, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden relative shadow-2xl"
+        >
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.123456789!2d75.8000000!3d26.9000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }} 
+                allowFullScreen={false} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Office Location"
+            ></iframe>
+            
+            <div className="absolute bottom-6 left-8 pointer-events-none">
+                <span style={styles.serifFont} className="text-white/80 text-[10px] tracking-[0.3em] uppercase mix-blend-difference">
+                    GOOGLE MAP
+                </span>
+            </div>
+        </motion.div>
+      </section>
+
+      {/* --- FOOTER SECTION --- */}
+      <footer className="relative z-10 w-full mt-32 pt-40 pb-12 text-center overflow-hidden flex flex-col justify-end min-h-[60vh]">
+        
+        {/* Footer Ornament (Now "Breathing") */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+             <motion.img 
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                src="/assets/contact.png" 
+                alt="" 
+                className="w-full h-full object-cover object-bottom opacity-[0.4] mix-blend-multiply" 
+                style={{ transform: 'rotate(180deg)' }} 
+            />
+        </div>
+
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={staggerContainer}
+          className="relative z-10 mb-32 flex flex-col items-center"
+        >
+            <Link to="/ourprojects" className="inline-block group mb-8">
+                <motion.h2 variants={slowFadeUp} style={styles.serifFont} className="text-4xl md:text-6xl text-[#1a1a1a] tracking-[0.2em] uppercase group-hover:opacity-70 transition-opacity duration-300">
+                    SIGNATURE <br /> ENGAGEMENTS
+                </motion.h2>
+            </Link>
+            <motion.p variants={slowFadeUp} style={styles.sansFont} className="text-[10px] md:text-xs text-[#555] max-w-md mx-auto tracking-widest lowercase">
+               Projects that reflect our approach to identity, structure, and cultural relevance.
+            </motion.p>
+        </motion.div>
+
+        <div className="relative z-10 max-w-[1400px] w-full mx-auto px-8 flex justify-between items-end text-[9px] md:text-[10px] text-[#555] uppercase tracking-[0.15em] border-t border-transparent">
+            <button onClick={scrollToTop} className="hover:text-black transition-colors text-left w-1/3">
+                back on top
             </button>
+            <div className="text-center w-1/3">
+                2024 @ qui creatives all rights reserved
+            </div>
+            <div className="text-right w-1/3">
+                <a href="#" className="hover:text-black transition-colors">Follow Us</a>
+            </div>
         </div>
       </footer>
-
     </div>
   );
 };
+
+export default ContactUs;

@@ -10,7 +10,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#050505',
     minHeight: '100vh',
     position: 'relative',
-    overflowX: 'hidden',
+    // REMOVED: overflowX: 'hidden' - This was breaking the sticky scroll in HeroSection!
   },
   nav: {
     display: 'flex',
@@ -33,24 +33,23 @@ const styles: { [key: string]: React.CSSProperties } = {
   /* --- FOOTER STYLES --- */
   footerContainer: {
     position: 'relative',
-    height: '100vh', // Changed to full height for better impact
+    height: '100vh', 
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#050505',
-    overflow: 'hidden', // Ensures image doesn't spill out
+    overflow: 'hidden', 
   },
-  // New style for the footer image
   footerImage: {
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '100%', // Expanded to full width
-    height: '100%', // Expanded to full height
+    width: '100%', 
+    height: '100%', 
     objectFit: 'cover',
-    opacity: 0.6, // Dimmed so text pops
-    filter: 'grayscale(100%)', // Black and white for elegance
+    opacity: 0.6, 
+    filter: 'grayscale(100%)', 
     zIndex: 1,
   },
   footerWatermark: {
@@ -66,13 +65,13 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   allProjectsLink: {
     position: 'relative',
-    zIndex: 2, // Ensures text is above the image
+    zIndex: 2, 
     textAlign: 'center',
     textDecoration: 'none',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    mixBlendMode: 'difference', // Makes text readable over the image
+    mixBlendMode: 'difference', 
   },
   allProjectsText: {
     fontFamily: '"Times New Roman", serif',
@@ -126,15 +125,7 @@ const BrandingPage = () => {
       {/* --- FOOTER SECTION --- */}
       <footer style={styles.footerContainer}>
         
-        {/* 1. Background Watermark (Optional decoration) */}
-        {/* <img 
-          src="/assets/crest-ornament-dark.png" 
-          alt="" 
-          style={styles.footerWatermark} 
-        /> */}
-
         {/* 2. THE NEW FOOTER IMAGE */}
-        {/* Replace with your actual image path */}
         <img 
           src="/assets/brandingf.png"
           alt="Office Aesthetic" 

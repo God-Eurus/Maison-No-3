@@ -1,42 +1,87 @@
+/* ========================= */
+/* FONT DECLARATIONS */
+/* ========================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:wght@700&display=swap');
+@font-face {
+  font-family: 'Snell';
+  src: url('/fonts/snellroundhand_black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Breadley Sans';
+  src: url('/fonts/BreadleySans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================= */
+/* MAC FONT RENDERING FIX */
+/* ========================= */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+* {
+  font-synthesis: none;
+  box-sizing: border-box;
+}
+
+/* ========================= */
+/* TAILWIND */
+/* ========================= */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ========================= */
+/* BASE STYLES */
+/* ========================= */
 
 @layer base {
   body {
     overflow-x: hidden;
     background: #000;
-  }
-
-  html {
-    scroll-behavior: smooth;
+    margin: 0;
   }
 }
+
+/* ========================= */
+/* CUSTOM CLASSES */
+/* ========================= */
 
 .section {
   transition: transform 0.1s ease-out;
   will-change: transform;
 }
+
 .card-title {
-  /* Use the 'Playfair Display' font we imported */
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem; /* 56px */
-  font-weight: 700;
+  font-family: 'Snell', cursive;
+  font-size: 3.5rem;
+  font-weight: 900;
   color: white;
-  /* Add a shadow to make the text readable over images */
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .card-description {
-  /* Use the 'Montserrat' font */
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.125rem; /* 18px */
-  font-weight: 300;
+  font-family: 'Breadley Sans', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
   color: white;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
   margin-top: 1rem;
-  max-width: 500px; /* Stop it from getting too wide */
+  max-width: 500px;
   text-align: center;
+}
+
+body {
+  font-family: 'Breadley Sans', sans-serif !important;
+  font-family: 'Snell', cursive !important;
 }

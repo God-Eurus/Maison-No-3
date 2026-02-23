@@ -4,9 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        
-        'script': ['"Pinyon Script"', 'cursive'],
-        'serif-display': ['"Playfair Display"', 'serif'],
+        breadley: ['"Breadley Sans"', 'sans-serif'],
+        snell: ['Snell', 'cursive'],
       },
       keyframes: {
         fadeInUp: {
