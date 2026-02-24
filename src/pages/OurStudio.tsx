@@ -68,14 +68,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#000000',
     color: '#e0e0e0',
     minHeight: '100vh',
-    fontFamily: '"Helvetica Neue", sans-serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     overflowX: 'hidden',
   },
   nav: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 'clamp(1rem, 5vw, 2rem) clamp(1.5rem, 5vw, 3rem)', // Fluid padding
+    padding: 'clamp(1rem, 5vw, 2rem) clamp(1.5rem, 5vw, 3rem)',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -90,14 +90,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     textDecoration: 'none',
   },
   
-  // --- NEW HERO TEXT SECTION ---
+  // --- HERO TEXT SECTION ---
   heroTextSection: {
     position: 'relative',
     height: '60vh', 
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    padding: '0 clamp(1.5rem, 5vw, 5%)', // Fluid padding
+    padding: '0 clamp(1.5rem, 5vw, 5%)',
     backgroundColor: '#000',
   },
   heroContent: {
@@ -105,8 +105,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     textAlign: 'left',
   },
   heroTitle: {
-    fontFamily: '"Times New Roman", serif',
-    fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', // Adjusted clamp for better mobile impact
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(3.5rem, 8vw, 5rem)', 
     letterSpacing: '0.2em',
     fontWeight: 400,
     color: '#fff',
@@ -114,8 +114,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: '1rem',
   },
   heroSubtitle: {
-    fontSize: 'clamp(0.85rem, 2vw, 0.9rem)',
-    maxWidth: '300px',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
+    maxWidth: '400px',
     lineHeight: '1.6',
     color: '#a0a0a0',
   },
@@ -123,12 +124,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'absolute',
     top: '10%',
     right: '-5%',
-    width: 'clamp(150px, 25%, 400px)', // Fluid width to prevent taking over mobile screens
+    width: 'clamp(150px, 25%, 400px)', 
     zIndex: 5, 
     pointerEvents: 'none',
   },
 
-  // --- NEW VIDEO SECTION ---
+  // --- VIDEO SECTION ---
   videoSection: {
     position: 'relative',
     height: '100vh',
@@ -156,7 +157,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   // --- INDUSTRIES SECTION ---
   industriesSection: {
     backgroundColor: '#000000',
-    padding: 'clamp(4rem, 10vw, 8rem) 0', // Fluid vertical padding
+    padding: 'clamp(4rem, 10vw, 8rem) 0',
     position: 'relative',
     zIndex: 30,
     display: 'flex',
@@ -164,7 +165,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
   },
   sectionTitle: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
     letterSpacing: '0.3em',
     fontWeight: 400,
@@ -182,17 +183,17 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   industryItem: {
     width: '100%',
-    padding: 'clamp(2rem, 5vw, 3rem) 0', // Scaled down slightly for mobile
+    padding: 'clamp(2rem, 5vw, 3rem) 0', 
     borderBottom: '1px solid #222',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    cursor: 'pointer',
+    cursor: 'default',
     position: 'relative',
     overflow: 'hidden', 
   },
   industryText: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
     letterSpacing: '0.05em',
     textAlign: 'center',
@@ -200,8 +201,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 2, 
     padding: '0 1rem',
   },
-  industryLink: {
-    textDecoration: 'none',
+  industryLinkWrapper: {
     width: '100%',
     display: 'block',
   },
@@ -214,13 +214,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 30,
     position: 'relative',
     display: 'flex',
-    flexWrap: 'wrap', // Will automatically stack on mobile
+    flexWrap: 'wrap', 
     minHeight: '100vh',
   },
   servicesLeft: {
     flex: '1 1 40%',
-    minWidth: 'min(100%, 300px)', // Allows 100% width on mobile
-    minHeight: '40vh', // Gives it breathing room when stacked
+    minWidth: 'min(100%, 300px)', 
+    minHeight: '40vh', 
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -230,14 +230,14 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   servicesOrnament: {
     width: '100%',
-    height: '100%', // Changed to 100% height to ensure it fills the wrapper when stacked
+    height: '100%', 
     objectFit: 'cover', 
     opacity: 0.5, 
     pointerEvents: 'none',
   },
   servicesTitle: {
-    fontFamily: '"Times New Roman", serif',
-    fontSize: 'clamp(3rem, 10vw, 5rem)',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(4rem, 12vw, 7rem)',
     letterSpacing: '0.2em',
     fontWeight: 400,
     textTransform: 'uppercase',
@@ -251,8 +251,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   servicesRight: {
     flex: '1 1 50%',
-    minWidth: 'min(100%, 350px)', // Allows 100% width on mobile
-    padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem)', // Fluid padding fixes the squished mobile text
+    minWidth: 'min(100%, 350px)', 
+    padding: 'clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem)', 
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -268,13 +268,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: '1.5rem 0',
   },
   serviceName: {
-    fontFamily: '"Helvetica Neue", sans-serif',
-    fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(1rem, 3vw, 1.5rem)',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
     fontWeight: 500,
     color: '#333',
-    paddingRight: '1rem', // Prevents text from hitting the arrow
+    paddingRight: '1rem', 
   },
   serviceArrow: {
     width: '30px',
@@ -285,14 +285,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'transform 0.3s ease',
-    flexShrink: 0, // Prevents arrow from squishing
+    flexShrink: 0, 
   },
   serviceDesc: {
-    fontSize: '0.9rem',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(1rem, 2vw, 1.2rem)',
     color: '#666',
     lineHeight: '1.6',
     paddingBottom: '1.5rem',
-    maxWidth: '100%', // Max width opened up for mobile readability
+    maxWidth: '100%', 
   },
 
   // --- CLIENTS SECTION ---
@@ -309,8 +310,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: '0 clamp(1.5rem, 5vw, 2rem)',
   },
   clientsTitle: {
-    fontFamily: 'Georgia, serif', // Changed to Georgia
-    fontWeight: 300, // Thin weight
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontWeight: 300, 
     fontSize: 'clamp(2rem, 6vw, 3rem)',
     letterSpacing: '0.3em',
     color: '#fff',
@@ -318,10 +319,10 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: '1rem',
   },
   clientsSubtitle: {
-    fontFamily: '"Snell Roundhand", Snell, cursive', // Changed to Snell
-    fontWeight: 300, // Thin weight
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontWeight: 300, 
     fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-    fontStyle: 'italic', // Italics kept
+    fontStyle: 'italic', 
     color: '#a0a0a0',
     letterSpacing: '0.05em',
   },
@@ -336,18 +337,18 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: 'max-content',
   },
   clientCard: {
-    width: 'clamp(200px, 50vw, 300px)', // Fluid width for smaller mobile screens
-    height: 'clamp(200px, 50vw, 300px)', // Fluid height
-    backgroundColor: 'transparent', // FIX: Removed the #111111 background
+    width: 'clamp(200px, 50vw, 300px)', 
+    height: 'clamp(200px, 50vw, 300px)', 
+    backgroundColor: 'transparent', 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0,
-    border: 'none', // FIX: Removed the 1px solid border
+    border: 'none', 
   },
   clientLogoText: {
     color: '#fff',
-    fontFamily: '"Helvetica Neue", sans-serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     textTransform: 'uppercase',
     letterSpacing: '0.2em',
     fontSize: 'clamp(0.9rem, 3vw, 1.2rem)',
@@ -360,7 +361,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     backgroundColor: '#000000',
     color: '#ffffff',
-    padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 2rem) 2rem clamp(1.5rem, 5vw, 2rem)', // Fluid padding
+    padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 2rem) 2rem clamp(1.5rem, 5vw, 2rem)', 
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
@@ -371,11 +372,11 @@ const styles: { [key: string]: React.CSSProperties } = {
   footerBgImage: {
     position: 'absolute',
     top: 0,
-    left: '-10%', 
-    width: '120%', 
+    left: 0, // Reset to exact edge
+    width: '100%', // Match exact width
     height: '100%',
-    objectFit: 'cover', 
-    objectPosition: 'center bottom',
+    objectFit: 'cover', // Or change to 'contain' if you don't want it cropped at all
+    objectPosition: 'center', // Centers the graphic perfectly vertically and horizontally
     opacity: 0.8, 
     zIndex: 0,
     pointerEvents: 'none',
@@ -388,8 +389,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     maxWidth: '1200px',
   },
   footerTitle: {
-    fontFamily: '"Times New Roman", serif',
-    fontSize: 'clamp(3rem, 10vw, 8rem)', 
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(4rem, 12vw, 10rem)', 
     letterSpacing: '0.15em',
     fontWeight: 400,
     color: '#ffffff',
@@ -398,11 +399,11 @@ const styles: { [key: string]: React.CSSProperties } = {
     lineHeight: 1,
   },
   footerSubtitle: {
-    fontFamily: '"Times New Roman", serif', 
-    fontSize: 'clamp(0.9rem, 2.5vw, 1.5rem)',
+    fontFamily: '"Breadley Sans", sans-serif', 
+    fontSize: 'clamp(1.2rem, 3vw, 2rem)',
     fontStyle: 'italic',
     color: '#e0e0e0',
-    maxWidth: '600px',
+    maxWidth: '800px',
     margin: '0 auto',
     lineHeight: 1.6,
   },
@@ -410,7 +411,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center', 
-    flexWrap: 'wrap', // Wraps neatly on mobile
+    flexWrap: 'wrap', 
     gap: '1.5rem',
     width: '100%',
     maxWidth: '1400px',
@@ -418,7 +419,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     paddingTop: 'clamp(4rem, 10vw, 6rem)',
     zIndex: 10,
     position: 'relative',
-    fontSize: 'clamp(0.7rem, 2vw, 0.8rem)',
+    fontSize: 'clamp(0.9rem, 2.5vw, 1.2rem)',
     color: '#a0a0a0',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
@@ -454,6 +455,17 @@ const OurStudioPage = () => {
 
   return (
     <div style={styles.pageContainer}>
+      {/* Explicit Breadley Sans Definition */}
+      <style>{`
+        @font-face {
+          font-family: 'Breadley Sans';
+          src: url('/fonts/BreadleySans.woff2') format('woff2'),
+               url('/fonts/BreadleySans.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+      `}</style>
       
       {/* Nav */}
       <nav style={styles.nav}>
@@ -463,9 +475,9 @@ const OurStudioPage = () => {
       {/* --- HERO TEXT SECTION --- */}
       <section style={styles.heroTextSection}>
         <div style={styles.heroContent}>
-          <motion.h1 style={styles.heroTitle}>OUR STUDIO</motion.h1>
+          <motion.h1 style={styles.heroTitle}>LA MAISON</motion.h1>
           <motion.p style={styles.heroSubtitle}>
-            A hypnotique affair where Art<br/>Casts its Spell
+            A house shaped by intention,<br/> practice, and time.
           </motion.p>
         </div>
         <img 
@@ -486,7 +498,6 @@ const OurStudioPage = () => {
             initial="collapsed"
             animate={isVideoHovered ? "expanded" : "collapsed"}
             variants={{
-              // USING min(80vw, 450px) PREVENTS IT FROM OVERFLOWING ON MOBILE SCREENS
               collapsed: { width: 'min(80vw, 450px)', height: 'min(80vw, 450px)', borderRadius: '50%', marginTop: '0' },
               expanded: { width: '100%', height: '100%', borderRadius: '0%', marginTop: '0%' }
             }}
@@ -504,9 +515,8 @@ const OurStudioPage = () => {
         <h2 style={styles.sectionTitle}>INDUSTRIES WE WORK IN</h2>
         <div style={styles.industryListWrapper}>
           {industries.map((item, i) => {
-            const slug = item.toLowerCase().replace(/ & /g, '-').replace(/, /g, '-').replace(/ /g, '-');
             return (
-              <Link key={i} to={`/industries/${slug}`} style={styles.industryLink}>
+              <div key={i} style={styles.industryLinkWrapper}>
                 <motion.div style={styles.industryItem} whileHover="hover" initial="rest">
                   <motion.div
                     variants={{ rest: { height: "0%" }, hover: { height: "100%" } }}
@@ -521,7 +531,7 @@ const OurStudioPage = () => {
                     {item}
                   </motion.span>
                 </motion.div>
-              </Link>
+              </div>
             );
           })}
         </div>
@@ -618,13 +628,13 @@ const OurStudioPage = () => {
               onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
-              CONTACT US
+              CONTACT
             </h2>
           </Link>
           <p style={styles.footerSubtitle}>
-            Contact us & let's bring your vision to life together!
+            We begin with an understanding, 
             <br />
-            one country at a time!
+            a conversation that brings clarity before form.
           </p>
         </div>
         <div style={styles.footerBottomBar}>

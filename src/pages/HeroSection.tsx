@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const textContent = "L'Alchimie de l'Essence. Where identities are sculpted in gold-leafed narratives. At Qui Creatives branding is not mere design—it is the sacred art of distillation. Imagine a maitre parfumeur in Grasse, blending rare essences to create a fragrance that lingers for generations. We approach your brand with the same reverence, transforming raw ideas into objects d'art that defy time. Here, logos are not sketched—they are forged in the fires of intention, each curve a whisper of your ethos, each hue a stanza in your visual sonnet.";
+const textContent = "L’Alchimie de l’Essence. Where identities are sculpted in gold-leafed narratives. At Maison No.3, branding is not mere design; it is the sacred art of distillation. Imagine a maître perfumer in Grasse, blending rare essences to create a fragrance that lingers for generations. We approach your brand with the same reverence, transforming raw ideas into objects d’art that defy time. Here, logos are not sketched; they are forged in the fires of intention, each curve a whisper of your ethos, each hue a stanza in your visual sonnet.";
 
 // Sub-component for the smooth, word-by-word illumination
 const Word = ({ children, progress, range }) => {
@@ -16,7 +16,7 @@ const Word = ({ children, progress, range }) => {
   );
 };
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles = {
   wrapper: {
     position: 'relative',
     height: '350vh', // Provides the scroll distance needed for the full sequence
@@ -32,6 +32,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
+    fontFamily: '"Breadley Sans", sans-serif', // Added global font
   },
   overlay: {
     position: 'absolute',
@@ -52,7 +53,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 10,
   },
   heading: {
-    fontFamily: '"Times New Roman", Times, serif',
+    fontFamily: '"Breadley Sans", sans-serif', // Changed font
     fontSize: 'clamp(4rem, 10vw, 10rem)', 
     letterSpacing: '0.05em',
     color: '#ffffff',
@@ -71,58 +72,13 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: '3rem',
   },
   text: {
-    fontFamily: '"Times New Roman", Times, serif',
+    fontFamily: '"Breadley Sans", sans-serif', // Changed font
     fontSize: 'clamp(1rem, 1.8vw, 1.4rem)',
     lineHeight: '1.6',
     letterSpacing: '0.02em',
     margin: 0,
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  metadataContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1.5rem',
-    fontFamily: '"Helvetica Neue", sans-serif', 
-    color: '#ffffff',
-  },
-  metaTitle: {
-    fontSize: '1.1rem',
-    fontWeight: 600,
-    margin: '0 0 0.5rem 0',
-    letterSpacing: '0.05em',
-  },
-  metaText: {
-    margin: 0,
-    opacity: 0.8,
-    fontSize: '0.9rem',
-    letterSpacing: '0.05em',
-  },
-  link: {
-    color: '#ffffff',
-    textDecoration: 'none',
-    letterSpacing: '0.15em',
-    fontSize: '0.8rem',
-    textTransform: 'uppercase',
-    opacity: 0.9,
-    display: 'inline-block',
-    marginTop: '1rem',
-    borderBottom: '1px solid transparent',
-    paddingBottom: '2px',
-    transition: 'border-color 0.3s ease',
-  },
-  bottomNav: {
-    position: 'absolute',
-    bottom: '2rem',
-    left: '5%',
-    right: '5%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    color: '#ffffff',
-    fontSize: '0.7rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.15em',
-    zIndex: 10,
   }
 };
 
@@ -148,6 +104,17 @@ const HeroSection = () => {
 
   return (
     <section ref={containerRef} style={styles.wrapper}>
+      {/* Explicit Breadley Sans Definition */}
+      <style>{`
+        @font-face {
+          font-family: 'Breadley Sans';
+          src: url('/fonts/BreadleySans.woff2') format('woff2'),
+               url('/fonts/BreadleySans.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+      `}</style>
       <div style={styles.stickyContainer}>
         
         <div style={styles.overlay} />
@@ -164,7 +131,7 @@ const HeroSection = () => {
           <h1 style={styles.heading}>BRANDING</h1>
         </motion.div>
         
-        {/* --- ANIMATED CONTENT BLOCK (Text + Metadata) --- */}
+        {/* --- ANIMATED CONTENT BLOCK (Text Only) --- */}
         <motion.div 
           style={{ 
             ...styles.contentWrapper,
@@ -185,24 +152,6 @@ const HeroSection = () => {
               );
             })}
           </p>
-
-          <div style={styles.metadataContainer}>
-            <div>
-              <h4 style={styles.metaTitle}>Date</h4>
-              <p style={styles.metaText}>January 2024</p>
-            </div>
-            <div>
-              <h4 style={styles.metaTitle}>Role</h4>
-              <p style={styles.metaText}>Art Direction, Web Design, Production</p>
-            </div>
-            
-          </div>
-        </motion.div>
-
-        {/* --- BOTTOM NAVIGATION (Fades in simultaneously with content) --- */}
-        <motion.div style={{ ...styles.bottomNav, opacity: contentOpacity }}>
-           <span>Scroll To Explore ↓</span>
-           <span style={{ opacity: 0.5 }}>Share Project: Fb Tw Pn</span>
         </motion.div>
 
       </div>

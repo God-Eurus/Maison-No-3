@@ -10,7 +10,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#050505',
     minHeight: '100vh',
     position: 'relative',
-    // REMOVED: overflowX: 'hidden' - This was breaking the sticky scroll in HeroSection!
   },
   nav: {
     display: 'flex',
@@ -23,7 +22,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 10,
   },
   logo: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif', 
     fontSize: '0.8rem',
     letterSpacing: '0.3em',
     color: '#e0e0e0',
@@ -48,7 +47,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '100%', 
     height: '100%', 
     objectFit: 'cover',
-    opacity: 0.6, 
+    opacity: 0.3, 
     filter: 'grayscale(100%)', 
     zIndex: 1,
   },
@@ -74,7 +73,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     mixBlendMode: 'difference', 
   },
   allProjectsText: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif', 
     color: '#ffffff',
     fontSize: 'clamp(3rem, 8vw, 6rem)',
     letterSpacing: '0.2em',
@@ -90,7 +89,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '0 3rem',
-    fontSize: '0.75rem',
+    fontSize: '0.9rem', 
+    fontFamily: '"Breadley Sans", sans-serif', 
     textTransform: 'uppercase',
     letterSpacing: '0.2em',
     color: 'rgba(255, 255, 255, 0.6)',
@@ -100,6 +100,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: 'inherit',
     textDecoration: 'none',
     cursor: 'pointer',
+    whiteSpace: 'nowrap',
   },
 };
 
@@ -110,9 +111,50 @@ const BrandingPage = () => {
 
   return (
     <div style={styles.pageContainer}>
-      
+      <style>{`
+        @font-face {
+          font-family: 'Breadley Sans';
+          src: url('/fonts/BreadleySans.woff2') format('woff2'),
+               url('/fonts/BreadleySans.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @media (max-width: 768px) {
+          .responsive-nav {
+            padding: 1.5rem !important;
+            justify-content: center !important; 
+          }
+          .responsive-footer {
+            height: 60vh !important; 
+          }
+          .responsive-title {
+            font-size: clamp(3.5rem, 14vw, 5rem) !important; 
+          }
+          /* FIX: Forces the bottom bar onto a single line */
+          .responsive-bottom-bar {
+            flex-direction: row !important; /* Keep items in a row */
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 0.5rem !important;
+            padding: 0 1rem 1.5rem 1rem !important; /* Reduce side padding slightly to make room */
+            font-size: 0.55rem !important; /* Shrink font to fit on one line */
+            white-space: nowrap !important; /* Forbid line breaks */
+          }
+          /* Allows the middle text to truncate with '...' if the screen is super narrow */
+          .copyright-text {
+            flex: 1;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 0.5rem;
+          }
+        }
+      `}</style>
+
       {/* Navigation */}
-      <nav style={styles.nav}>
+      <nav className="responsive-nav" style={styles.nav}>
         <Link to="/" style={styles.logo}>OUI CREATIVES</Link>
       </nav>
 
@@ -123,25 +165,27 @@ const BrandingPage = () => {
       <LAtelierSignature />
 
       {/* --- FOOTER SECTION --- */}
-      <footer style={styles.footerContainer}>
+      <footer className="responsive-footer" style={styles.footerContainer}>
         
-        {/* 2. THE NEW FOOTER IMAGE */}
+        {/* THE FOOTER IMAGE */}
         <img 
           src="/assets/brandingf.png"
           alt="Office Aesthetic" 
           style={styles.footerImage as React.CSSProperties} 
         />
 
-        {/* 3. Text Overlay */}
+        {/* Text Overlay */}
         <Link to="/narratingstories" style={styles.allProjectsLink}>
-          <h2 style={styles.allProjectsText}>ALL</h2>
-          <h2 style={styles.allProjectsText}>PROJECTS</h2>
+          <h2 className="responsive-title" style={styles.allProjectsText}>SELECTED</h2>
+          <h2 className="responsive-title" style={styles.allProjectsText}>ENGAGEMENTS</h2>
         </Link>
 
-        {/* 4. Bottom Utility Bar */}
-        <div style={styles.bottomBar}>
+        {/* Bottom Utility Bar */}
+        <div className="responsive-bottom-bar" style={styles.bottomBar}>
           <span onClick={scrollToTop} style={styles.footerAction}>back on top</span>
-          <span>2024 © oui creatives all rights reserved</span>
+          
+          <span className="copyright-text">2024 © oui creatives all rights reserved</span>
+          
           <a href="#" style={styles.footerAction}>Follow Us</a>
         </div>
       </footer>

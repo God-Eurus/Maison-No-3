@@ -26,49 +26,6 @@ const pageVariants = {
   },
 };
 
-// --- WINDOW BLINDS ANIMATION COMPONENT ---
-const WindowBlinds = () => {
-  const blinds = Array.from({ length: 10 });
-
-  return (
-    <div 
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        pointerEvents: 'none',
-        zIndex: 10,
-      }}
-    >
-      {blinds.map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ scaleY: 0, transformOrigin: 'top' }}
-          variants={{
-            hover: {
-              scaleY: 1,
-              transition: {
-                duration: 0.4,
-                delay: i * 0.03,
-                ease: "easeInOut"
-              }
-            }
-          }}
-          style={{
-            flex: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            height: '100%',
-            borderRight: '1px solid rgba(255,255,255,0.05)'
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const AnimatedCard = ({ children, index, to }) => {
   const { scrollYProgress } = useScroll();
   
@@ -78,14 +35,7 @@ const AnimatedCard = ({ children, index, to }) => {
     [0, index % 2 === 0 ? -100 : 100]
   );
   
-  const rotate = useTransform(
-    scrollYProgress, 
-    [0, 1], 
-    [0, index % 2 === 0 ? 3 : -3]
-  );
-  
   const springY = useSpring(yOffset, { stiffness: 40, damping: 25 });
-  const springRotate = useSpring(rotate, { stiffness: 40, damping: 25 });
 
   const isLeft = index % 2 === 0;
   const cardStyle = {
@@ -101,7 +51,6 @@ const AnimatedCard = ({ children, index, to }) => {
       style={{
         ...cardStyle,
         y: springY,
-        rotate: springRotate,
       }}
       whileHover="hover" 
     >
@@ -116,7 +65,6 @@ const AnimatedCard = ({ children, index, to }) => {
             damping: 30
           }}
         >
-          <WindowBlinds />
           {children}
         </motion.div>
       </Link>

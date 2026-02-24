@@ -12,7 +12,8 @@ const CARD_DATA = [
     bgColor: "#1A1A1A", 
     textColor: "text-white",
     titleClass: "text-4xl sm:text-6xl md:text-9xl font-breadley tracking-tighter",
-    descClass: "mt-4 md:mt-6 text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
+    // INCREASED TEXT SIZE
+    descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
     logo: "", // Add logo path here if needed
     logoPlacement: "top-center",    
     link: "./branding"
@@ -22,7 +23,8 @@ const CARD_DATA = [
     logo: "/assets/card2.png",
     logoPlacement: "top-high", 
     logoClass: "w-12 md:w-16 lg:w-24", 
-    title: <>Crafting Hypnotic <br /> Brands!</>, 
+    // REMOVED <br /> TO MAKE IT ONE LINE
+    title: "Crafting Hypnotic Brands!", 
     subtitle: "Digital Experiences",
     description: (
       <>
@@ -33,10 +35,11 @@ const CARD_DATA = [
     bgImage: "", 
     bgColor: "#F7F2ED", 
     textColor: "text-black", 
-    // FIX: Added inline style to aggressively force the lighter font weight for Snell
-    titleClass: "text-4xl md:text-5xl lg:text-6xl font-['Snell',cursive] font-normal italic leading-tight", 
+    // REMOVED leading-tight and font-normal from class, will use inline style for weight
+    titleClass: "text-4xl md:text-5xl lg:text-6xl font-['Snell',cursive] italic", 
     subtitleClass: "mt-4 text-[30px] md:text-xl font-breadley uppercase tracking-[0.3em] font-medium", 
-    descClass: "mt-4 max-w-[90%] md:max-w-2xl lg:max-w-3xl mx-auto text-[20px] md:text-xs font-breadley leading-relaxed opacity-80", 
+    // INCREASED TEXT SIZE and fixed mobile/desktop inconsistency
+    descClass: "mt-4 max-w-[90%] md:max-w-2xl lg:max-w-3xl mx-auto text-sm md:text-base lg:text-lg font-breadley leading-relaxed opacity-80", 
     link: "/work/web-design"
   },
    { 
@@ -46,7 +49,8 @@ const CARD_DATA = [
     bgColor: "#000000",
     textColor: "text-white",
     titleClass: "text-2xl sm:text-4xl md:text-7xl font-breadley font-light tracking-tighter",
-    descClass: "mt-4 md:mt-6 text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
+    // INCREASED TEXT SIZE
+    descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
     logo: "",
     logoPlacement: "top-left",
     link: "/work/marketing"
@@ -58,7 +62,8 @@ const CARD_DATA = [
     bgColor: "#F7F2ED",
     textColor: "text-white",
     titleClass: "text-4xl sm:text-6xl md:text-9xl font-breadley tracking-tighter",
-    descClass: "mt-4 md:mt-6 text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
+    // INCREASED TEXT SIZE
+    descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
     logo: "",
     logoPlacement: "center",
     link: "/work/photography"
@@ -72,7 +77,8 @@ const CARD_DATA = [
     textColor: "text-white", 
     titleClass: "text-5xl md:text-7xl lg:text-8xl font-breadley font-light leading-tight", 
     subtitleClass: "mt-6 text-sm md:text-base font-breadley uppercase tracking-[0.3em] font-medium", 
-    descClass: "mt-6 max-w-md mx-auto text-sm md:text-base font-breadley leading-relaxed opacity-80", 
+    // INCREASED TEXT SIZE
+    descClass: "mt-6 max-w-md mx-auto text-sm md:text-base lg:text-lg font-breadley leading-relaxed opacity-80", 
     link: "/work/web-design"
   },
 ];
@@ -215,8 +221,8 @@ function Card({ card, index }: { card: any; index: number }) {
           {card.title && (
             <h2 
               className={card.titleClass} 
-              // FIX: Specific inline style to force the lighter weight for the Snell card
-              style={card.titleClass.includes("Snell") ? { fontWeight: 300 } : {}}
+              // FIX: Specific inline style to force the lighter weight for the Snell card. 'normal' maps to 400.
+              style={card.titleClass.includes("Snell") ? { fontWeight: 'normal' } : {}}
             >
               {card.title}
             </h2>
@@ -227,9 +233,9 @@ function Card({ card, index }: { card: any; index: number }) {
             </h3>
           )}
           {card.description && (
-            <p className={card.descClass}>
+            <div className={card.descClass}>
               {card.description}
-            </p>
+            </div>
           )}
         </div>
       </motion.div>
@@ -264,12 +270,12 @@ function StudioFooter() {
           Our Disciplines
         </h3>
         <div className="flex flex-col gap-6 md:gap-8 items-center">
-          {/* FIX: Changed motion.button to motion.div, removed onClick, removed cursor-pointer */}
+          {/* FIX: Added cursor-pointer back so it shows the finger cursor on hover */}
           {disciplines.map((d) => (
             <motion.div 
               key={d.name} 
               whileHover={{ opacity: 0.5 }}
-              className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-breadley tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] uppercase transition-all"
+              className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-breadley tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] uppercase transition-all cursor-pointer"
             >
               {d.name}
             </motion.div>

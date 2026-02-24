@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LAtelierSignature = () => {
@@ -13,18 +13,39 @@ const LAtelierSignature = () => {
     { id: 5, image: '/assets/signature-card-5.jpg' },
   ];
 
+  // --- AUTO-PLAY EFFECT ---
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 3000); // Changes image every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [slides.length]);
+
   return (
     <section style={styles.container}>
+      {/* Explicit Breadley Sans Definition */}
+      <style>{`
+        @font-face {
+          font-family: 'Breadley Sans';
+          src: url('/fonts/BreadleySans.woff2') format('woff2'),
+               url('/fonts/BreadleySans.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+      `}</style>
+
       {/* Decorative background ornament (left edge) */}
       <div style={styles.bgOrnament}>
-        <img src="/assets/crest-ornament-dark.png" alt="" style={styles.ornamentImg} />
+        <img src="/assets/key2.png" alt="" style={styles.ornamentImg} />
       </div>
 
       {/* Header Section */}
       <header style={styles.header}>
         <h2 style={styles.title}>L'ATELIER SIGNATURE</h2>
         <p style={styles.subtitle}>
-          Oui Creatives envisions a world where brands move beyond visibility, becoming 
+           Maison NO. 3 envisions a world where brands move beyond visibility, becoming 
           experiences that linger in memory and emotion.
         </p>
       </header>
@@ -82,30 +103,36 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   bgOrnament: {
     position: 'absolute',
-    left: '-100px',
-    top: '20%',
-    width: '400px',
-    opacity: 0.2,
+    left: '0',
+    top: '0',
+    height: '100%',
+    opacity: 0.8,
     pointerEvents: 'none',
+    zIndex: 0,
+    mixBlendMode: 'screen',
   },
-  ornamentImg: { width: '100%', filter: 'invert(1)' },
+  ornamentImg: { 
+    height: '70%', 
+    objectFit: 'contain' 
+  },
   header: {
     textAlign: 'center',
     marginBottom: '4rem',
     zIndex: 2,
+    padding: '0 1rem', // Added minor padding to prevent text from touching screen edges on mobile
   },
   title: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif', // Changed font
     color: '#ffffff',
-    fontSize: '1rem',
-    letterSpacing: '0.6em',
+    fontSize: 'clamp(1.7rem, 6vw, 1.7rem)', // Made responsive and increased slightly
+    letterSpacing: '0.4em',
     fontWeight: 400,
     marginBottom: '1.5rem',
   },
   subtitle: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif', // Changed font
     color: '#ffffff',
-    fontSize: '0.9rem',
+    fontSize: 'clamp(1.07rem, 2.6vw, 1.18rem)', // Made responsive and increased slightly
     maxWidth: '500px',
     margin: '0 auto',
     lineHeight: '1.8',
@@ -116,10 +143,11 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     width: '100%',
     maxWidth: '1100px',
-    height: '600px',
+    height: 'clamp(300px, 60vw, 600px)', // Made slider height responsive
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 2,
   },
   mainCardFrame: {
     width: '100%',
@@ -137,12 +165,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   fullCoverImage: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover', // Ensures the image stretches to fill the box without distorting
+    objectFit: 'cover', 
     display: 'block',
   },
   pagination: {
     position: 'absolute',
-    bottom: '2rem',
+    bottom: '1.5rem',
     display: 'flex',
     gap: '1rem',
     zIndex: 10,

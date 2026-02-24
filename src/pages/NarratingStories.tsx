@@ -79,7 +79,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 10,
   },
   logo: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     fontSize: '0.8rem',
     letterSpacing: '0.2em',
@@ -104,8 +104,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '100%',
-    fontFamily: '"Times New Roman", serif',
-    fontSize: 'clamp(2rem, 5vw, 4.5rem)',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(1.8rem, 4vw, 3.5rem)',
     letterSpacing: '0.3em',
     fontWeight: 300,
     color: '#ffffff',
@@ -145,18 +145,18 @@ const styles: { [key: string]: React.CSSProperties } = {
     textAlign: 'center',
   },
   storyTextLine1: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '1.2rem',
+    fontSize: '1.7rem',
     color: '#e0e0e0',
     letterSpacing: '0.05em',
     lineHeight: 1.3,
     margin: 0,
   },
   storyTextLine2: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '1rem',
+    fontSize: '1.7rem',
     color: '#b0b0b0',
     lineHeight: 1.3,
     letterSpacing: '0.05em',
@@ -210,14 +210,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginBottom: '1rem',
   },
   cardTitle: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     fontSize: '3.5rem',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
   },
   cardDesc: {
-    fontFamily: 'sans-serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     fontSize: '0.9rem',
     textTransform: 'uppercase',
@@ -228,12 +228,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   /* --- FOOTER SECTION --- */
   footerSection: {
     position: 'relative',
-    backgroundColor: '#000000',
+    backgroundColor: '#050505', // Changed to match cardsSection for seamless blend
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight: '100vh', 
-    padding: '4rem 2rem 2rem 2rem',
+    minHeight: '120vh', // Increased minHeight
+    padding: '10rem 2rem 2rem 2rem', // Increased top padding to blend better
     overflow: 'hidden',
     zIndex: 1, 
   },
@@ -242,21 +242,21 @@ const styles: { [key: string]: React.CSSProperties } = {
     top: '50%', 
     left: '50%',
     transform: 'translate(-50%, -50%)', 
-    height: '110%', 
-    opacity: 0.15,
+    height: '100%', // Decreased height slightly
+    opacity: 0.3,
     zIndex: 0, 
     pointerEvents: 'none',
   },
   footerTopTextContainer: {
     textAlign: 'center',
-    marginTop: '10vh', 
+    marginTop: '-4vh', 
     marginBottom: 'auto', 
     color: '#e0e0e0',
     zIndex: 2, 
     maxWidth: '800px',
   },
   footerBodyText: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Times New Roman", serif', // Intentionally left as requested
     fontWeight: 300,
     fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', 
     fontStyle: 'italic',
@@ -273,11 +273,11 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: 'pointer',
     padding: 0,
     marginTop: 'auto',
-    marginBottom: '2rem',
+    marginBottom: '8rem',
     transition: 'opacity 0.3s ease',
   },
   footerTitle: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     fontSize: 'clamp(2.5rem, 8vw, 6.5rem)', 
     letterSpacing: '0.25em',
@@ -287,9 +287,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     margin: 0,
   },
   footerSubtitle: {
-    fontFamily: '"Times New Roman", serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+    fontSize: 'clamp(1.1rem, 1.7vw, 1.2rem)',
     color: '#e0e0e0',
     letterSpacing: '0.05em',
     marginBottom: 'auto',
@@ -304,7 +304,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     marginTop: 'auto', 
     paddingTop: '2rem',
-    fontFamily: 'sans-serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     fontSize: '0.75rem',
     textTransform: 'uppercase',
@@ -339,6 +339,16 @@ const NarratingStoriesPage = () => {
       {/* MOBILE RESPONSIVE CSS OVERRIDES */}
       <style>
         {`
+          /* Ensure Breadley Sans is loaded */
+          @font-face {
+            font-family: 'Breadley Sans';
+            src: url('/fonts/BreadleySans.woff2') format('woff2'),
+                 url('/fonts/BreadleySans.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+          }
+
           @media (max-width: 768px) {
             .nav-responsive {
               padding: 1.5rem !important;
@@ -397,7 +407,7 @@ const NarratingStoriesPage = () => {
       <section style={styles.heroSection}>
         <div style={styles.heroOverlay} />
         <nav style={styles.nav} className="nav-responsive">
-          <Link to="/" style={styles.logo}>OUI CREATIVES</Link>
+          
         </nav>
         <div style={styles.heroContent}>
           <motion.h1 
@@ -493,7 +503,7 @@ const NarratingStoriesPage = () => {
       <footer style={styles.footerSection} className="footer-sec-responsive">
         
         <img 
-            src="/assets/crest-ornament-dark.png" 
+            src="/assets/brandingf.png" 
             alt="" 
             style={styles.footerWatermark} 
         />
