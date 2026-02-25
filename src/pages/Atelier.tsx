@@ -88,6 +88,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   // --- HERO SECTION ---
   heroSection: {
+    minHeight: '100vh', 
     paddingTop: '20vh',
     paddingBottom: '15vh',
     textAlign: 'center',
@@ -110,13 +111,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   frameGraphic: {
     height: '250px',
     objectFit: 'contain',
-    // Added fallback background so it doesn't look invisible if broken
     backgroundColor: 'transparent', 
   },
   heroTitle: {
-    fontFamily: '"Times New Roman", Times, serif',
-    fontSize: '3rem',
-    letterSpacing: '0.3em',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: '4rem',
+    letterSpacing: '0.4em',
     color: '#e0e0e0',
     textTransform: 'uppercase',
     fontWeight: 400,
@@ -131,15 +131,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     backgroundColor: '#050505',
   },
   atelierTitle: {
-    fontFamily: '"Times New Roman", Times, serif',
-    fontSize: '1.8rem',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: '2.3rem',
     letterSpacing: '0.4em',
     textTransform: 'uppercase',
     color: '#e0e0e0',
     marginBottom: '1.5rem',
   },
   atelierSubtitle: {
-    fontSize: '0.9rem',
+    fontSize: '1.3rem',
     color: '#a0a0a0',
     maxWidth: '650px',
     margin: '0 auto 6rem auto',
@@ -182,10 +182,12 @@ const styles: { [key: string]: React.CSSProperties } = {
   // --- FINAL SECTION ---
   finalSection: {
     textAlign: 'center',
-    padding: '8rem 2rem 4rem 2rem',
-    background: 'linear-gradient(to bottom, #000000 0%, #0f0205 50%, #2b0b12 100%)',
+    padding: '4rem 2rem 2rem 2rem', // Reduced bottom padding so the bottom bar sticks to the absolute bottom edge
     position: 'relative',
     overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '130vh', // INCREASED OVERALL FOOTER HEIGHT
   },
   finalBackgroundImage: {
     position: 'absolute',
@@ -201,10 +203,16 @@ const styles: { [key: string]: React.CSSProperties } = {
   finalContentWrapper: {
     position: 'relative',
     zIndex: 1, 
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    flex: 1, // Allows this wrapper to grow and push the footer bar down
+    width: '100%',
   },
   finalImageWrapper: {
     maxWidth: '500px',
-    margin: '0 auto 3rem auto',
+    width: '100%', 
+    margin: '0 auto 4rem auto', 
     borderRadius: '12px',
     overflow: 'hidden',
     boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
@@ -215,24 +223,41 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'block',
     filter: 'grayscale(100%) contrast(110%)',
   },
+  finalTextContainer: {
+    maxWidth: '800px', 
+    margin: '0 auto 6rem auto',
+  },
   finalText: {
-    fontSize: '0.9rem',
+    fontSize: '1.5rem',
     color: '#d0d0d0',
-    maxWidth: '550px',
-    margin: '0 auto 8rem auto',
-    lineHeight: '1.7',
+    lineHeight: '1.6',
     letterSpacing: '0.03em',
     fontWeight: 300,
+    margin: 0,
   },
   nextProjectTitle: {
-    fontFamily: '"Times New Roman", Times, serif',
-    fontSize: '5rem',
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: '7rem',
     letterSpacing: '0.2em',
     color: '#e0e0e0',
     fontWeight: 400,
     marginBottom: '6rem',
     lineHeight: 1.1,
     textTransform: 'uppercase',
+  },
+  finalSubtitleText: {
+    fontSize: '1.5rem',
+    color: '#d0d0d0',
+    maxWidth: '800px',
+    margin: '0 auto',
+    lineHeight: '1.6',
+    letterSpacing: '0.03em',
+    fontWeight: 300,
+  },
+  footerBarContainer: {
+    width: '100%',
+    marginTop: 'auto', // Pushes the bottom bar to the absolute bottom of the container
+    paddingTop: '4rem',
   },
   footerBar: {
     display: 'flex',
@@ -262,15 +287,12 @@ const styles: { [key: string]: React.CSSProperties } = {
 };
 
 const AtelierPage = () => {
-  // FIX: Force scroll to top IMMEDIATELY before paint
   useLayoutEffect(() => {
-    // Disable browser's automatic scroll restoration (prevents "stuck" feeling)
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
     
-    // Re-enable it when leaving (optional, but good practice)
     return () => {
       if ('scrollRestoration' in window.history) {
         window.history.scrollRestoration = 'auto';
@@ -282,7 +304,6 @@ const AtelierPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Helper to render a column of items
   const renderColumn = (items: typeof column1, colIndex: number) => (
     <div className="flex-col-res" style={styles.flexColumn}>
       {items.map((item, index) => (
@@ -299,7 +320,6 @@ const AtelierPage = () => {
               y: 0, 
               transition: { 
                 duration: 0.8, 
-                // Reduced delay slightly for snappier feel
                 delay: (colIndex * 0.05) + (index * 0.05), 
                 ease: [0.22, 1, 0.36, 1] 
               } 
@@ -341,13 +361,15 @@ const AtelierPage = () => {
           @media (max-width: 1024px) {
             .flex-grid-res { flex-direction: column !important; }
             .flex-col-res { width: 100% !important; }
+            .final-text-res { font-size: 1.2rem !important; }
           }
           @media (max-width: 768px) {
             .hero-title-res { font-size: 1.8rem !important; letter-spacing: 0.2em !important; }
             .atelier-title-res { font-size: 1.4rem !important; letter-spacing: 0.2em !important; }
             .next-title-res { font-size: 3rem !important; }
             .footer-bar-res { flexDirection: column; gap: 1.5rem; }
-            .final-image-wrapper-res { max-width: 100% !important; }
+            .final-image-wrapper-res { max-width: 90% !important; }
+            .final-text-res { font-size: 1rem !important; padding: 0 1rem; }
           }
         `}
       </style>
@@ -360,7 +382,6 @@ const AtelierPage = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <Link to="/" style={styles.logo}>OUI CREATIVES</Link>
-        {/* Burger Menu Removed */}
       </motion.nav>
 
       {/* --- Hero Section --- */}
@@ -371,8 +392,6 @@ const AtelierPage = () => {
         variants={fadeInUp}
       >
         <motion.div style={styles.frameGraphicWrapper} variants={fadeInUp}>
-           {/* NOTE: Check this file path. In the video, this image appears broken. */}
-           
         </motion.div>
         <motion.h1 className="hero-title-res" style={styles.heroTitle} variants={fadeInUp}>
           Hypnotique Frames
@@ -427,24 +446,36 @@ const AtelierPage = () => {
                 />
             </div>
 
-            <p style={styles.finalText}>
-                Oui Creatives envisions a world where brands are not just seen but experienced on a profound emotional level.
-            </p>
+            <div style={styles.finalTextContainer}>
+                <p className="final-text-res" style={styles.finalText}>
+                    In the end, what remains is not the image, but the feeling it carries.<br/>
+                    The Chamber of Light exists for visuals that continue to live beyond their first glance.
+                </p>
+            </div>
 
-            <Link to="/thirdhall" className="inline-block hover:scale-[1.02] transition-transform duration-500 cursor-pointer">
-            <h2 className="next-title-res" style={styles.nextProjectTitle}>
-            CONTACT US
-            </h2>
+            <Link to="/thirdhall" className="inline-block hover:scale-[1.02] transition-transform duration-500 cursor-pointer" style={{ textDecoration: 'none' }}>
+                <h2 className="next-title-res" style={styles.nextProjectTitle}>
+                    Enter the Chamber
+                </h2>
             </Link>
 
-            <div className="footer-bar-res" style={styles.footerBar}>
-            <button onClick={scrollToTop} style={styles.backTopBtn}>
-                back on top <ArrowUp size={14} />
-            </button>
-            
-            <span style={{ opacity: 0.8 }}>2024 © oui creatives all rights reserved</span>
-            
-            <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Follow Us</a>
+            <div style={{...styles.finalTextContainer, marginBottom: '4rem'}}>
+                <p className="final-text-res" style={styles.finalSubtitleText}>
+                    If your story seeks a visual language shaped by light and intention, we invite you to begin a dialogue.
+                </p>
+            </div>
+
+            {/* This container uses marginTop: auto to push the bar to the bottom */}
+            <div style={styles.footerBarContainer}>
+                <div className="footer-bar-res" style={styles.footerBar}>
+                    <button onClick={scrollToTop} style={styles.backTopBtn}>
+                        back on top <ArrowUp size={14} />
+                    </button>
+                    
+                    <span style={{ opacity: 0.8 }}>2024 © oui creatives all rights reserved</span>
+                    
+                    <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Follow Us</a>
+                </div>
             </div>
         </div>
       </motion.footer>

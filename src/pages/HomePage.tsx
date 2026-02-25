@@ -40,7 +40,7 @@ const CARD_DATA = [
     subtitleClass: "mt-4 text-[30px] md:text-xl font-breadley uppercase tracking-[0.3em] font-medium", 
     // INCREASED TEXT SIZE and fixed mobile/desktop inconsistency
     descClass: "mt-4 max-w-[90%] md:max-w-2xl lg:max-w-3xl mx-auto text-sm md:text-base lg:text-lg font-breadley leading-relaxed opacity-80", 
-    link: "/work/web-design"
+    link: "./ourprojects"
   },
    { 
     title: "THE ART OF NARRATING STORIES", 
@@ -53,7 +53,7 @@ const CARD_DATA = [
     descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
     logo: "",
     logoPlacement: "top-left",
-    link: "/work/marketing"
+    link: "./narratingstories"
   },
   { 
     // title: "Photography", 
@@ -66,7 +66,7 @@ const CARD_DATA = [
     descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
     logo: "",
     logoPlacement: "center",
-    link: "/work/photography"
+    link: "./consciousbusiness"
   },
    { 
     logoPlacement: "top-middle", 
@@ -79,7 +79,7 @@ const CARD_DATA = [
     subtitleClass: "mt-6 text-sm md:text-base font-breadley uppercase tracking-[0.3em] font-medium", 
     // INCREASED TEXT SIZE
     descClass: "mt-6 max-w-md mx-auto text-sm md:text-base lg:text-lg font-breadley leading-relaxed opacity-80", 
-    link: "/work/web-design"
+    link: "./atelier"
   },
 ];
 
