@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const ThirdHallForm: React.FC = () => {
   const [step, setStep] = useState(0);
@@ -33,7 +34,17 @@ const ThirdHallForm: React.FC = () => {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-[#1c1311] text-[#d6c5b3] font-serif flex flex-col justify-center items-center px-6 text-center relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03] flex justify-center items-center">
+        
+        {/* --- EXIT BACKGROUND VIDEO --- */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+            <source src="/assets/passage.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for text readability & moody shade */}
+          <div className="absolute inset-0 bg-[#050302]/80" />
+        </div>
+
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] flex justify-center items-center z-0">
           <img src="/images/ornate-crest.png" alt="" className="w-full max-w-4xl object-contain mix-blend-screen" />
         </div>
         
@@ -48,7 +59,7 @@ const ThirdHallForm: React.FC = () => {
           }
         `}</style>
         
-        <div className="max-w-md relative z-10">
+        <div className="max-w-md relative z-10 flex flex-col items-center">
           <p className="reveal-text tracking-[0.2em] text-sm md:text-base font-light leading-relaxed mb-4" style={{ animationDelay: '0.5s' }}>
             The Hall receives in silence.
           </p>
@@ -58,6 +69,13 @@ const ThirdHallForm: React.FC = () => {
           <p className="reveal-text tracking-[0.2em] text-sm md:text-base font-light leading-relaxed opacity-60" style={{ animationDelay: '4.5s' }}>
             Further correspondence, if any, will arrive privately.
           </p>
+          
+          {/* Back to Home Button */}
+          <div className="reveal-text mt-16" style={{ animationDelay: '6s' }}>
+            <Link to="/" className="border border-[#d6c5b3]/30 py-4 px-12 tracking-[0.4em] text-xs uppercase hover:bg-[#d6c5b3] hover:text-[#1c1311] transition-all duration-500 inline-block backdrop-blur-sm">
+              Return to Maison
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -67,12 +85,21 @@ const ThirdHallForm: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#1c1311] text-[#d6c5b3] font-serif flex flex-col items-center pb-24 relative overflow-hidden">
       
+      {/* --- ENTRY BACKGROUND VIDEO (Only visible on Step 0) --- */}
+      <div className={`absolute inset-0 pointer-events-none z-0 transition-opacity duration-1000 ${step === 0 ? 'opacity-100' : 'opacity-0'}`}>
+        <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+          <source src="/assets/passage.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for text readability & moody shade */}
+        <div className="absolute inset-0 bg-[#050302]/80" />
+      </div>
+
       {/* Background Imagery */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04] flex justify-center items-center transition-opacity duration-1000">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04] flex justify-center items-center transition-opacity duration-1000 z-0">
         <img src="/images/ornate-crest.png" alt="" className="w-[120%] md:w-[800px] object-contain opacity-50" />
       </div>
 
-      {/* Custom Keyframes for the "Flying/Drifting" transitions */}
+      {/* Custom Keyframes for the "Flying/Drifting" transitions & Line-by-Line Reveal */}
       <style>{`
         @keyframes driftInFromBottom {
           0% { opacity: 0; filter: blur(8px); transform: translateY(60px) scale(0.98); }
@@ -82,11 +109,19 @@ const ThirdHallForm: React.FC = () => {
           0% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
           100% { opacity: 0; filter: blur(8px); transform: translateY(-60px) scale(0.98); }
         }
+        @keyframes smoothFadeUp {
+          0% { opacity: 0; filter: blur(8px); transform: translateY(20px); }
+          100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+        }
         .card-enter {
           animation: driftInFromBottom 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
         .card-exit {
           animation: driftOutToTop 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+        .animate-line {
+          opacity: 0;
+          animation: smoothFadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
       `}</style>
 
@@ -103,23 +138,27 @@ const ThirdHallForm: React.FC = () => {
         
         <form onSubmit={handleSubmit} className={`w-full transition-all ${isTransitioning ? 'card-exit' : 'card-enter'}`}>
           
-          {/* --- STEP 0: THE RECOGNITION --- */}
+          {/* --- STEP 0: THE RECOGNITION (Line-by-Line Animation) --- */}
           {step === 0 && (
-            <div className="text-center py-20">
-              <p className="tracking-[0.2em] text-sm md:text-base font-light mb-8">
+            <div className="text-center py-20 flex flex-col items-center">
+              <p className="animate-line tracking-[0.2em] text-sm md:text-base font-light mb-8 drop-shadow-md" style={{ animationDelay: '0.2s' }}>
                 The Hall recognises your passage.
               </p>
-              <p className="tracking-[0.2em] text-sm md:text-base font-light opacity-70 mb-16 leading-loose">
+              
+              <p className="animate-line tracking-[0.2em] text-sm md:text-base font-light opacity-80 mb-16 leading-loose drop-shadow-md" style={{ animationDelay: '1.2s' }}>
                 You have been extended a private access code <br/>by a Signatory of The Third Hall.
               </p>
-              <h1 className="text-xl md:text-2xl tracking-[0.3em] uppercase font-light mb-8">
-                Hall Record <br/><span className="text-sm opacity-60">Private Entry Archive</span>
+              
+              <h1 className="animate-line text-xl md:text-2xl tracking-[0.3em] uppercase font-light mb-8 drop-shadow-lg" style={{ animationDelay: '2.4s' }}>
+                Hall Record <br/><span className="text-sm opacity-70">Private Entry Archive</span>
               </h1>
-              <p className="tracking-[0.1em] text-sm font-light leading-loose opacity-60 mb-16">
+              
+              <p className="animate-line tracking-[0.1em] text-sm font-light leading-loose opacity-70 mb-16 drop-shadow-md" style={{ animationDelay: '3.4s' }}>
                 The Third Hall maintains a private archive of those who enter.<br/>
                 This record exists only for quiet correspondence.
               </p>
-              <button type="button" onClick={nextStep} className="border border-[#d6c5b3]/50 py-4 px-12 tracking-[0.4em] text-xs uppercase hover:bg-[#d6c5b3] hover:text-[#1c1311] transition-all duration-500">
+              
+              <button type="button" onClick={nextStep} className="animate-line border border-[#d6c5b3]/50 py-4 px-12 tracking-[0.4em] text-xs uppercase hover:bg-[#d6c5b3] hover:text-[#1c1311] transition-all duration-500 bg-[#1c1311]/20 backdrop-blur-sm" style={{ animationDelay: '4.4s' }}>
                 Open The Archive
               </button>
             </div>
