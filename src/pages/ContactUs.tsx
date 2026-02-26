@@ -95,7 +95,7 @@ const ContactUs = () => {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
           style={styles.scriptFont} 
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-8 md:mb-10 text-[#1a1a1a] px-4"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8 md:mb-10 text-[#1a1a1a] px-4"
         >
           Crafting <br className="hidden sm:block" />
           Hypnotic Brands!
@@ -195,7 +195,6 @@ const ContactUs = () => {
               variants={slowFadeUp}
               className="relative flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 mt-12 md:mt-16 w-full"
             >
-              {/* Changed to motion.a for the Calendly link */}
               <motion.a 
                 href="https://calendly.com/maisonnoiii/30min"
                 target="_blank"
@@ -251,8 +250,9 @@ const ContactUs = () => {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-2xl md:rounded-3xl overflow-hidden relative shadow-2xl"
         >
+            {/* UPDATED IFRAME SOURCE FOR JEWEL OF INDIA APARTMENTS */}
             <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.123456789!2d75.8000000!3d26.9000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" 
+                src="https://maps.google.com/maps?q=Jewel+Of+India+Apartments,+Jaipur,+Rajasthan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }} 

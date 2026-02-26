@@ -29,7 +29,6 @@ import ThirdHallForm from './src/pages/thirdhallform';
 import HallRecord from './src/pages/HallRecord';
 import Aia from './src/pages/aia';
 
-import KezaVeraForm from './src/pages/KezaveraForm';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -74,7 +73,7 @@ function App() {
           <Route path="/hallrecord" element={<HallRecord />} />
           <Route path="/aia" element={<Aia />} />
           
-          <Route path="/kezaveraform" element={<KezaVeraForm />} />
+          
 
 
         </Routes>
