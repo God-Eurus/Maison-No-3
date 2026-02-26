@@ -144,32 +144,50 @@ const ContactUs = () => {
               variants={staggerContainer}
             >
               <motion.div variants={slowFadeUp} className="group relative text-center">
-                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4" style={styles.serifFont}>Your name</label>
-                <input required type="text" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all" />
+                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4 font-breadley">Your name</label>
+                <input required type="text" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all font-breadley" />
               </motion.div>
               
               <motion.div variants={slowFadeUp} className="group relative text-center">
-                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4" style={styles.serifFont}>Email Address</label>
-                <input required type="email" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all" />
+                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4 font-breadley">Email Address</label>
+                <input required type="email" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all font-breadley" />
               </motion.div>
               
               <motion.div variants={slowFadeUp} className="group relative text-center">
-                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4" style={styles.serifFont}>Telephone Number</label>
-                <input required type="tel" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all" />
+                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4 font-breadley">Telephone Number</label>
+                <input required type="tel" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all font-breadley" />
               </motion.div>
               
               <motion.div variants={slowFadeUp} className="group relative text-center">
-                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4" style={styles.serifFont}>Services</label>
-                <input required type="text" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all" />
+                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4 font-breadley">Services</label>
+                <input required type="text" className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all font-breadley" />
               </motion.div>
               
               <motion.div variants={slowFadeUp} className="group md:col-span-2 relative text-center mt-2 md:mt-4">
-                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4" style={styles.serifFont}>Tell us about your project</label>
-                <textarea required rows={1} className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all resize-none overflow-hidden"></textarea>
+                <label className="block text-sm md:text-base text-[#333] mb-3 md:mb-4 font-breadley">Tell us about your project</label>
+                <textarea required rows={1} className="w-full bg-transparent border-b border-[#ccc] focus:border-black outline-none py-2 md:py-3 text-center text-base md:text-lg lg:text-xl font-light transition-all resize-none overflow-hidden font-breadley"></textarea>
               </motion.div>
             </motion.div>
 
-            {/* Action Buttons */}
+            {/* NEW SUBMIT BUTTON */}
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={slowFadeUp}
+              className="relative flex justify-center items-center mt-6 mb-12 w-full"
+            >
+              <motion.button 
+                whileHover={{ scale: 1.02, backgroundColor: "#222" }}
+                whileTap={{ scale: 0.98 }}
+                type="submit" 
+                className="w-full md:w-auto px-12 md:px-16 py-3 md:py-4 rounded-full bg-[#1a1a1a] text-white transition-colors shadow-lg"
+              >
+                <span className="font-breadley font-light text-sm md:text-base tracking-[0.3em] uppercase">SUBMIT</span>
+              </motion.button>
+            </motion.div>
+
+            {/* RESTORED ACTION BUTTONS WITH CALENDLY LINK */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
@@ -177,18 +195,22 @@ const ContactUs = () => {
               variants={slowFadeUp}
               className="relative flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 mt-12 md:mt-16 w-full"
             >
-              <motion.button 
+              {/* Changed to motion.a for the Calendly link */}
+              <motion.a 
+                href="https://calendly.com/maisonnoiii/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.02, backgroundColor: "#222" }}
                 whileTap={{ scale: 0.98 }}
-                type="submit" 
-                className="w-full md:w-auto px-8 md:px-12 py-4 rounded-full bg-black text-white transition-colors shadow-lg"
+                className="w-full md:w-auto px-8 md:px-12 py-4 rounded-full bg-black text-white transition-colors shadow-lg text-center"
               >
                 <span style={styles.serifFont} className="text-xs sm:text-sm md:text-base tracking-[0.2em] md:tracking-[0.3em] uppercase">SCHEDULE A CALL</span>
-              </motion.button>
+              </motion.a>
+
               <motion.button 
                 whileHover={{ scale: 1.02, backgroundColor: "#222" }}
                 whileTap={{ scale: 0.98 }}
-                type="submit" 
+                type="button" 
                 className="w-full md:w-auto px-8 md:px-12 py-4 rounded-full bg-black text-white transition-colors shadow-lg"
               >
                 <span style={styles.serifFont} className="text-xs sm:text-sm md:text-base tracking-[0.2em] md:tracking-[0.3em] uppercase">GET IN TOUCH</span>
