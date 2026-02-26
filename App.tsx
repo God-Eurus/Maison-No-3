@@ -28,6 +28,7 @@ import ThirdHall from './src/pages/thirdhall';
 import ThirdHallForm from './src/pages/thirdhallform';
 import HallRecord from './src/pages/HallRecord';
 import Aia from './src/pages/aia';
+import KezaVeraForm from './src/pages/KezaveraForm';
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
           <Route path="/thirdhallform" element={<ThirdHallForm />} />
           <Route path="/hallrecord" element={<HallRecord />} />
           <Route path="/aia" element={<Aia />} />
+          <Route path="/kezaveraform" element={<KezaVeraForm />} />
           
           
 
