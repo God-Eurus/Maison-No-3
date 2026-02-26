@@ -45,28 +45,28 @@ export default function ScrollToTop() {
             {/* SVG Circular Progress */}
             <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 36 36">
               {/* Background Track */}
-              <path
+              {/* <path
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1"
                 className="opacity-20"
-              />
+              /> */}
               {/* Progress Indicator */}
-              <motion.path
+              {/* <motion.path
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1"
                 style={{ pathLength: scrollYProgress }}
                 className="text-white"
-              />
+              /> */}
             </svg>
 
             {/* Arrow Icon */}
-            <span className="text-xs font-serif italic tracking-widest uppercase group-hover:-translate-y-1 transition-transform duration-300">
+            {/* <span className="text-xs font-serif italic tracking-widest uppercase group-hover:-translate-y-1 transition-transform duration-300">
               Top
-            </span>
+            </span> */}
           </button>
         </motion.div>
       )}

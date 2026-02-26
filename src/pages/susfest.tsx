@@ -62,8 +62,19 @@ export default function SusFest() {
   }, []);
 
   return (
-    <main className="min-h-screen w-full bg-gradient-to-b from-[#bcd1ac] via-[#9eb88d] to-[#8fa87a] overflow-x-hidden font-['Breadley_Sans',_sans-serif]">
+    <main className="relative min-h-screen w-full bg-[#9eb88d] overflow-x-hidden font-breadley">
       
+      {/* --- REPLACED: DARK IMAGE OVERLAY INSTEAD OF COLOR GRADIENT --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img 
+          src="/assets/Sus Fest.png" 
+          alt="" 
+          className="w-full h-full object-cover opacity-40 mix-blend-multiply fixed"
+        />
+        {/* Subtle vignette to maintain focus on center content */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+      </div>
+
       <style>{`
         @keyframes sand-flow {
           from { stroke-dashoffset: 8; }
@@ -72,12 +83,15 @@ export default function SusFest() {
         .animate-sand {
           animation: sand-flow 0.4s linear infinite;
         }
+        .font-breadley {
+          font-family: 'Breadley Sans', sans-serif;
+        }
       `}</style>
 
       {/* --- 1. HERO IMAGE SECTION --- */}
-      <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative z-10 w-full h-screen overflow-hidden">
         <img 
-          src="/assets/eye-landscape.jpg" 
+          src="/assets/susfesthero.png" 
           alt="Sust Fest Nature Eye" 
           className="w-full h-full object-cover object-center"
         />
@@ -88,7 +102,7 @@ export default function SusFest() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-white text-3xl md:text-5xl lg:text-6xl tracking-[0.4em] uppercase font-normal drop-shadow-lg"
+            className="text-white text-3xl md:text-5xl lg:text-6xl tracking-[0.4em] uppercase font-normal drop-shadow-lg font-breadley"
           >
             SUST FEST
           </motion.h1>
@@ -96,7 +110,7 @@ export default function SusFest() {
       </section>
 
       {/* --- 2. CONTENT SECTION --- */}
-      <section className="w-full px-6 md:px-16 lg:px-24 pt-24 md:pt-40 pb-24 md:pb-40">
+      <section className="relative z-10 w-full px-6 md:px-16 lg:px-24 pt-24 md:pt-40 pb-24 md:pb-40">
         <motion.div 
           variants={staggerContainer}
           initial="hidden"
@@ -104,11 +118,11 @@ export default function SusFest() {
           viewport={{ once: true, amount: 0.2 }}
           className="max-w-6xl mx-auto"
         >
-          <motion.h2 variants={fadeInUp} className="text-black text-2xl md:text-3xl lg:text-4xl tracking-[0.3em] uppercase mb-10">
+          <motion.h2 variants={fadeInUp} className="text-black text-2xl md:text-3xl lg:text-4xl tracking-[0.3em] uppercase mb-10 font-breadley">
             SUSTAINABILITY FEST
           </motion.h2>
 
-          <motion.p variants={fadeInUp} className="text-black/80 text-xs md:text-sm lg:text-base leading-[2] tracking-wide max-w-5xl font-serif">
+          <motion.p variants={fadeInUp} className="text-black/80 text-xs md:text-sm lg:text-base leading-[2] tracking-wide max-w-5xl font-breadley">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </motion.p>
         </motion.div>
@@ -120,7 +134,7 @@ export default function SusFest() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full pb-20 md:pb-32 overflow-hidden"
+        className="relative z-10 w-full pb-20 md:pb-32 overflow-hidden"
       >
         <motion.div 
           className="flex gap-4 md:gap-6 w-max pl-4 md:pl-6"
@@ -130,8 +144,8 @@ export default function SusFest() {
           {marqueeCards.map((card, index) => (
             <div key={`${card.id}-${index}`} className="w-[200px] md:w-[240px] h-[200px] md:h-[240px] bg-[#788d66] flex flex-col p-4 md:p-6 shrink-0 transition-transform duration-300 hover:scale-[1.02] shadow-sm">
               <div className="flex items-start gap-3">
-                <span className="text-white text-4xl md:text-5xl font-bold leading-none font-sans">{card.number}</span>
-                <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-wider leading-tight whitespace-pre-line font-sans mt-1">{card.title}</span>
+                <span className="text-white text-4xl md:text-5xl font-bold leading-none font-breadley">{card.number}</span>
+                <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-wider leading-tight whitespace-pre-line font-breadley mt-1">{card.title}</span>
               </div>
               <div className="mt-auto self-center w-full flex justify-center">
                 <img src={card.icon} alt={card.title.replace('\n', ' ')} className="w-24 md:w-32 h-24 md:h-32 object-contain opacity-90"/>
@@ -142,7 +156,7 @@ export default function SusFest() {
       </motion.section>
 
       {/* --- 4. COUNTDOWN SECTION (HOURGLASS + COMPACT TIMER) --- */}
-      <section className="w-full flex flex-col items-center justify-center pt-10 px-6">
+      <section className="relative z-10 w-full flex flex-col items-center justify-center pt-10 px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -172,32 +186,31 @@ export default function SusFest() {
           {/* COMPACT TIMER BOX */}
           <div className="bg-[#f0f3eb] rounded-lg px-6 py-4 md:px-10 md:py-6 shadow-lg flex items-center justify-center gap-4 md:gap-6 mb-16 md:mb-24">
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
-              <span className="text-[#3c4a33] text-2xl md:text-4xl font-serif tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.days) : '0 0'}</span>
+              <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.days) : '0 0'}</span>
               <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Days</span>
             </div>
             <span className="text-[#3c4a33] text-xl md:text-3xl font-light mb-4 opacity-30">|</span>
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
-              <span className="text-[#3c4a33] text-2xl md:text-4xl font-serif tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.hours) : '0 0'}</span>
+              <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.hours) : '0 0'}</span>
               <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Hours</span>
             </div>
             <span className="text-[#3c4a33] text-xl md:text-3xl font-light mb-4 opacity-30">|</span>
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
-              <span className="text-[#3c4a33] text-2xl md:text-4xl font-serif tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.minutes) : '0 0'}</span>
+              <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.minutes) : '0 0'}</span>
               <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Mins</span>
             </div>
             <span className="text-[#3c4a33] text-xl md:text-3xl font-light mb-4 opacity-30">|</span>
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
-              <span className="text-[#3c4a33] text-2xl md:text-4xl font-serif tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.seconds) : '0 0'}</span>
+              <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.seconds) : '0 0'}</span>
               <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Secs</span>
             </div>
           </div>
 
           {/* REVEALING SOON TEXT */}
-          <h3 className="text-white text-lg md:text-2xl lg:text-3xl tracking-[0.4em] uppercase font-normal text-center drop-shadow-sm">
+          <h3 className="text-white text-lg md:text-2xl lg:text-3xl tracking-[0.4em] uppercase font-normal text-center drop-shadow-sm font-breadley">
             REVEALING SOON...
           </h3>
 
-          {/* NEW: SNELL ITALIC TEXT WITH MARGIN */}
           <p className="font-['Snell',_cursive] italic text-white/95 text-xl md:text-2xl lg:text-3xl mt-16 md:mt-24 text-center max-w-4xl leading-relaxed drop-shadow-sm px-4">
             A gathering of ideas, people, and possibilities — shaped around conscious living.
           </p>
@@ -205,8 +218,8 @@ export default function SusFest() {
         </motion.div>
       </section>
 
-      {/* --- 5. CONTACT US SECTION (WITH MASSIVE VERTICAL SPACE) --- */}
-      <section className="w-full flex flex-col items-center justify-center pt-32 md:pt-64 lg:pt-80 pb-32 md:pb-64 lg:pb-80 px-6">
+      {/* --- 5. CONTACT US SECTION --- */}
+      <section className="relative z-10 w-full flex flex-col items-center justify-center pt-32 md:pt-64 lg:pt-80 pb-32 md:pb-64 lg:pb-80 px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -214,7 +227,7 @@ export default function SusFest() {
           transition={{ duration: 0.8 }}
         >
           <a href="/contact" className="group flex flex-col items-center text-center cursor-pointer hover:opacity-70 transition-opacity">
-            <h2 className="text-[#111] text-4xl md:text-6xl lg:text-[5.5rem] font-serif tracking-[0.3em] uppercase leading-[1.3] md:leading-[1.4]">
+            <h2 className="text-[#111] text-4xl md:text-6xl lg:text-[5.5rem] font-breadley tracking-[0.3em] uppercase leading-[1.3] md:leading-[1.4]">
               CONTACT<br/>US
             </h2>
           </a>
@@ -222,8 +235,8 @@ export default function SusFest() {
       </section>
 
       {/* --- 6. FOOTER SECTION --- */}
-      <footer className="w-full pb-8 px-6 md:px-16">
-        <div className="max-w-6xl mx-auto flex justify-between items-end text-[#111] text-[10px] tracking-[0.3em] uppercase font-sans font-light">
+      <footer className="relative z-10 w-full pb-8 px-6 md:px-16">
+        <div className="max-w-6xl mx-auto flex justify-between items-end text-[#111] text-[10px] tracking-[0.3em] uppercase font-breadley font-light">
           <div className="flex-1 text-left">
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} 

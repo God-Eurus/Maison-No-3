@@ -154,9 +154,7 @@ const BrandingPage = () => {
       `}</style>
 
       {/* Navigation */}
-      <nav className="responsive-nav" style={styles.nav}>
-        <Link to="/" style={styles.logo}>OUI CREATIVES</Link>
-      </nav>
+      
 
       {/* Existing Sections */}
       <HeroSection />

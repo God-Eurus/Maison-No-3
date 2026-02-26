@@ -5,56 +5,65 @@ import { useRef } from "react";
 
 // --- 1. DATA CONFIGURATION ---
 const CARD_DATA = [
-  { 
+ { 
     title: "BRANDING", 
     // description: "Visual identities that resonate and endure.",
     bgImage: "/assets/section2-bg.jpg",
     bgColor: "#1A1A1A", 
     textColor: "text-white",
-    titleClass: "text-4xl sm:text-6xl md:text-9xl font-breadley tracking-tighter",
-    // INCREASED TEXT SIZE
-    descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
+    // Changed tracking-tighter to custom wide letter spacing
+    titleClass: "text-3xl sm:text-3xl md:text-6xl font-breadley tracking-[0.2em] md:tracking-[0.3em]",
+    // Increased the tracking values here as well for even more space
+    descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.4em] sm:tracking-[0.5em] font-breadley font-light opacity-50",
     logo: "", // Add logo path here if needed
     logoPlacement: "top-center",    
     link: "./branding"
   },
   { 
     // CUSTOM WEB DESIGN CARD
-    logo: "/assets/card2.png",
+    logo: "/assets/card2.png", // Replace with your Eiffel Tower logo path if different
     logoPlacement: "top-high", 
-    logoClass: "w-12 md:w-16 lg:w-24", 
-    // REMOVED <br /> TO MAKE IT ONE LINE
-    title: "Crafting Hypnotic Brands!", 
-    subtitle: "Digital Experiences",
+    logoClass: "w-16 md:w-20 lg:w-24 mb-8 md:mb-10", 
+    title: (
+      <>
+        Crafting<br />
+        Hypnotic Brands!
+      </>
+    ), 
+    subtitle: "A FRENCH-INSPIRED LUXURY AGENCY",
     description: (
       <>
-        Crafted for impact, our digital platforms merge elegant aesthetics{" "}
-        with seamless functionality to elevate your brand presence.
+        A French-inspired creative atelier working at the intersection of elegance, culture, and modern<br className="hidden md:block" /> identity
       </>
     ), 
     bgImage: "", 
-    bgColor: "#F7F2ED", 
+    bgColor: "#F4EFEA", // Slightly warmer cream to match the screenshot
     textColor: "text-black", 
-    // REMOVED leading-tight and font-normal from class, will use inline style for weight
-    titleClass: "text-4xl md:text-5xl lg:text-6xl font-['Snell',cursive] italic", 
-    subtitleClass: "mt-4 text-[30px] md:text-xl font-breadley uppercase tracking-[0.3em] font-medium", 
-    // INCREASED TEXT SIZE and fixed mobile/desktop inconsistency
-    descClass: "mt-4 max-w-[90%] md:max-w-2xl lg:max-w-3xl mx-auto text-sm md:text-base lg:text-lg font-breadley leading-relaxed opacity-80", 
+    
+    // font-normal tells the browser to use the new 400-weight font file
+    titleClass: "mt-4 text-3xl md:text-4xl lg:text-5xl font-['Snell',cursive] italic font-light leading-tight", 
+    
+    subtitleClass: "mt-10 md:mt-12 text-base md:text-lg font-breadley uppercase tracking-[0.4em] md:tracking-[0.5em] font-light", 
+    
+    descClass: "mt-6 max-w-[90%] md:max-w-3xl lg:max-w-4xl mx-auto text-s md:text-base font-breadley leading-relaxed opacity-80 font-light", 
     link: "./ourprojects"
   },
+
    { 
     title: "THE ART OF NARRATING STORIES", 
     // description: "Strategies that drive growth.",
     bgImage: "/assets/section4-bg.jpeg",
     bgColor: "#000000",
     textColor: "text-white",
-    titleClass: "text-2xl sm:text-4xl md:text-7xl font-breadley font-light tracking-tighter",
+    // CHANGED: Replaced tracking-tighter with tracking-[0.2em] md:tracking-[0.3em]
+    titleClass: "text-1xl sm:text-3xl md:text-6xl font-breadley font-light tracking-[0.2em] md:tracking-[0.3em]",
     // INCREASED TEXT SIZE
     descClass: "mt-4 md:mt-6 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.3em] font-breadley font-light opacity-50",
     logo: "",
     logoPlacement: "top-left",
     link: "./narratingstories"
   },
+
   { 
     // title: "Photography", 
     description: "Capturing moments, telling stories.",
@@ -70,12 +79,13 @@ const CARD_DATA = [
   },
    { 
     logoPlacement: "top-middle", 
-    title: "Hypnotique Frames", 
+    title: "HYPNOTIC FRAMES", 
     // subtitle: "Digital Experiences",
     // description: "Crafted for impact, our digital platforms merge elegant aesthetics with seamless functionality to elevate your brand presence.",
     bgImage: "/assets/section6-bg.jpg", 
     textColor: "text-white", 
-    titleClass: "text-5xl md:text-7xl lg:text-8xl font-breadley font-light leading-tight", 
+    // CHANGED: Added tracking-[0.2em] md:tracking-[0.3em] for wide letter spacing
+    titleClass: "text-2xl md:text-4xl lg:text-5xl font-breadley font-light leading-tight tracking-[0.2em] md:tracking-[0.3em]", 
     subtitleClass: "mt-6 text-sm md:text-base font-breadley uppercase tracking-[0.3em] font-medium", 
     // INCREASED TEXT SIZE
     descClass: "mt-6 max-w-md mx-auto text-sm md:text-base lg:text-lg font-breadley leading-relaxed opacity-80", 
@@ -166,7 +176,7 @@ function HeroSection() {
         transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
         className="text-center relative max-w-4xl z-10"
       >
-        <h1 className="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-breadley font-light tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] uppercase leading-relaxed mb-8 md:mb-12">
+        <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-5xl font-breadley font-light tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] uppercase leading-relaxed mb-8 md:mb-12">
           LA Maison <br /> No.3
         </h1>
       </motion.div>

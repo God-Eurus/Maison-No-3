@@ -7,10 +7,10 @@ const LAtelierSignature = () => {
   // Example slide data
   const slides = [
     { id: 1, image: '/assets/brandingcard.png' },
-    { id: 2, image: '/assets/signature-card-2.jpg' },
-    { id: 3, image: '/assets/signature-card-3.jpg' },
-    { id: 4, image: '/assets/signature-card-4.jpg' },
-    { id: 5, image: '/assets/signature-card-5.jpg' },
+    { id: 2, image: '/assets/brandcard.png' },
+    { id: 3, image: '/assets/brandcard2.png' },
+    { id: 4, image: '/assets/brandcaard3.png' },
+    { id: 5, image: '/assets/brandcard4.png' },
   ];
 
   // --- AUTO-PLAY EFFECT ---

@@ -237,7 +237,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   servicesTitle: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: 'clamp(4rem, 12vw, 7rem)',
+    fontSize: 'clamp(3rem, 11vw, 6rem)',
     letterSpacing: '0.2em',
     fontWeight: 400,
     textTransform: 'uppercase',
@@ -361,7 +361,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     backgroundColor: '#000000',
     color: '#ffffff',
-    padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 2rem) 2rem clamp(1.5rem, 5vw, 2rem)', 
+    padding: 'clamp(3rem, 9vw, 7rem) clamp(1.5rem, 5vw, 2rem) 2rem clamp(1.5rem, 5vw, 2rem)', 
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
@@ -390,7 +390,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   footerTitle: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: 'clamp(4rem, 12vw, 10rem)', 
+    fontSize: 'clamp(3rem, 11vw, 9rem)', 
     letterSpacing: '0.15em',
     fontWeight: 400,
     color: '#ffffff',

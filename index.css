@@ -9,6 +9,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Snell';
+  src: url('/fonts/snellroundhand_regular.woff2') format('woff2');
+  font-weight: 300; /* Use 300 if you download a 'Light' version */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Snell';
+  src: url('/fonts/snellroundhand_regular.woff2') format('woff2'); /* Ensure you have this file */
+  font-weight: 400; /* 400 is normal, 300 is light */
+  font-style: italic;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Breadley Sans';
