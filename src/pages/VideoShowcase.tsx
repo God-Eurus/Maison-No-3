@@ -33,7 +33,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     zIndex: 2,
     // INCREASED SIZE FROM 180px TO 350px
-    height: '350px', 
+    height: '250px', 
     objectFit: 'contain',
     filter: 'drop-shadow(0px 0px 30px rgba(197, 160, 89, 0.5))', // Slightly stronger glow for larger size
     opacity: 0,

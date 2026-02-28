@@ -226,7 +226,7 @@ export default function SusFest() {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8 }}
         >
-          <a href="/contact" className="group flex flex-col items-center text-center cursor-pointer hover:opacity-70 transition-opacity">
+          <a href="/sustfestform" className="group flex flex-col items-center text-center cursor-pointer hover:opacity-70 transition-opacity">
             <h2 className="text-[#111] text-4xl md:text-6xl lg:text-[5.5rem] font-breadley tracking-[0.3em] uppercase leading-[1.3] md:leading-[1.4]">
               CONTACT<br/>US
             </h2>

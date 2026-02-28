@@ -52,7 +52,7 @@ interface MenuOverlayProps {
 export default function MenuOverlay({ onClose }: MenuOverlayProps) {
   const menuItems = [
     { label: "Portfolio", href: "/ourprojects" },
-    { label: "About", href: "/branding" },
+    { label: "About", href: "/ourstudio" },
     { label: "Contact", href: "/contact" },
     { label: "The Third Hall", href: "/thirdhall" },
     { label: "Stories", href: "/narratingstories" },

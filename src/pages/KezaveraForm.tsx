@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function KezaVeraForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false); // Added loading state
+
   // Form State covering all 30 fields
   const [formData, setFormData] = useState({
     fullName: '',
@@ -59,11 +61,33 @@ export default function KezaVeraForm() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // UPDATED: Formspree Integration
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    // Add your submission logic here
-    alert("Partnership request submitted successfully.");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mzdawdvz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData), // Sends your exact state object beautifully
+      });
+
+      if (response.ok) {
+        alert("Partnership request submitted successfully. We will be in touch!");
+        // Optional: Reset form here if you want to clear it out after success
+        // setFormData({ ...initialState }); 
+      } else {
+        alert("Oops! There was a problem submitting your form. Please try again.");
+      }
+    } catch (error) {
+      alert("Oops! There was a network error submitting your form.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // --- Styling Constants ---
@@ -387,9 +411,12 @@ export default function KezaVeraForm() {
           <div className="flex justify-center md:justify-end mt-4 pb-24">
             <button 
               type="submit" 
-              className="bg-[#111] text-[#faf9f6] px-16 py-5 tracking-[0.3em] text-xs uppercase hover:bg-black hover:shadow-xl transition-all duration-300 font-sans font-light"
+              disabled={isSubmitting} // Lock the button while submitting
+              className={`bg-[#111] text-[#faf9f6] px-16 py-5 tracking-[0.3em] text-xs uppercase transition-all duration-300 font-sans font-light ${
+                isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-black hover:shadow-xl'
+              }`}
             >
-              Submit Expression of Interest
+              {isSubmitting ? 'Submitting...' : 'Submit Expression of Interest'}
             </button>
           </div>
 

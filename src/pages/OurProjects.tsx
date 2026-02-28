@@ -44,6 +44,7 @@ const AnimatedCard = ({ children, index, to }) => {
     marginTop: index === 0 ? '0' : '-10vh', 
     position: 'relative',
     marginBottom: '5vh',
+    zIndex: 2, // Keeps cards above the background images
   };
 
   return (
@@ -104,11 +105,12 @@ const OurProjects = () => {
       animate="animate"
       exit="exit"
     >
-      <div style={styles.watermarkContainer}>
-        <img src="/assets/cross.png" alt="" style={styles.watermark} />
-      </div>
-
-      
+      {/* BACKGROUND 1: Center image starting from the absolute top of the page */}
+      <img 
+        src="/assets/cross2.png" 
+        alt="" 
+        style={styles.bgImageTop} 
+      />
 
       <main>
         <section style={styles.titleSection}>
@@ -119,6 +121,14 @@ const OurProjects = () => {
         </section>
 
         <section style={styles.projectGrid}>
+          
+          {/* BACKGROUND 2: Right-aligned image starting after 4 cards */}
+          <img 
+            src="/assets/proojectright.png" 
+            alt="" 
+            style={styles.bgImageRight} 
+          />
+
           {visibleProjects.map((project, index) => (
             <AnimatedCard 
               key={project.id} 
@@ -136,12 +146,13 @@ const OurProjects = () => {
           ))}
         </section>
 
-        {/* UPDATED: Load More Button & Subtitle */}
+        {/* RESTORED AND PROTECTED: Load More Button & Subtitle */}
         {!showAll && projects.length > 7 && (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '8rem', position: 'relative', zIndex: 10 }}
+            // CHANGED: Added massive zIndex (50) and explicit top margin to protect it
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '4rem 0 8rem 0', position: 'relative', zIndex: 50 }}
           >
             <motion.button 
               onClick={() => setShowAll(true)}
@@ -158,7 +169,7 @@ const OurProjects = () => {
         )}
       </main>
 
-      {/* UPDATED: Footer section matching the screenshot */}
+      {/* Footer section */}
       <footer style={styles.footerContainer}>
         <div style={styles.footerWatermarkWrapper}>
           <img src="/assets/crest-ornament.png" alt="" style={styles.footerWatermark} />
@@ -195,38 +206,40 @@ const styles = {
     position: 'relative',
     overflowX: 'hidden',
   },
-  watermarkContainer: {
-    position: 'fixed',
-    top: '10%',
+  
+  bgImageTop: {
+    position: 'absolute',
+    top: '0', 
     left: '50%',
     transform: 'translateX(-50%)',
-    width: '60vw',
-    opacity: 0.10,
+    width: '90vw',
+    maxWidth: '900px',
+    height: 'auto',
+    opacity: 1,
     zIndex: 0,
     pointerEvents: 'none',
   },
-  watermark: { width: '100%', height: 'auto' },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    position: 'relative',
-    zIndex: 10,
-    marginBottom: '4rem'
+  bgImageRight: {
+    position: 'absolute',
+    top: '55%', 
+    // This calc breaks out of the grid to snap exactly to the right edge of the window
+    right: 'calc(50% - 50vw)', 
+    width: '30vw',
+    maxWidth: '700px',
+    height: 'auto',
+    opacity: 1,
+    zIndex: 0,
+    pointerEvents: 'none',
   },
-  logo: {
-    fontFamily: 'Georgia, serif',
-    fontWeight: 300,
-    fontSize: '0.9rem',
-    letterSpacing: '0.4em',
-    color: '#1a1a1a',
-  },
+
   titleSection: {
     textAlign: 'center',
     margin: '10vh 0 15vh 0',
+    position: 'relative',
+    zIndex: 1, 
   },
   title: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     fontSize: 'clamp(3rem, 8vw, 7rem)',
     letterSpacing: '0.15em',
@@ -234,9 +247,9 @@ const styles = {
     color: '#3d2f28',
   },
   description: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     maxWidth: '500px',
     margin: '2rem auto 0',
     lineHeight: '1.8',
@@ -247,9 +260,10 @@ const styles = {
     flexDirection: 'column',
     maxWidth: '1200px',
     margin: '0 auto',
-    position: 'relative',
+    position: 'relative', 
     paddingBottom: '5vh',
   },
+
   cardInner: {
     borderRadius: '28px',
     overflow: 'hidden',
@@ -268,30 +282,29 @@ const styles = {
     alignItems: 'center'
   },
   placeholderText: { 
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     letterSpacing: '0.3em', 
     fontSize: '0.7rem', 
     opacity: 0.4 
   },
   
-  // UPDATED: Underlined text button
   loadMoreButton: {
     background: 'none',
     border: 'none',
     borderBottom: '1px solid #1a1a1a',
     padding: '0 0 4px 0',
     color: '#1a1a1a',
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '1.8rem',
+    fontSize: '2.1rem',
     cursor: 'pointer',
     outline: 'none',
   },
   buttonSubtitle: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '0.9rem',
+    fontSize: '1.6rem',
     marginTop: '1.5rem',
     opacity: 0.8,
   },
@@ -327,9 +340,9 @@ const styles = {
     textAlign: 'center',
   },
   footerTitle: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: 'clamp(3rem, 10vw, 7rem)', // Further reduced text size to match the screenshot proportion
+    fontSize: 'clamp(3rem, 10vw, 7rem)', 
     letterSpacing: '0.25em',
     lineHeight: '1',
     color: '#1a1a1a',
@@ -337,9 +350,9 @@ const styles = {
     textTransform: 'uppercase',
   },
   footerSubtitle: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '0.9rem',
+    fontSize: '1.3rem',
     marginTop: '2rem',
     opacity: 0.8,
   },
@@ -350,8 +363,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    fontSize: '0.65rem',
-    fontFamily: 'Georgia, serif',
+    fontSize: '1.1rem',
+    fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
     color: '#1a1a1a',
   },

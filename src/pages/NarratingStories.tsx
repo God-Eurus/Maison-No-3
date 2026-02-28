@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const cardsData = [
   {
     id: 1,
-    title: "ZOHARET",
+    // title: "ZOHARET",
     background: 'url("/assets/zoharet.png")', 
     backgroundColor: '#e3d0b9', 
     backgroundSize: 'cover',
@@ -41,7 +41,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     minHeight: '100vh',
     width: '100%',
     position: 'relative',
-    overflowX: 'hidden',
+    overflowX: 'clip', // Changed from hidden to clip to ensure sticky works perfectly across all browsers
   },
 
   /* --- HERO SECTION --- */
@@ -474,6 +474,8 @@ const NarratingStoriesPage = () => {
               whileHover={{ scale: 0.98 }}
               style={{
                 ...styles.cardContainer,
+                position: 'sticky', // ADDED: Anchors the card during scroll
+                top: `calc(10vh + ${index * 40}px)`, // ADDED: Increments the offset so they stack visibly underneath each other
                 backgroundImage: card.background,
                 backgroundColor: card.backgroundColor,
                 backgroundSize: card.backgroundSize,

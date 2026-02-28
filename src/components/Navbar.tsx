@@ -42,15 +42,18 @@ export default function Navbar() {
           isVisible && !isOpen ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
-        {/* --- LOGO (TOP LEFT) - CENTERED TEXT --- */}
+        {/* --- LOGO (TOP LEFT) --- */}
         <Link 
           to="/"
-          className="flex flex-col items-center cursor-pointer hover:opacity-70 transition-opacity"
-          style={{ fontFamily: '"Breadley Sans", sans-serif' }}
+          className="flex items-center cursor-pointer hover:opacity-70 transition-opacity"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <span className="tracking-[0.4em] text-lg md:text-xl uppercase opacity-90">Maison</span>
-          <span className="tracking-[0.3em] text-sm md:text-base mt-2 uppercase opacity-70">No. 3</span>
+          {/* Image replaces the text. h-10 md:h-12 mimics the height of the previous two lines of text */}
+          <img 
+            src="/assets/Maisonlogo.svg" 
+            alt="Maison No. 3 Logo" 
+            className="h-10 md:h-12 w-auto object-contain" 
+          />
         </Link>
 
         {/* --- HAMBURGER TRIGGER (TOP RIGHT) --- */}

@@ -32,15 +32,14 @@ const styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    fontFamily: '"Breadley Sans", sans-serif', // Added global font
+    fontFamily: '"Breadley Sans", sans-serif', 
   },
   overlay: {
     position: 'absolute',
     inset: 0,
-    backgroundColor: 'rgba(0,0,0,0.4)', // Dimmed overlay to make text pop
+    backgroundColor: 'rgba(0,0,0,0.4)', 
     zIndex: 1,
   },
-  // Wrapper guarantees the heading stays perfectly centered before moving
   headingWrapper: {
     position: 'absolute',
     top: 0,
@@ -53,7 +52,7 @@ const styles = {
     zIndex: 10,
   },
   heading: {
-    fontFamily: '"Breadley Sans", sans-serif', // Changed font
+    fontFamily: '"Breadley Sans", sans-serif', 
     fontSize: 'clamp(4rem, 10vw, 10rem)', 
     letterSpacing: '0.05em',
     color: '#ffffff',
@@ -64,7 +63,7 @@ const styles = {
   contentWrapper: {
     position: 'absolute',
     left: '5%',
-    top: '32%', 
+    top: '38%', 
     width: 'clamp(300px, 50%, 700px)',
     zIndex: 5,
     display: 'flex',
@@ -72,7 +71,7 @@ const styles = {
     gap: '3rem',
   },
   text: {
-    fontFamily: '"Breadley Sans", sans-serif', // Changed font
+    fontFamily: '"Breadley Sans", sans-serif', 
     fontSize: 'clamp(1rem, 1.8vw, 1.4rem)',
     lineHeight: '1.6',
     letterSpacing: '0.02em',
@@ -91,10 +90,11 @@ const HeroSection = () => {
   });
 
   // 1. BULLETPROOF HEADING ANIMATION: 
-  // Moves up (-35vh) and left (-25vw) while scaling down flawlessly from the center.
-  const headingX = useTransform(scrollYProgress, [0, 0.3], ["0vw", "-24vw"]);
-  const headingY = useTransform(scrollYProgress, [0, 0.3], ["0vh", "-35vh"]);
-  const headingScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.45]); 
+  // CHANGED: Increased the negative X value to -40vw to pull it further left over the paragraph.
+  // (If it goes too far left, change -40vw to -35vw. If it needs more, try -45vw).
+  const headingX = useTransform(scrollYProgress, [0, 0.3], ["0vw", "-37vw"]);
+  const headingY = useTransform(scrollYProgress, [0, 0.3], ["0vh", "-18vh"]);
+  const headingScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.4]); 
 
   // 2. CONTENT REVEAL: Slides up from below the visible area, locking into place.
   const contentY = useTransform(scrollYProgress, [0.15, 0.35], ["15vh", "0vh"]);

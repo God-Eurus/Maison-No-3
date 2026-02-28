@@ -111,6 +111,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: 400,
     color: '#fff',
     textTransform: 'uppercase',
+    marginTop:'10rem',
     marginBottom: '1rem',
   },
   heroSubtitle: {
@@ -124,7 +125,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'absolute',
     top: '10%',
     right: '-5%',
-    width: 'clamp(150px, 25%, 400px)', 
+    width: 'clamp(200px, 25%, 200px)', 
     zIndex: 5, 
     pointerEvents: 'none',
   },
@@ -481,7 +482,7 @@ const OurStudioPage = () => {
           </motion.p>
         </div>
         <img 
-          src="/assets/LaMaison.svg" 
+          src="/assets/ourstudioleft.svg" 
           alt="" 
           style={styles.ornamentGraphic} 
         />
@@ -505,7 +506,7 @@ const OurStudioPage = () => {
             style={{ overflow: 'hidden', boxShadow: '0 0 50px rgba(0,0,0,0.5)', cursor: 'pointer', position: 'relative' }}
           >
             <video src="/assets/horizontal day 1.mp4" autoPlay loop muted playsInline style={styles.videoElement} />
-            <motion.div animate={{ opacity: isVideoHovered ? 0.4 : 0 }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#000', pointerEvents: 'none' }} />
+            <motion.div animate={{ opacity: isVideoHovered ? 0.4 : 0 }} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',  pointerEvents: 'none' }} />
           </motion.div>
         </div>
       </section>

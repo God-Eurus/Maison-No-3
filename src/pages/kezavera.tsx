@@ -63,7 +63,7 @@ export default function KezaVera() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[#111]/80 text-xs md:text-sm font-semibold tracking-[0.3em] md:tracking-[0.4em] uppercase ml-[0.4em] font-breadley"
+          className="text-[#111]/80 text-l md:text-l font-semibold tracking-[0.3em] md:tracking-[0.4em] uppercase ml-[0.4em] font-breadley"
         >
           UNEARTHING FLAIRS
         </motion.p>
@@ -339,7 +339,7 @@ At its core, the Keza Vera identity reflects Maison No. 3’s intent to nurture 
           >
             <a href="/kezaveraform" className="group flex flex-col items-center text-center cursor-pointer hover:opacity-70 transition-opacity">
               <h2 className="text-[#111] text-5xl md:text-7xl lg:text-[6.5rem] tracking-[0.3em] uppercase leading-[1.3] md:leading-[1.4] font-breadley">
-                CONTACT<br/>US
+                Expressions <br/> of the Future
               </h2>
             </a>
           </motion.div>
@@ -361,7 +361,7 @@ At its core, the Keza Vera identity reflects Maison No. 3’s intent to nurture 
           </div>
           
           <div className="flex-1 text-center">
-            <span className="font-breadley">2024 @ qui creatives all rights reserved</span>
+            <span className="font-breadley">2026 @ Maison No.3 all rights reserved</span>
           </div>
           
           <div className="flex-1 text-right">

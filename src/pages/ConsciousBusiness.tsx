@@ -51,58 +51,52 @@ const imageScaleOnHover = {
   hover: { scale: 1.05, transition: { duration: 0.8, ease: "easeOut" } }
 };
 
-const pinkButtonVariants = {
-  rest: { scale: 1, rotate: 0 },
-  hover: { 
-    scale: 1.1, 
-    rotate: 10, 
-    boxShadow: '0 10px 25px rgba(245, 208, 214, 0.9)',
-    transition: { type: "spring", stiffness: 300, damping: 15 } 
-  },
-  tap: { scale: 0.95 }
-};
-
-// --- DATA ---
+// --- DATA: Images Only ---
 const sdgTop = [
-  { id: 1, number: '1', title: 'NO\nPOVERTY', image: '/assets/sus1.png' }, 
-  { id: 2, number: '2', title: 'ZERO\nHUNGER', image: '/assets/sus2.png' },
-  { id: 3, number: '3', title: 'GOOD HEALTH\nAND WELL-BEING', image: '/assets/sus3.png' },
-  { id: 4, number: '4', title: 'QUALITY\nEDUCATION', image: '/assets/sus4.png' },
-  { id: 5, number: '5', title: 'NO\nPOVERTY', image: '/assets/sus1.png' }, 
+  { id: 1, image: '/assets/sus1.png' }, 
+  { id: 2, image: '/assets/sus2.png' },
+  { id: 3, image: '/assets/sus3.png' },
+  { id: 4, image: '/assets/sus4.png' },
+  { id: 5, image: '/assets/sus5.png' }, 
+  { id: 6, image: '/assets/sus6.png' },
+  { id: 7, image: '/assets/sus7.png' },
+  { id: 8, image: '/assets/sus8.png' },
+  { id: 9, image: '/assets/sus9.png' }, 
+  { id: 10, image: '/assets/sus10.png' },
 ];
 
 const sdgBottom = [
-  { id: 11, number: '11', title: 'SUSTAINABLE CITIES\nAND COMMUNITIES', image: '/assets/sus11.png' },
-  { id: 12, number: '12', title: 'RESPONSIBLE\nCONSUMPTION', image: '/assets/sus12.png' },
-  { id: 13, number: '13', title: 'CLIMATE\nACTION', image: '/assets/sus13.png' },
-  { id: 14, number: '14', title: 'LIFE\nBELOW WATER', image: '/assets/sus14.png' },
-  { id: 15, number: '15', title: 'LIFE\nON LAND', image: '/assets/sus15.png' },
+  { id: 11, image: '/assets/sus11.png' },
+  { id: 12, image: '/assets/sus12.png' },
+  { id: 13, image: '/assets/sus13.png' },
+  { id: 14, image: '/assets/sus14.png' },
+  { id: 15, image: '/assets/sus15.png' },
+  { id: 16, image: '/assets/sus16.png' },
+  { id: 17, image: '/assets/sus17.png' },
 ];
 
 const projectsData = [
   {
     id: 1,
-    title: 'KEZAVERA',
     link: '/kezavera',
     image: '/assets/kezavera.png',
     textColor: '#ffffff'
   },
   {
     id: 2,
-    title: 'AIA',
     link: '/aia',
     image: '/assets/aia.png',
     textColor: '#ffffff'
   },
   {
     id: 3,
-    title: 'SUST FEST',
     link: '/sust-fest',
     image: '/assets/susfest.png',
     textColor: '#ffffff'
   }
 ];
 
+// --- STYLES ---
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     background: 'linear-gradient(to bottom, #fdfbf7 0%, #f4efe9 50%, #eadcd5 100%)',
@@ -112,7 +106,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
   },
 
-  // --- NAV STYLES ---
   nav: {
     position: 'absolute',
     top: 0,
@@ -124,19 +117,26 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 10,
   },
   logoImage: {
-    height: '50px', // Adjust this value to perfectly size your logo image
+    height: '350px', 
     width: 'auto',
     objectFit: 'contain',
+    opacity: 0.6,
   },
   
+  mainContent: {
+    position: 'relative',
+    width: '100%',
+    zIndex: 1,
+  },
+
   headerSection: {
     position: 'relative',
-    minHeight: '80vh', 
+    minHeight: '130vh', 
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: '4rem',
+    paddingBottom: '0rem', 
     textAlign: 'center',
     width: '100%',
     overflow: 'hidden', 
@@ -168,7 +168,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   heroImageRight: {
     position: 'absolute',
     right: '-0.1%',
-    top: '15%',
+    top: '25%', 
     width: 'clamp(150px, 20vw, 350px)',
     objectFit: 'contain',
     zIndex: 1,
@@ -177,8 +177,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   heroImageLeft: {
     position: 'absolute',
-    left: '',
-    top: '-2rem', 
+    left: '-0.1%',
+    top: '75rem', 
     width: 'clamp(150px, 20vw, 350px)',
     objectFit: 'contain',
     zIndex: 1,
@@ -190,10 +190,12 @@ const styles: { [key: string]: React.CSSProperties } = {
     width: '75%', 
     marginLeft: 'auto', 
     overflow: 'hidden',
-    padding: '2rem 0',
+    padding: '0rem 0', 
     display: 'flex',
     position: 'relative',
     zIndex: 3, 
+    marginTop: '-15rem',
+    marginBottom: '15rem', 
   },
   marqueeContainerBottom: {
     width: '75%', 
@@ -203,6 +205,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     position: 'relative',
     zIndex: 3, 
+    marginBottom: '10rem',
   },
   marqueeTrack: {
     display: 'flex',
@@ -213,43 +216,27 @@ const styles: { [key: string]: React.CSSProperties } = {
   sdgCard: {
     minWidth: '280px',
     height: '280px',
-    backgroundColor: '#cecece', 
+    backgroundColor: 'transparent', 
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center', 
+    alignItems: 'center', 
     padding: '2rem',
     color: '#fff',
     flexShrink: 0,
     borderRadius: '0px', 
-    boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
-  },
-  sdgNumber: {
-    fontSize: '3.5rem',
-    fontWeight: '300', 
-    lineHeight: 1,
-    opacity: 0.9,
-    fontFamily: '"Breadley Sans", sans-serif',
-  },
-  sdgTitle: {
-    fontSize: '0.9rem',
-    fontWeight: '300', 
-    textTransform: 'uppercase',
-    lineHeight: 1.2,
-    marginLeft: '0.5rem',
-    marginTop: '0.5rem',
-    fontFamily: '"Breadley Sans", sans-serif',
-    whiteSpace: 'pre-line',
+    border: 'none', 
+    boxShadow: 'none', 
   },
   sdgImage: {
-    width: '100px',
-    height: '100px',
+    width: '100%',
+    height: '100%',
     objectFit: 'contain',
     alignSelf: 'center',
-    marginBottom: '1rem',
   },
 
   projectStackSection: {
-    padding: '6rem 2rem 15rem 2rem', 
+    padding: '6rem 2rem 10rem 2rem', 
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -274,6 +261,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     overflow: 'hidden',
     backgroundColor: 'transparent',
+    border: 'none', 
   },
   cardBackgroundImage: {
     position: 'absolute',
@@ -309,43 +297,67 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 
   whyNotSection: {
-    textAlign: 'center',
     padding: '4rem 2rem 8rem 2rem',
-    maxWidth: '800px',
+    maxWidth: '1200px', 
     margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   whyNotTitle: {
     fontFamily: '"Snell Roundhand", "Apple Chancery", "Brush Script MT", cursive',
     fontSize: '3.5rem', 
     color: '#333',
     marginBottom: '2rem',
+    whiteSpace: 'nowrap', 
+    textAlign: 'center',
   },
   whyNotText: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: '0.75rem',
+    fontSize: '1.1rem',
     lineHeight: '1.8',
     color: '#555',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
-    maxWidth: '700px',
+    maxWidth: '1000px', 
+    textAlign: 'justify', 
     margin: '0 auto 4rem auto',
   },
 
+  /* --- UPDATED FOOTER SECTION --- */
   footerSection: {
-    padding: '4rem 2rem',
+    padding: '4rem 2rem 2rem 2rem',
     textAlign: 'center',
     position: 'relative',
+    minHeight: '125vh', // INCREASED HEIGHT: Forces the section to be tall enough to fit the full image
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundImage: 'url("/assets/concfooter.png")', // Make sure this matches your file name exactly
+    backgroundSize: 'contain', // CHANGED: Ensures the image is never cropped
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
   },
   allProjectsTitle: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: 'clamp(3rem, 6vw, 5rem)',
-    letterSpacing: '0.2em',
+    fontSize: 'clamp(5rem, 8vw, 7rem)',
+    letterSpacing: '0.1em',
     color: '#1a1a1a',
     fontWeight: 300,
     textTransform: 'uppercase',
-    marginBottom: '4rem',
+    marginTop: '20rem',
+    marginBottom: '1rem',
     cursor: 'pointer',
     display: 'inline-block',
+  },
+  footerSubtitleText: { // NEW: Styles for the paragraph text under the title
+    fontFamily: '"Breadley Sans", sans-serif',
+    fontSize: 'clamp(0.9rem, 1.2vw, 1.1rem)',
+    color: '#333',
+    lineHeight: '1.8',
+    maxWidth: '800px',
+    margin: '0 auto 4rem auto',
+    letterSpacing: '0.05em',
   },
   bottomBar: {
     display: 'flex',
@@ -358,8 +370,9 @@ const styles: { [key: string]: React.CSSProperties } = {
     letterSpacing: '0.1em',
     paddingTop: '2rem',
     borderTop: '1px solid rgba(0,0,0,0.1)',
+    width: '100%',
     maxWidth: '1400px',
-    margin: '0 auto',
+    margin: 'auto auto 0 auto', 
   },
 };
 
@@ -390,35 +403,36 @@ const ConsciousBusinessPage = () => {
               padding: 1.5rem !important;
             }
             .responsive-logo {
-              height: 40px !important; /* Slightly smaller logo on mobile */
+              height: 40px !important; 
             }
             .responsive-marquee {
               width: 100% !important;
+              margin-top: 0 !important;
             }
             .responsive-sdg-card {
               min-width: 200px !important;
               height: 200px !important;
               padding: 1.2rem !important;
             }
-            .responsive-sdg-num {
-              font-size: 2.5rem !important;
-            }
             .responsive-sdg-img {
-              width: 70px !important;
-              height: 70px !important;
-              margin-bottom: 0.5rem !important;
+              width: 100% !important;
+              height: 100% !important;
+              margin-bottom: 0 !important;
             }
 
-            /* Responsive Hero Images */
             .responsive-hero-img-right {
               width: 120px !important;
-              top: 5% !important;
+              top: 15% !important; 
             }
             .responsive-hero-img-left {
               width: 120px !important;
+              top: 0 !important;
             }
 
-            /* Responsive Cards */
+            .responsive-project-stack-section {
+              padding: 3rem 1rem 6rem 1rem !important;
+              gap: 2rem !important;
+            }
             .responsive-project-card {
               min-height: 400px !important;
               height: 60vh !important;
@@ -427,7 +441,6 @@ const ConsciousBusinessPage = () => {
               font-size: 1.8rem !important;
             }
             
-            /* Responsive Single-line footer */
             .responsive-bottom-bar {
               flex-direction: row !important;
               align-items: center !important;
@@ -451,7 +464,7 @@ const ConsciousBusinessPage = () => {
       <nav style={styles.nav} className="responsive-nav">
         <Link to="/">
           <img 
-            src="/assets/logo.png" // Make sure to update this with your actual logo image path
+            src="/assets/Aia foundation logo.svg"
             alt="OUI Creatives Logo" 
             style={styles.logoImage} 
             className="responsive-logo"
@@ -459,196 +472,198 @@ const ConsciousBusinessPage = () => {
         </Link>
       </nav>
 
-      {/* --- HERO SECTION --- */}
-      <motion.section 
-        style={styles.headerSection}
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-      >
-        <img 
-          src="/assets/Conscious (1).png" 
-          alt="" 
-          style={styles.heroImageRight} 
-          className="responsive-hero-img-right"
-        />
+      <div style={styles.mainContent}>
+        
+        {/* --- HERO SECTION --- */}
+        <motion.section 
+          style={styles.headerSection}
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <img 
+            src="/assets/Conscious (1).png" 
+            alt="" 
+            style={styles.heroImageRight} 
+            className="responsive-hero-img-right"
+          />
 
-        <div style={styles.headerContentWrapper}>
-          <motion.h1 variants={fadeInUp} style={styles.scriptTitle}>Conscious Businesses</motion.h1>
-          <motion.p variants={fadeInUp} style={styles.bodyText}>
-            Business, at its best, extends beyond commerce. It carries the power to influence systems, 
-            communities, and futures. To be conscious is to recognise this reach and act with intention. 
-            We believe that brands built with awareness create value that lasts longer than visibility, 
-            leaving behind meaning, not just momentum.
-          </motion.p>
-        </div>
-      </motion.section>
+          <div style={styles.headerContentWrapper}>
+            <motion.h1 variants={fadeInUp} style={styles.scriptTitle}>Conscious Businesses</motion.h1>
+            <motion.p variants={fadeInUp} style={styles.bodyText}>
+              Business, at its best, extends beyond commerce. It carries the power to influence systems, 
+              communities, and futures. To be conscious is to recognise this reach and act with intention. 
+              We believe that brands built with awareness create value that lasts longer than visibility, 
+              leaving behind meaning, not just momentum.
+            </motion.p>
+          </div>
+        </motion.section>
 
-      {/* --- TOP MARQUEE (75% width, aligned right, moving left) --- */}
-      <motion.div 
-        style={styles.marqueeContainerTop}
-        className="responsive-marquee"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-      >
-        <Link to="/sdg" style={{ display: 'flex', textDecoration: 'none', width: 'max-content', cursor: 'pointer' }}>
-          <motion.div style={styles.marqueeTrack} variants={marqueeVariants} animate="animate">
-            {[...sdgTop, ...sdgTop, ...sdgTop].map((card, index) => (
-              <motion.div 
-                key={`top-${card.id}-${index}`} 
-                style={styles.sdgCard}
-                className="responsive-sdg-card"
-                whileHover={{ scale: 1.05, rotate: -1 }}
-              >
-                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                  <span style={styles.sdgNumber} className="responsive-sdg-num">{card.number}</span>
-                  <span style={styles.sdgTitle}>{card.title}</span>
-                </div>
-                <img src={card.image} alt="SDG" style={styles.sdgImage} className="responsive-sdg-img" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </Link>
-      </motion.div>
+        {/* --- TOP MARQUEE --- */}
+        <motion.div 
+          style={styles.marqueeContainerTop}
+          className="responsive-marquee"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <Link to="/sdg" style={{ display: 'flex', textDecoration: 'none', width: 'max-content', cursor: 'pointer' }}>
+            <motion.div style={styles.marqueeTrack} variants={marqueeVariants} animate="animate">
+              {[...sdgTop, ...sdgTop, ...sdgTop].map((card, index) => (
+                <motion.div 
+                  key={`top-${card.id}-${index}`} 
+                  style={styles.sdgCard}
+                  className="responsive-sdg-card"
+                  whileHover={{ scale: 1.05, rotate: -1 }}
+                >
+                  <img src={card.image} alt="SDG" style={styles.sdgImage} className="responsive-sdg-img" />
+                </motion.div>
+              ))}
+            </motion.div>
+          </Link>
+        </motion.div>
 
-      {/* --- LEFT IMAGE BELOW MARQUEE SLIDER --- */}
-      <div style={{ position: 'relative', width: '100%', height: 0 }}>
+        {/* --- LEFT IMAGE --- */}
         <img 
           src="/assets/Conscious.png" 
           alt="" 
           style={styles.heroImageLeft} 
           className="responsive-hero-img-left"
         />
-      </div>
 
-      {/* --- PROJECT STACK WITH STICKY SCROLL ANIMATION --- */}
-      <motion.section 
-        style={styles.projectStackSection}
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-      >
-        {projectsData.map((project, index) => (
-          <motion.div 
-            key={project.id} 
-            variants={fadeInUp} 
-            style={{ 
-              width: '100%', 
-              maxWidth: '1200px', 
-              position: 'sticky', 
-              top: `calc(15vh + ${index * 40}px)`, 
-              zIndex: index + 1 
-            }}
-          >
-            <Link to={project.link} style={styles.largeProjectLink}>
-              <motion.div 
-                style={styles.largeProjectCard}
-                className="responsive-project-card"
-                initial="rest"
-                whileHover="hover"
-                animate="rest"
-                variants={projectCardHover}
-              >
-                <motion.div 
-                  style={{...styles.cardBackgroundImage, backgroundImage: `url(${project.image})`}}
-                  variants={imageScaleOnHover}
-                />
-                
-                <motion.div style={styles.cardOverlay} variants={{
-                  rest: { backgroundColor: 'rgba(0,0,0,0)' },
-                  hover: { backgroundColor: 'rgba(0,0,0,0)' }
-                }} />
-                
-                <div style={styles.cardContent}>
-                  <h2 style={{ ...styles.cardTitle, color: project.textColor }} className="responsive-card-title">{project.title}</h2>
-                </div>
-              </motion.div>
-            </Link>
-          </motion.div>
-        ))}
-      </motion.section>
-
-      {/* --- BOTTOM MARQUEE (75% width, aligned left, moving right) --- */}
-      <motion.div 
-        style={styles.marqueeContainerBottom}
-        className="responsive-marquee"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, delay: 0.2 }}
-      >
-        <Link to="/sdg" style={{ display: 'flex', textDecoration: 'none', width: 'max-content', cursor: 'pointer' }}>
-          <motion.div style={styles.marqueeTrack} variants={marqueeVariantsReverse} animate="animate">
-            {[...sdgBottom, ...sdgBottom, ...sdgBottom].map((card, index) => (
-              <motion.div 
-                key={`bot-${card.id}-${index}`} 
-                style={styles.sdgCard}
-                className="responsive-sdg-card"
-                whileHover={{ scale: 1.05, rotate: 1 }}
-              >
-                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-                  <span style={styles.sdgNumber} className="responsive-sdg-num">{card.number}</span>
-                  <span style={styles.sdgTitle}>{card.title}</span>
-                </div>
-                 <img src={card.image} alt="SDG" style={styles.sdgImage} className="responsive-sdg-img" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </Link>
-      </motion.div>
-
-      {/* --- WHY NOT SECTION --- */}
-      <motion.section 
-        style={styles.whyNotSection}
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.4 }}
-      >
-        <motion.h2 variants={fadeInUp} style={styles.whyNotTitle}>The Chase for a Conscious Business.</motion.h2>
-        <motion.p variants={fadeInUp} style={styles.whyNotText}>
-         To translate intent into action, we collaborate with organisations working at the grassroots level, including our association with the AIA Foundation and allied initiatives. Through these partnerships, we support brands in engaging with meaningful CSR pathways, helping transform awareness into real-world contribution. Our role is not to prescribe, but to enable, connecting brands with opportunities to give back in ways that feel authentic and lasting.
-        </motion.p>
-      </motion.section>
-
-      {/* --- FOOTER --- */}
-      <motion.footer 
-        style={styles.footerSection}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div style={{ marginBottom: '2rem' }}>
-          <Link to="/atelier" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <motion.h2 
-              style={styles.allProjectsTitle}
-              whileHover={{ scale: 1.02, letterSpacing: '0.25em', color: '#555' }}
-              transition={{ duration: 0.3 }}
+        {/* --- PROJECT STACK --- */}
+        <motion.section 
+          style={styles.projectStackSection}
+          className="responsive-project-stack-section"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {projectsData.map((project, index) => (
+            <motion.div 
+              key={project.id} 
+              variants={fadeInUp} 
+              style={{ 
+                width: '100%', 
+                maxWidth: '1200px', 
+                position: 'sticky', 
+                top: `calc(15vh + ${index * 40}px)`, 
+                zIndex: index + 1 
+              }}
             >
-              BEGIN<br/>THE SHIFT
-            </motion.h2>
+              <Link to={project.link} style={styles.largeProjectLink}>
+                <motion.div 
+                  style={styles.largeProjectCard}
+                  className="responsive-project-card"
+                  initial="rest"
+                  whileHover="hover"
+                  animate="rest"
+                  variants={projectCardHover}
+                >
+                  <motion.div 
+                    style={{...styles.cardBackgroundImage, backgroundImage: `url(${project.image})`}}
+                    variants={imageScaleOnHover}
+                  />
+                  
+                  <motion.div style={styles.cardOverlay} variants={{
+                    rest: { backgroundColor: 'rgba(0,0,0,0)' },
+                    hover: { backgroundColor: 'rgba(0,0,0,0)' }
+                  }} />
+                  
+                  <div style={styles.cardContent}>
+                    <h2 style={{ ...styles.cardTitle, color: project.textColor }} className="responsive-card-title">{project.title}</h2>
+                  </div>
+                </motion.div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.section>
+
+        {/* --- BOTTOM MARQUEE --- */}
+        <motion.div 
+          style={styles.marqueeContainerBottom}
+          className="responsive-marquee"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <Link to="/sdg" style={{ display: 'flex', textDecoration: 'none', width: 'max-content', cursor: 'pointer' }}>
+            <motion.div style={styles.marqueeTrack} variants={marqueeVariantsReverse} animate="animate">
+              {[...sdgBottom, ...sdgBottom, ...sdgBottom].map((card, index) => (
+                <motion.div 
+                  key={`bot-${card.id}-${index}`} 
+                  style={styles.sdgCard}
+                  className="responsive-sdg-card"
+                  whileHover={{ scale: 1.05, rotate: 1 }}
+                >
+                   <img src={card.image} alt="SDG" style={styles.sdgImage} className="responsive-sdg-img" />
+                </motion.div>
+              ))}
+            </motion.div>
           </Link>
-        </div>
+        </motion.div>
 
-        <div className="responsive-bottom-bar" style={styles.bottomBar}>
-          <motion.span 
-            onClick={scrollToTop} 
-            whileHover={{ y: -3, color: '#000' }} 
-            style={{ cursor: 'pointer' }}
-          >
-            back on top
-          </motion.span>
-          <span className="copyright-text">2024 © oui creatives all rights reserved</span>
-          <motion.span whileHover={{ y: -3, color: '#000' }} style={{ cursor: 'pointer' }}>
-            Follow Us
-          </motion.span>
-        </div>
-      </motion.footer>
+        {/* --- WHY NOT SECTION --- */}
+        <motion.section 
+          style={styles.whyNotSection}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+        >
+          <motion.h2 variants={fadeInUp} style={styles.whyNotTitle}>The Chase for a Conscious Business.</motion.h2>
+          <motion.p variants={fadeInUp} style={styles.whyNotText}>
+           To translate intent into action, we collaborate with organisations working at the grassroots level, including our association with the AIA Foundation and allied initiatives. Through these partnerships, we support brands in engaging with meaningful CSR pathways, helping transform awareness into real-world contribution. Our role is not to prescribe, but to enable, connecting brands with opportunities to give back in ways that feel authentic and lasting.
+          </motion.p>
+        </motion.section>
 
+        {/* --- FOOTER --- */}
+        <motion.footer 
+          style={styles.footerSection}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div style={{ margin: 'auto 0', position: 'relative', zIndex: 2 }}>
+            <Link to="/atelier" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <motion.h2 
+                style={styles.allProjectsTitle}
+                whileHover={{ scale: 1.02, letterSpacing: '0.25em', color: '#555' }}
+                transition={{ duration: 0.3 }}
+              >
+                BEGIN<br/>THE SHIFT
+              </motion.h2>
+            </Link>
+            
+            {/* NEW: Added paragraph matching your screenshot */}
+            <motion.p 
+              variants={fadeInUp}
+              style={styles.footerSubtitleText}
+            >
+              If you believe business can create value beyond itself, we invite you to explore what a more conscious approach could look like for your brand. Sometimes the smallest shifts create the most meaningful change.
+            </motion.p>
+          </div>
+
+          <div className="responsive-bottom-bar" style={styles.bottomBar}>
+            <motion.span 
+              onClick={scrollToTop} 
+              whileHover={{ y: -3, color: '#000' }} 
+              style={{ cursor: 'pointer' }}
+            >
+              back on top
+            </motion.span>
+            <span className="copyright-text">2024 © qui creatives all rights reserved</span>
+            <motion.span whileHover={{ y: -3, color: '#000' }} style={{ cursor: 'pointer' }}>
+              Follow Us
+            </motion.span>
+          </div>
+        </motion.footer>
+
+      </div>
     </div>
   );
 };
