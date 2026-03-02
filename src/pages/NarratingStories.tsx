@@ -147,7 +147,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   storyTextLine1: {
     fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '1.7rem',
+    fontSize: '1.4rem',
     color: '#e0e0e0',
     letterSpacing: '0.05em',
     lineHeight: 1.3,
@@ -156,7 +156,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   storyTextLine2: {
     fontFamily: '"Breadley Sans", sans-serif',
     fontWeight: 300,
-    fontSize: '1.7rem',
+    fontSize: '1.4rem',
     color: '#b0b0b0',
     lineHeight: 1.3,
     letterSpacing: '0.05em',
@@ -424,36 +424,41 @@ const NarratingStoriesPage = () => {
 
       {/* SECTION 2: NEW STORYBOOK SECTION */}
       <section style={styles.storySection}>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.5 }}
-          style={styles.storyImageContainer} 
-          className="story-img-responsive"
-        >
-          <img 
-            src="/assets/narrate.png" 
-            alt="Illuminated open book" 
-            style={styles.storyImage} 
-          />
-        </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          style={styles.storyTextContainer} 
-          className="story-txt-responsive"
-        >
-          <p style={styles.storyTextLine1}>
-            Some stories are loud. The ones that last are often deeply imagined.
-          </p>
-          <p style={styles.storyTextLine2}>
-            We are drawn to narratives that unfold gently, stories that invite discovery rather than demand attention, but build curiosity. Like a well-told fairytale, they linger in memory, carried through emotion rather than explanation.
-          </p>
-        </motion.div>
-      </section>
+  <motion.div 
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 1.5 }}
+    style={styles.storyImageContainer} 
+    className="story-img-responsive"
+  >
+    {/* Replaced <img> with <video> */}
+    <video 
+      src="/assets/narratingvideo.mp4" /* Change this to the path of your video file */
+      style={styles.storyImage} 
+      autoPlay
+      loop
+      muted
+      playsInline
+    />
+  </motion.div>
+
+  <motion.div 
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 1, ease: "easeOut" }}
+    style={styles.storyTextContainer} 
+    className="story-txt-responsive"
+  >
+    <p style={styles.storyTextLine1}>
+      Some stories are loud. The ones that last are often deeply imagined.
+    </p>
+    <p style={styles.storyTextLine2}>
+      We are drawn to narratives that unfold gently, stories that invite discovery rather than demand attention, but build curiosity. Like a well-told fairytale, they linger in memory, carried through emotion rather than explanation.
+    </p>
+  </motion.div>
+</section>
 
       {/* SECTION 3: CARDS */}
       <section style={styles.cardsSection} className="cards-sec-responsive">

@@ -141,7 +141,7 @@ export default function KezaVera() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="text-[#111] text-4xl md:text-5xl lg:text-6xl tracking-[0.4em] md:tracking-[0.6em] uppercase mb-8 text-center drop-shadow-sm ml-[0.4em] font-breadley"
+            className="text-[#111] text-4xl md:text-5xl lg:text-6xl tracking-[0.4em] md:tracking-[0.6em] [word-spacing:-0.4em] md:[word-spacing:-0.6em] uppercase mb-8 text-center drop-shadow-sm ml-[0.4em] font-breadley"
           >
             THE IDENTITY
           </motion.h2>
@@ -275,14 +275,15 @@ At its core, the Keza Vera identity reflects Maison No. 3’s intent to nurture 
         <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center px-6 md:px-16 lg:px-24">
           
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-[#111] text-4xl md:text-5xl lg:text-6xl tracking-[0.4em] md:tracking-[0.6em] uppercase mb-12 text-center drop-shadow-sm ml-[0.4em] font-breadley"
-          >
-            THE VENUE
-          </motion.h2>
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 1 }}
+  
+  className="text-[#111] text-4xl md:text-5xl lg:text-6xl tracking-[0.4em] md:tracking-[0.6em] [word-spacing:-0.4em] md:[word-spacing:-0.6em] uppercase mb-12 text-center drop-shadow-sm ml-[0.4em] font-breadley"
+>
+  THE VENUE
+</motion.h2>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
