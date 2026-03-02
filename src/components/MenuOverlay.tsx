@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'; // Added Link import
 
 // --- ICONS ---
 const CloseIcon = () => (
@@ -104,12 +105,14 @@ export default function MenuOverlay({ onClose }: MenuOverlayProps) {
               variants={menuItemVariant}
               className={`w-full border-t border-white/10 ${index === menuItems.length - 1 ? 'border-b' : ''}`}
             >
-              <a
-                href={item.href}
+              {/* Changed from <a> to <Link> and added onClick={onClose} */}
+              <Link
+                to={item.href}
+                onClick={onClose}
                 className="block w-full text-center py-5 md:py-6 text-[26px] md:text-3xl font-serif tracking-widest hover:opacity-50 transition-opacity duration-500 ease-in-out"
               >
                 {item.label}
-              </a>
+              </Link>
             </motion.li>
           ))}
         </motion.ul>
