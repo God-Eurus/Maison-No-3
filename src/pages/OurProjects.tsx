@@ -175,7 +175,7 @@ const OurProjects = () => {
           <img src="/assets/crest-ornament.png" alt="" style={styles.footerWatermark} />
         </div>
 
-        <Link to="/branding" style={styles.footerButtonLink}>
+        <Link to="/contact" style={styles.footerButtonLink}>
           <motion.div 
             style={styles.footerMainContent}
             whileHover={{ scale: 1.02 }}

@@ -169,7 +169,7 @@ export default function Aia() {
               className="flex-1"
             >
               <p className="text-white/95 text-xs md:text-sm lg:text-base leading-[2] md:leading-[2.2] tracking-wide font-breadley drop-shadow-sm text-center md:text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                
               </p>
             </motion.div>
           </div>

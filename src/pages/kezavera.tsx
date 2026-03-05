@@ -388,9 +388,12 @@ At its core, the Keza Vera identity reflects Maison No. 3’s intent to nurture 
       className="mb-2"
     >
       <a href="/kezaveraform" className="group flex flex-col items-center text-center cursor-pointer hover:opacity-70 transition-opacity">
-        <h2 className="text-[#111] text-4xl md:text-6xl lg:text-[6rem] tracking-[0.3em] uppercase leading-[1.3] md:leading-[1.4] font-breadley">
-          Expressions <br/> of the Future
-        </h2>
+        <h2 className="text-[#111] text-3xl md:text-5xl lg:text-[5rem] tracking-[0.3em] uppercase leading-[1.2] md:leading-[1.4] font-breadley mb-6 md:mb-10 lg:mb-12">
+  Expressions <br/> of the Future
+</h2>
+<p className="text-[#111]/80 text-sm md:text-base lg:text-lg leading-[2] md:leading-[2.2] tracking-wide max-w-5xl text-justify drop-shadow-sm font-breadley">
+  We continue to build Keza Vera thoughtfully. Designers, partners, and collaborators are welcome to begin the conversation.
+</p>
       </a>
     </motion.div>
 

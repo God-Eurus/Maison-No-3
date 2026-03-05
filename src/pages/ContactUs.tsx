@@ -384,7 +384,7 @@ const ContactUs = () => {
           className="relative z-10 mb-20 md:mb-32 flex flex-col items-center px-4"
         >
             <Link to="/ourprojects" className="inline-block group mb-6 md:mb-8">
-                <motion.h2 variants={slowFadeUp} style={styles.serifFont} className="text-4xl sm:text-6xl md:text-9xl text-[#1a1a1a] tracking-[0.30em] md:tracking-[0.2em] uppercase group-hover:opacity-70 transition-opacity duration-300">
+                <motion.h2 variants={slowFadeUp} style={styles.serifFont} className="text-3xl sm:text-5xl md:text-8xl text-[#1a1a1a] tracking-[0.30em] md:tracking-[0.2em] uppercase group-hover:opacity-70 transition-opacity duration-300">
                     SIGNATURE <br /> ENGAGEMENTS
                 </motion.h2>
             </Link>

@@ -5,10 +5,23 @@ import { motion } from 'framer-motion';
 
 // --- DATA CONFIGURATION ---
 const sdgCards = [
-  { id: 1, number: '1', title: 'NO\nPOVERTY', icon: '/assets/sus1-white.png' },
-  { id: 2, number: '2', title: 'ZERO\nHUNGER', icon: '/assets/sus2-white.png' },
-  { id: 3, number: '3', title: 'GOOD HEALTH\nAND WELL-BEING', icon: '/assets/sus3-white.png' },
-  { id: 4, number: '4', title: 'QUALITY\nEDUCATION', icon: '/assets/sus4-white.png' },
+  { id: 1, number: '1', title: 'NO\nPOVERTY', icon: '/assets/sus1.png' },
+  { id: 2, number: '2', title: 'ZERO\nHUNGER', icon: '/assets/sus2.png' },
+  { id: 3, number: '3', title: 'GOOD HEALTH\nAND WELL-BEING', icon: '/assets/sus3.png' },
+  { id: 4, number: '4', title: 'QUALITY\nEDUCATION', icon: '/assets/sus4.png' },
+  { id: 5, number: '5', title: 'GENDER\nEQUITY', icon: '/assets/sus5.png' },
+  { id: 6, number: '6', title: 'CLEAN WATER\nAND SANITATION', icon: '/assets/sus6.png' },
+  { id: 7, number: '7', title: 'AFFORDABLE\nAND CLEAN ENERGY', icon: '/assets/sus7.png' },
+  { id: 8, number: '8', title: 'DECENT WORK\nAND ECONOMIC GROWTH', icon: '/assets/sus8.png' },
+  { id: 9, number: '9', title: 'PATTERNS\nAND INFRASTRUCTURE', icon: '/assets/sus9.png' },
+  { id: 10, number: '10', title: 'REDUCED\nINEQUALITIES', icon: '/assets/sus10.png' },
+  { id: 11, number: '11', title: 'SUSTAINABLE\nCITIES AND COMMUNITIES', icon: '/assets/sus11.png' },
+  { id: 12, number: '12', title: 'RESPONSIBLE\nCONSUMPTION AND PRODUCTION', icon: '/assets/sus12.png' },
+  { id: 13, number: '13', title: 'CLIMATE ACTION', icon: '/assets/sus13.png' },
+  { id: 14, number: '14', title: 'LIFE BELOW\nWATER', icon: '/assets/sus14.png' },
+  { id: 15, number: '15', title: 'LIFE ON\nLAND', icon: '/assets/sus15.png' },
+  { id: 16, number: '16', title: 'PEACE AND\nJUSTICE STRONG INSTITUTIONS', icon: '/assets/sus16.png' },
+  { id: 17, number: '17', title: 'PARTNERSHIPS\nFOR THE GOALS', icon: '/assets/sus17.png' }
 ];
 
 const marqueeCards = [...sdgCards, ...sdgCards, ...sdgCards, ...sdgCards];
@@ -64,14 +77,13 @@ export default function SusFest() {
   return (
     <main className="relative min-h-screen w-full bg-[#9eb88d] overflow-x-hidden font-breadley">
       
-      {/* --- REPLACED: DARK IMAGE OVERLAY INSTEAD OF COLOR GRADIENT --- */}
+      {/* --- BACKGROUND IMAGE OVERLAY --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
           src="/assets/Sus Fest.png" 
           alt="" 
           className="w-full h-full object-cover opacity-40 mix-blend-multiply fixed"
         />
-        {/* Subtle vignette to maintain focus on center content */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
       </div>
 
@@ -83,8 +95,13 @@ export default function SusFest() {
         .animate-sand {
           animation: sand-flow 0.4s linear infinite;
         }
+        
+        /* Typography Definitions */
         .font-breadley {
           font-family: 'Breadley Sans', sans-serif;
+        }
+        .font-snell {
+          font-family: 'Snell Roundhand', 'Apple Chancery', 'Brush Script MT', cursive;
         }
       `}</style>
 
@@ -122,8 +139,10 @@ export default function SusFest() {
             SUSTAINABILITY FEST
           </motion.h2>
 
-          <motion.p variants={fadeInUp} className="text-black/80 text-xs md:text-sm lg:text-base leading-[2] tracking-wide max-w-5xl font-breadley">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          <motion.p variants={fadeInUp} className="text-black/80 text-xs md:text-sm lg:text-base leading-[2] tracking-wide max-w-5xl font-breadley text-justify">
+           SUST FEST is our upcoming initiative to create a more visible and participatory sustainability culture. Conceived as a festival rather than a campaign, it brings together speakers, designers, thinkers, brands, and communities to explore sustainability as a shared responsibility rather than a solitary effort.
+
+Through curated showcases, conversations, and experiential moments, SUST FEST aims to make sustainability feel accessible and culturally relevant. It is our way of building a platform where ideas are exchanged, practices are reimagined, and conscious futures are shaped collectively.
           </motion.p>
         </motion.div>
       </section>
@@ -137,25 +156,28 @@ export default function SusFest() {
         className="relative z-10 w-full pb-20 md:pb-32 overflow-hidden"
       >
         <motion.div 
-          className="flex gap-4 md:gap-6 w-max pl-4 md:pl-6"
+          className="flex gap-4 md:gap-8 w-max pl-4 md:pl-8"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 110 }} 
         >
           {marqueeCards.map((card, index) => (
-            <div key={`${card.id}-${index}`} className="w-[200px] md:w-[240px] h-[200px] md:h-[240px] bg-[#788d66] flex flex-col p-4 md:p-6 shrink-0 transition-transform duration-300 hover:scale-[1.02] shadow-sm">
-              <div className="flex items-start gap-3">
-                <span className="text-white text-4xl md:text-5xl font-bold leading-none font-breadley">{card.number}</span>
-                <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-wider leading-tight whitespace-pre-line font-breadley mt-1">{card.title}</span>
-              </div>
-              <div className="mt-auto self-center w-full flex justify-center">
-                <img src={card.icon} alt={card.title.replace('\n', ' ')} className="w-24 md:w-32 h-24 md:h-32 object-contain opacity-90"/>
-              </div>
+            <div 
+              key={`${card.id}-${index}`} 
+              
+              className="relative w-[200px] md:w-[260px] h-[200px] md:h-[260px] overflow-hidden shrink-0 transition-transform duration-300 hover:scale-[1.02] shadow-md rounded-xl bg-white/5 backdrop-blur-sm"
+            >
+              {/* UPDATED: Changed object-cover to object-contain so images never clip */}
+              <img 
+                src={card.icon} 
+                alt={card.title.replace('\n', ' ')} 
+                className="absolute inset-0 w-full h-full object-contain p-2" 
+              />
             </div>
           ))}
         </motion.div>
       </motion.section>
 
-      {/* --- 4. COUNTDOWN SECTION (HOURGLASS + COMPACT TIMER) --- */}
+      {/* --- 4. COUNTDOWN SECTION --- */}
       <section className="relative z-10 w-full flex flex-col items-center justify-center pt-10 px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -184,25 +206,25 @@ export default function SusFest() {
           </div>
 
           {/* COMPACT TIMER BOX */}
-          <div className="bg-[#f0f3eb] rounded-lg px-6 py-4 md:px-10 md:py-6 shadow-lg flex items-center justify-center gap-4 md:gap-6 mb-16 md:mb-24">
+          <div className="bg-[#f0f3eb] rounded-xl px-6 py-4 md:px-10 md:py-6 shadow-lg flex items-center justify-center gap-4 md:gap-6 mb-16 md:mb-24">
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
               <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.days) : '0 0'}</span>
-              <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Days</span>
+              <span className="text-[#3c4a33] font-snell text-[12px] md:text-lg">Days</span>
             </div>
             <span className="text-[#3c4a33] text-xl md:text-3xl font-light mb-4 opacity-30">|</span>
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
               <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.hours) : '0 0'}</span>
-              <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Hours</span>
+              <span className="text-[#3c4a33] font-snell text-[12px] md:text-lg">Hours</span>
             </div>
             <span className="text-[#3c4a33] text-xl md:text-3xl font-light mb-4 opacity-30">|</span>
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
               <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.minutes) : '0 0'}</span>
-              <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Mins</span>
+              <span className="text-[#3c4a33] font-snell text-[12px] md:text-lg">Mins</span>
             </div>
             <span className="text-[#3c4a33] text-xl md:text-3xl font-light mb-4 opacity-30">|</span>
             <div className="flex flex-col items-center min-w-[50px] md:min-w-[60px]">
               <span className="text-[#3c4a33] text-2xl md:text-4xl font-breadley tracking-[0.1em] mb-1">{mounted ? spaceOut(timeLeft.seconds) : '0 0'}</span>
-              <span className="text-[#3c4a33] font-['Snell',_cursive] italic text-[10px] md:text-sm">Secs</span>
+              <span className="text-[#3c4a33] font-snell text-[12px] md:text-lg">Secs</span>
             </div>
           </div>
 
@@ -211,7 +233,7 @@ export default function SusFest() {
             REVEALING SOON...
           </h3>
 
-          <p className="font-['Snell',_cursive] italic text-white/95 text-xl md:text-2xl lg:text-3xl mt-16 md:mt-24 text-center max-w-4xl leading-relaxed drop-shadow-sm px-4">
+          <p className="font-snell text-white/95 text-xl md:text-3xl lg:text-4xl mt-16 md:mt-24 text-center max-w-4xl leading-relaxed drop-shadow-sm px-4">
             A gathering of ideas, people, and possibilities — shaped around conscious living.
           </p>
 
@@ -240,16 +262,16 @@ export default function SusFest() {
           <div className="flex-1 text-left">
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} 
-              className="hover:text-[#111]/70 transition-colors cursor-pointer uppercase"
+              className="hover:text-[#111]/70 transition-colors cursor-pointer uppercase font-breadley"
             >
               back on top
             </button>
           </div>
-          <div className="flex-1 text-center">
+          <div className="flex-1 text-center font-breadley">
             <span>2024 @ qui creatives all rights reserved</span>
           </div>
           <div className="flex-1 text-right">
-            <a href="#" className="hover:text-[#111]/70 transition-colors uppercase">Follow Us</a>
+            <a href="#" className="hover:text-[#111]/70 transition-colors uppercase font-breadley">Follow Us</a>
           </div>
         </div>
       </footer>
@@ -257,3 +279,4 @@ export default function SusFest() {
     </main>
   );
 }
+

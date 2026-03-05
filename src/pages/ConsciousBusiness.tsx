@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 // --- ANIMATION VARIANTS ---
 const fadeInUp = {
@@ -37,20 +37,6 @@ const marqueeVariantsReverse = {
   },
 };
 
-const projectCardHover = {
-  rest: { scale: 1, y: 0 },
-  hover: { 
-    scale: 1.02, 
-    y: -10, 
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } 
-  }
-};
-
-const imageScaleOnHover = {
-  rest: { scale: 1 },
-  hover: { scale: 1.05, transition: { duration: 0.8, ease: "easeOut" } }
-};
-
 // --- DATA: Images Only ---
 const sdgTop = [
   { id: 1, image: '/assets/sus1.png' }, 
@@ -80,19 +66,22 @@ const projectsData = [
     id: 1,
     link: '/kezavera',
     image: '/assets/kezavera.png',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
+    title: 'Keza Vera'
   },
   {
     id: 2,
     link: '/aia',
     image: '/assets/aia.png',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
+    title: 'AIA Foundation'
   },
   {
     id: 3,
     link: '/sust-fest',
     image: '/assets/susfest.png',
-    textColor: '#ffffff'
+    textColor: '#ffffff',
+    title: 'Sustainability Fest'
   }
 ];
 
@@ -104,6 +93,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: '#333',
     fontFamily: '"Breadley Sans", sans-serif',
     position: 'relative',
+    // FIXED: overflow-x hidden completely removed to allow sticky cards to stack
   },
 
   nav: {
@@ -117,7 +107,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     zIndex: 10,
   },
   logoImage: {
-    height: '350px', 
+    height: '200px', 
     width: 'auto',
     objectFit: 'contain',
     opacity: 0.6,
@@ -127,19 +117,20 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: 'relative',
     width: '100%',
     zIndex: 1,
+    // FIXED: overflow-x hidden completely removed here as well
   },
 
   headerSection: {
     position: 'relative',
-    minHeight: '130vh', 
+    minHeight: '100vh', 
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: '0rem', 
+    paddingTop: '10rem', 
+    paddingBottom: '2rem', 
     textAlign: 'center',
     width: '100%',
-    overflow: 'hidden', 
   },
   headerContentWrapper: {
     position: 'relative',
@@ -157,7 +148,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   bodyText: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: 'clamp(0.9rem, 1.5vw, 1.05rem)',
+    fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
     lineHeight: '1.8',
     color: '#333', 
     letterSpacing: '0.03em',
@@ -167,9 +158,9 @@ const styles: { [key: string]: React.CSSProperties } = {
   
   heroImageRight: {
     position: 'absolute',
-    right: '-0.1%',
-    top: '25%', 
-    width: 'clamp(150px, 20vw, 350px)',
+    right: 0,
+    top: '15%', 
+    width: 'clamp(120px, 15vw, 350px)',
     objectFit: 'contain',
     zIndex: 1,
     opacity: 0.9,
@@ -177,9 +168,9 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   heroImageLeft: {
     position: 'absolute',
-    left: '-0.1%',
-    top: '75rem', 
-    width: 'clamp(150px, 20vw, 350px)',
+    left: 0,
+    top: '60%', 
+    width: 'clamp(120px, 15vw, 350px)',
     objectFit: 'contain',
     zIndex: 1,
     opacity: 0.9,
@@ -187,25 +178,23 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
 
   marqueeContainerTop: {
-    width: '75%', 
+    width: '90%', 
     marginLeft: 'auto', 
     overflow: 'hidden',
-    padding: '0rem 0', 
     display: 'flex',
     position: 'relative',
     zIndex: 3, 
-    marginTop: '-15rem',
-    marginBottom: '15rem', 
+    marginTop: '-5rem', 
+    marginBottom: '8rem', 
   },
   marqueeContainerBottom: {
-    width: '75%', 
+    width: '90%', 
     marginRight: 'auto', 
     overflow: 'hidden',
-    padding: '2rem 0',
     display: 'flex',
     position: 'relative',
     zIndex: 3, 
-    marginBottom: '10rem',
+    marginBottom: '6rem',
   },
   marqueeTrack: {
     display: 'flex',
@@ -214,19 +203,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     paddingLeft: '2rem',
   },
   sdgCard: {
-    minWidth: '280px',
-    height: '280px',
+    minWidth: '220px', 
+    height: '220px',
     backgroundColor: 'transparent', 
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center', 
     alignItems: 'center', 
-    padding: '2rem',
-    color: '#fff',
+    padding: '1.5rem',
     flexShrink: 0,
-    borderRadius: '0px', 
-    border: 'none', 
-    boxShadow: 'none', 
   },
   sdgImage: {
     width: '100%',
@@ -235,69 +220,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignSelf: 'center',
   },
 
-  projectStackSection: {
-    padding: '6rem 2rem 10rem 2rem', 
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '4rem',
-  },
-  largeProjectLink: {
-    width: '100%',
-    maxWidth: '1200px', 
-    textDecoration: 'none',
-    display: 'block',
-  },
-  largeProjectCard: {
-    width: '100%',
-    height: '80vh', 
-    minHeight: '600px', 
-    borderRadius: '24px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 15px 40px rgba(0,0,0,0.15)',
-    position: 'relative',
-    overflow: 'hidden',
-    backgroundColor: 'transparent',
-    border: 'none', 
-  },
-  cardBackgroundImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    zIndex: 0,
-  },
-  cardOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-    zIndex: 1,
-    transition: 'background-color 0.4s ease',
-  },
-  cardContent: {
-    position: 'relative',
-    zIndex: 2,
-    textAlign: 'center',
-  },
-  cardTitle: {
-    fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: '2.5rem',
-    letterSpacing: '0.3em',
-    textTransform: 'uppercase',
-    marginBottom: '0.5rem',
-  },
-
   whyNotSection: {
-    padding: '4rem 2rem 8rem 2rem',
+    padding: '2rem 2rem 6rem 2rem',
     maxWidth: '1200px', 
     margin: '0 auto',
     display: 'flex',
@@ -306,56 +230,55 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   whyNotTitle: {
     fontFamily: '"Snell Roundhand", "Apple Chancery", "Brush Script MT", cursive',
-    fontSize: '3.5rem', 
+    fontSize: 'clamp(2.5rem, 5vw, 4rem)', 
     color: '#333',
     marginBottom: '2rem',
-    whiteSpace: 'nowrap', 
     textAlign: 'center',
+    lineHeight: '1.2',
   },
   whyNotText: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: '1.1rem',
+    fontSize: 'clamp(0.95rem, 1.2vw, 1.1rem)',
     lineHeight: '1.8',
     color: '#555',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
     maxWidth: '1000px', 
     textAlign: 'justify', 
-    margin: '0 auto 4rem auto',
+    margin: '0 auto',
   },
 
-  /* --- UPDATED FOOTER SECTION --- */
   footerSection: {
-    padding: '4rem 2rem 2rem 2rem',
+    padding: '2rem 2rem 2rem 2rem',
     textAlign: 'center',
     position: 'relative',
-    minHeight: '125vh', // INCREASED HEIGHT: Forces the section to be tall enough to fit the full image
+    minHeight: '115vh', 
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundImage: 'url("/assets/concfooter.png")', // Make sure this matches your file name exactly
-    backgroundSize: 'contain', // CHANGED: Ensures the image is never cropped
-    backgroundPosition: 'center center',
+    justifyContent: 'flex-end', 
+    backgroundImage: 'url("/assets/concfooter.png")', 
+    backgroundSize: 'contain', 
+    backgroundPosition: 'center bottom',
     backgroundRepeat: 'no-repeat',
   },
   allProjectsTitle: {
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: 'clamp(5rem, 8vw, 7rem)',
+    fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', 
     letterSpacing: '0.1em',
     color: '#1a1a1a',
     fontWeight: 300,
     textTransform: 'uppercase',
-    marginTop: '20rem',
+    marginTop: '25vh', 
     marginBottom: '1rem',
     cursor: 'pointer',
     display: 'inline-block',
   },
-  footerSubtitleText: { // NEW: Styles for the paragraph text under the title
+  footerSubtitleText: { 
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: 'clamp(0.9rem, 1.2vw, 1.1rem)',
+    fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', 
     color: '#333',
     lineHeight: '1.8',
-    maxWidth: '800px',
+    maxWidth: '700px',
     margin: '0 auto 4rem auto',
     letterSpacing: '0.05em',
   },
@@ -364,15 +287,15 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'space-between',
     alignItems: 'center',
     fontFamily: '"Breadley Sans", sans-serif',
-    fontSize: '0.65rem',
-    color: '#666',
+    fontSize: '1rem', 
+    color: '#333',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     paddingTop: '2rem',
     borderTop: '1px solid rgba(0,0,0,0.1)',
     width: '100%',
     maxWidth: '1400px',
-    margin: 'auto auto 0 auto', 
+    margin: '0 auto', 
   },
 };
 
@@ -396,66 +319,20 @@ const ConsciousBusinessPage = () => {
           
           html, body {
             scroll-behavior: smooth;
+            /* CRITICAL: Ensure no overflow-x hidden on body/html */
           }
 
+          /* --- MOBILE RESPONSIVENESS --- */
           @media (max-width: 768px) {
-            .responsive-nav {
-              padding: 1.5rem !important;
-            }
-            .responsive-logo {
-              height: 40px !important; 
-            }
-            .responsive-marquee {
-              width: 100% !important;
-              margin-top: 0 !important;
-            }
-            .responsive-sdg-card {
-              min-width: 200px !important;
-              height: 200px !important;
-              padding: 1.2rem !important;
-            }
-            .responsive-sdg-img {
-              width: 100% !important;
-              height: 100% !important;
-              margin-bottom: 0 !important;
-            }
-
-            .responsive-hero-img-right {
-              width: 120px !important;
-              top: 15% !important; 
-            }
-            .responsive-hero-img-left {
-              width: 120px !important;
-              top: 0 !important;
-            }
-
-            .responsive-project-stack-section {
-              padding: 3rem 1rem 6rem 1rem !important;
-              gap: 2rem !important;
-            }
-            .responsive-project-card {
-              min-height: 400px !important;
-              height: 60vh !important;
-            }
-            .responsive-card-title {
-              font-size: 1.8rem !important;
-            }
-            
-            .responsive-bottom-bar {
-              flex-direction: row !important;
-              align-items: center !important;
-              justify-content: space-between !important;
-              font-size: 0.55rem !important;
-              padding: 2rem 1rem 0 1rem !important;
-              white-space: nowrap !important;
-            }
-            .copyright-text {
-              flex: 1;
-              text-align: center;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              padding: 0 0.5rem;
-            }
+            .responsive-nav { padding: 1.5rem 1rem !important; }
+            .responsive-logo { height: 120px !important; }
+            .responsive-hero-img-right { width: 80px !important; top: 5% !important; opacity: 0.5 !important; }
+            .responsive-hero-img-left { width: 80px !important; top: 85% !important; opacity: 0.5 !important; }
+            .responsive-marquee { width: 100% !important; margin-top: -2rem !important; margin-bottom: 4rem !important; }
+            .responsive-sdg-card { min-width: 150px !important; height: 150px !important; padding: 1rem !important; }
+            .responsive-footer { min-height: 95vh !important; background-position: center bottom !important; background-size: contain !important; }
+            .responsive-bottom-bar { flex-wrap: wrap !important; justify-content: center !important; gap: 1rem !important; font-size: 0.85rem !important; padding-top: 1.5rem !important; text-align: center; }
+            .copyright-text { flex-basis: 100%; margin-top: 0.5rem; }
           }
         `}
       </style>
@@ -464,7 +341,7 @@ const ConsciousBusinessPage = () => {
       <nav style={styles.nav} className="responsive-nav">
         <Link to="/">
           <img 
-            src="/assets/Aia foundation logo.svg"
+            src="/assets/maisonlogoo.png"
             alt="OUI Creatives Logo" 
             style={styles.logoImage} 
             className="responsive-logo"
@@ -483,7 +360,7 @@ const ConsciousBusinessPage = () => {
         >
           <img 
             src="/assets/Conscious (1).png" 
-            alt="" 
+            alt="Decoration" 
             style={styles.heroImageRight} 
             className="responsive-hero-img-right"
           />
@@ -517,7 +394,7 @@ const ConsciousBusinessPage = () => {
                   className="responsive-sdg-card"
                   whileHover={{ scale: 1.05, rotate: -1 }}
                 >
-                  <img src={card.image} alt="SDG" style={styles.sdgImage} className="responsive-sdg-img" />
+                  <img src={card.image} alt="SDG" style={styles.sdgImage} />
                 </motion.div>
               ))}
             </motion.div>
@@ -527,59 +404,17 @@ const ConsciousBusinessPage = () => {
         {/* --- LEFT IMAGE --- */}
         <img 
           src="/assets/Conscious.png" 
-          alt="" 
+          alt="Decoration" 
           style={styles.heroImageLeft} 
           className="responsive-hero-img-left"
         />
 
         {/* --- PROJECT STACK --- */}
-        <motion.section 
-          style={styles.projectStackSection}
-          className="responsive-project-stack-section"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
+        <div className="relative z-20 w-full my-12 md:my-24">
           {projectsData.map((project, index) => (
-            <motion.div 
-              key={project.id} 
-              variants={fadeInUp} 
-              style={{ 
-                width: '100%', 
-                maxWidth: '1200px', 
-                position: 'sticky', 
-                top: `calc(15vh + ${index * 40}px)`, 
-                zIndex: index + 1 
-              }}
-            >
-              <Link to={project.link} style={styles.largeProjectLink}>
-                <motion.div 
-                  style={styles.largeProjectCard}
-                  className="responsive-project-card"
-                  initial="rest"
-                  whileHover="hover"
-                  animate="rest"
-                  variants={projectCardHover}
-                >
-                  <motion.div 
-                    style={{...styles.cardBackgroundImage, backgroundImage: `url(${project.image})`}}
-                    variants={imageScaleOnHover}
-                  />
-                  
-                  <motion.div style={styles.cardOverlay} variants={{
-                    rest: { backgroundColor: 'rgba(0,0,0,0)' },
-                    hover: { backgroundColor: 'rgba(0,0,0,0)' }
-                  }} />
-                  
-                  <div style={styles.cardContent}>
-                    <h2 style={{ ...styles.cardTitle, color: project.textColor }} className="responsive-card-title">{project.title}</h2>
-                  </div>
-                </motion.div>
-              </Link>
-            </motion.div>
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </motion.section>
+        </div>
 
         {/* --- BOTTOM MARQUEE --- */}
         <motion.div 
@@ -599,7 +434,7 @@ const ConsciousBusinessPage = () => {
                   className="responsive-sdg-card"
                   whileHover={{ scale: 1.05, rotate: 1 }}
                 >
-                   <img src={card.image} alt="SDG" style={styles.sdgImage} className="responsive-sdg-img" />
+                   <img src={card.image} alt="SDG" style={styles.sdgImage} />
                 </motion.div>
               ))}
             </motion.div>
@@ -623,23 +458,23 @@ const ConsciousBusinessPage = () => {
         {/* --- FOOTER --- */}
         <motion.footer 
           style={styles.footerSection}
+          className="responsive-footer"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div style={{ margin: 'auto 0', position: 'relative', zIndex: 2 }}>
+          <div style={{ margin: '0 auto', position: 'relative', zIndex: 2, width: '100%', maxWidth: '1200px' }}>
             <Link to="/atelier" style={{ textDecoration: 'none', color: 'inherit' }}>
               <motion.h2 
                 style={styles.allProjectsTitle}
-                whileHover={{ scale: 1.02, letterSpacing: '0.25em', color: '#555' }}
+                whileHover={{ scale: 1.02, letterSpacing: '0.15em', color: '#555' }}
                 transition={{ duration: 0.3 }}
               >
                 BEGIN<br/>THE SHIFT
               </motion.h2>
             </Link>
             
-            {/* NEW: Added paragraph matching your screenshot */}
             <motion.p 
               variants={fadeInUp}
               style={styles.footerSubtitleText}
@@ -667,5 +502,34 @@ const ConsciousBusinessPage = () => {
     </div>
   );
 };
+
+// --- MIRRORED PROJECT CARD COMPONENT (FIXED) ---
+function ProjectCard({ project, index }: { project: any; index: number }) {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({ target: container, offset: ["start end", "start start"] });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 45, damping: 20 });
+
+  // Slide up effect
+  const y = useTransform(smoothProgress, [0, 1], [index === 0 ? "0vh" : "100vh", "0vh"]);
+
+  return (
+    <section ref={container} className="h-screen sticky top-0 flex items-center justify-center p-4 md:p-12" style={{ zIndex: index + 1 }}>
+      <motion.div 
+        style={{ y }} 
+        onClick={() => window.location.href = project.link}
+        // FIXED: Reduced border-radius to rounded-xl.
+        // FIXED: Changed height from 'h-full' to specific 'h-[50vh] md:h-[80vh]' to stop black bars/letterboxing.
+        className="relative w-full max-w-[1200px] h-[50vh] md:h-[80vh] rounded-lg md:rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex flex-col items-center justify-center overflow-hidden cursor-pointer"
+      >
+        {/* FIXED: Removed ALL black backgrounds, dark overlays, and HTML text */}
+        <img 
+          src={project.image} 
+          className="w-full h-full object-cover" 
+          alt={project.title} 
+        />
+      </motion.div>
+    </section>
+  );
+}
 
 export default ConsciousBusinessPage;

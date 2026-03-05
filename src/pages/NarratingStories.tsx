@@ -535,7 +535,7 @@ const NarratingStoriesPage = () => {
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           style={styles.footerMainContent}
           className="footer-main-content-responsive"
-          onClick={() => navigate('/consciousbusiness')}
+          onClick={() => navigate('/ourprojects')}
           onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
           onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
         >

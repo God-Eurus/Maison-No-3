@@ -101,7 +101,7 @@ const ThirdHallForm: React.FC = () => {
         {/* --- EXIT BACKGROUND VIDEO --- */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-            <source src="/assets/passage.mp4" type="video/mp4" />
+            <source src="/assets/AfterSubmission.mp4" type="video/mp4" />
           </video>
           {/* Dark overlay for text readability & moody shade */}
           <div className="absolute inset-0 bg-[#050302]/80" />
